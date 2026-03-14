@@ -1,69 +1,75 @@
 {%- style -%}
+  /* ─── Wrapper ─────────────────────────────────────────── */
   .feature-bar-section {
-    background-color: #0a0a0a;
-    border-top: 1px solid #1a1a1a;
-    border-bottom: 1px solid #1a1a1a;
-    padding: 0;
+    background: #0a0a0a;
+    border-top: 1px solid #1e1e1e;
+    border-bottom: 1px solid #1e1e1e;
     overflow: hidden;
     color: #ffffff;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    position: relative;
   }
 
-  .feature-bar__container {
+  /* Subtle top gradient accent line */
+  .feature-bar-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, #3b82f6 30%, #a855f7 70%, transparent 100%);
+    opacity: 0.6;
+  }
+
+  /* ─── Desktop Layout ───────────────────────────────────── */
+  .feature-bar__desktop {
     max-width: 1280px;
     margin: 0 auto;
     display: flex;
-    flex-wrap: nowrap;
+    align-items: stretch;
   }
 
   .feature-bar__item {
     flex: 1;
-    min-width: 200px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 24px 20px;
+    gap: 14px;
+    padding: 20px 28px;
     position: relative;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background 0.4s ease;
     cursor: default;
-    border-right: 1px solid #1a1a1a;
+    border-right: 1px solid #1e1e1e;
+    overflow: hidden;
   }
 
   .feature-bar__item:last-child {
     border-right: none;
   }
 
-  /* Shimmer Effect */
+  /* Shimmer sweep on hover */
   .feature-bar__item::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(
-      to right,
-      transparent,
-      rgba(255, 255, 255, 0.05),
-      transparent
-    );
-    transform: skewX(-25deg);
+    inset: 0;
+    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.04) 50%, transparent 60%);
+    transform: translateX(-100%);
     transition: none;
   }
 
   .feature-bar__item:hover::before {
-    animation: shimmer 1.5s infinite;
+    animation: trustShimmer 0.8s ease forwards;
   }
 
-  @keyframes shimmer {
-    100% { left: 200%; }
+  @keyframes trustShimmer {
+    to { transform: translateX(250%); }
   }
 
-  /* Hover Effects */
   .feature-bar__item:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.025);
   }
 
+  /* Bottom gradient accent */
   .feature-bar__item::after {
     content: '';
     position: absolute;
@@ -72,27 +78,44 @@
     width: 0;
     height: 2px;
     background: linear-gradient(90deg, #3b82f6, #a855f7);
-    transition: width 0.5s ease;
+    transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .feature-bar__item:hover::after {
     width: 100%;
   }
 
-  /* Icon Styling */
-  .feature-bar__icon {
-    position: relative;
+  /* ─── Icon ─────────────────────────────────────────────── */
+  .feature-bar__icon-wrap {
     flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    transition: transform 0.5s ease;
-    opacity: 0.8;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+  }
+
+  .feature-bar__item:hover .feature-bar__icon-wrap {
+    background: rgba(59, 130, 246, 0.12);
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 18px rgba(59, 130, 246, 0.2);
+    transform: scale(1.06);
+  }
+
+  .feature-bar__icon {
+    width: 22px;
+    height: 22px;
+    color: #a0aec0;
+    transition: color 0.4s ease, transform 0.4s ease;
   }
 
   .feature-bar__item:hover .feature-bar__icon {
+    color: #60a5fa;
     transform: scale(1.1);
-    opacity: 1;
-    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5));
   }
 
   .feature-bar__icon svg {
@@ -100,106 +123,156 @@
     height: 100%;
     fill: none;
     stroke: currentColor;
-    stroke-width: 1.5;
+    stroke-width: 1.6;
     stroke-linecap: round;
     stroke-linejoin: round;
   }
 
-  /* Text Styling */
+  /* ─── Text ─────────────────────────────────────────────── */
   .feature-bar__content {
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease;
-  }
-
-  .feature-bar__item:hover .feature-bar__content {
-    transform: translateX(4px);
+    gap: 2px;
+    min-width: 0;
   }
 
   .feature-bar__title {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     font-weight: 900;
     text-transform: uppercase;
     font-style: italic;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin-bottom: 2px;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
     white-space: nowrap;
+    color: #f5f5f5;
+    transition: color 0.3s ease;
+  }
+
+  .feature-bar__item:hover .feature-bar__title {
+    color: #ffffff;
   }
 
   .feature-bar__subtitle {
-    font-size: 9px;
+    font-size: 8.5px;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: #737373;
+    letter-spacing: 0.14em;
+    color: #525252;
     white-space: nowrap;
+    transition: color 0.3s ease;
   }
 
-  /* Mobile Automatic Loop Styling */
+  .feature-bar__item:hover .feature-bar__subtitle {
+    color: #737373;
+  }
+
+  /* ─── Mobile ───────────────────────────────────────────── */
+  .feature-bar__mobile {
+    display: none;
+  }
+
   @media (max-width: 768px) {
-    .feature-bar__container {
+    .feature-bar__desktop {
+      display: none;
+    }
+
+    .feature-bar__mobile {
+      display: block;
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    }
+
+    .feature-bar__mobile-track {
       display: flex;
       width: max-content;
-      animation: marquee 20s linear infinite;
+      animation: mobileMarquee 24s linear infinite;
     }
 
-    /* Create clones for seamless loop if needed via liquid or repeat content */
-    .feature-bar__item {
-      flex: 0 0 250px;
-      min-width: 250px;
-      border-right: 1px solid #1a1a1a;
-      justify-content: center;
+    .feature-bar__mobile-track:hover,
+    .feature-bar__mobile-section:active .feature-bar__mobile-track {
+      animation-play-state: paused;
     }
 
-    .feature-bar-section {
-      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-    }
-
-    @keyframes marquee {
-      0% { transform: translateX(0); }
+    @keyframes mobileMarquee {
+      0%   { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
-    
-    /* Pause on touch */
-    .feature-bar-section:active .feature-bar__container {
-      animation-play-state: paused;
+
+    .feature-bar__mobile .feature-bar__item {
+      flex: 0 0 auto;
+      width: 200px;
+      padding: 18px 16px;
+      border-right: 1px solid #1e1e1e;
+      gap: 12px;
+      justify-content: flex-start;
+    }
+
+    .feature-bar__mobile .feature-bar__item:hover::after {
+      width: 0;
+    }
+
+    .feature-bar__mobile .feature-bar__icon-wrap {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+    }
+
+    .feature-bar__mobile .feature-bar__icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    .feature-bar__mobile .feature-bar__title {
+      font-size: 0.82rem;
+    }
+
+    .feature-bar__mobile .feature-bar__subtitle {
+      font-size: 7.5px;
     }
   }
 {%- endstyle -%}
 
-<section class="feature-bar-section">
-  <div class="feature-bar__container">
-    {%- capture feature_items -%}
-      {%- for block in section.blocks -%}
-        <div class="feature-bar__item" {{ block.shopify_attributes }}>
-          <div class="feature-bar__icon">
-            {%- case block.settings.icon -%}
-              {%- when 'riders' -%}
-                <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-              {%- when 'secure' -%}
-                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
-              {%- when 'premium' -%}
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
-              {%- when 'returns' -%}
-                <svg viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"></path><path d="M4 9h12.5A5.5 5.5 0 0 1 22 14.5v0A5.5 5.5 0 0 1 16.5 20H11"></path></svg>
-            {%- endcase -%}
-          </div>
-          <div class="feature-bar__content">
-            <span class="feature-bar__title">{{ block.settings.title }}</span>
-            <span class="feature-bar__subtitle">{{ block.settings.subtitle }}</span>
-          </div>
+{%- capture feature_items_html -%}
+  {%- for block in section.blocks -%}
+    <div class="feature-bar__item" {{ block.shopify_attributes }}>
+      <div class="feature-bar__icon-wrap">
+        <div class="feature-bar__icon">
+          {%- case block.settings.icon -%}
+            {%- when 'riders' -%}
+              <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            {%- when 'secure' -%}
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            {%- when 'premium' -%}
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            {%- when 'returns' -%}
+              <svg viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h12.5A5.5 5.5 0 0 1 22 14.5v0A5.5 5.5 0 0 1 16.5 20H11"/></svg>
+          {%- endcase -%}
         </div>
-      {%- endfor -%}
-    {%- endcapture -%}
+      </div>
+      <div class="feature-bar__content">
+        <span class="feature-bar__title">{{ block.settings.title }}</span>
+        <span class="feature-bar__subtitle">{{ block.settings.subtitle }}</span>
+      </div>
+    </div>
+  {%- endfor -%}
+{%- endcapture -%}
 
-    {{ feature_items }}
-    {% comment %} Duplicate for seamless infinite loop on mobile {% endcomment %}
-    <div class="hidden-desktop-items md:hidden flex">
-      {{ feature_items }}
+<section class="feature-bar-section">
+
+  {{- '<!-- Desktop -->' -}}
+  <div class="feature-bar__desktop">
+    {{ feature_items_html }}
+  </div>
+
+  {{- '<!-- Mobile marquee – items duplicated for seamless loop -->' -}}
+  <div class="feature-bar__mobile">
+    <div class="feature-bar__mobile-track">
+      {{ feature_items_html }}
+      {{ feature_items_html }}
     </div>
   </div>
+
 </section>
 
 {% schema %}
