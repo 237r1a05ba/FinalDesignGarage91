@@ -210,12 +210,30 @@
     text-align: center;
   }
 
+  /* ── Header actions layout ── */
+  header-actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+
+    @media screen and (max-width: 749px) {
+      justify-self: flex-end;
+      gap: 0;
+    }
+  }
+
+  .header__column--right header-actions {
+    margin-inline-start: calc(var(--gap-md) * -1);
+  }
+
   /* ── Instagram Icon + Counter ── */
   .header-insta {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 4px;
-    padding: 0;
+    justify-content: center;
+    gap: 3px;
+    height: var(--button-size);
+    padding: 0 4px;
     background: none;
     border: none;
     text-decoration: none !important;
@@ -233,8 +251,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
+    width: var(--icon-size-md, 20px);
+    height: var(--icon-size-md, 20px);
     color: #e1306c;
     flex-shrink: 0;
     transition: filter 0.3s ease;
@@ -274,28 +292,14 @@
 
   @media screen and (max-width: 749px) {
     .header-insta__icon {
-      width: 16px;
-      height: 16px;
+      width: 22px;
+      height: 22px;
     }
 
     .header-insta__count {
-      font-size: 9.5px;
+      font-size: 12px;
+      font-weight: 900;
     }
-  }
-
-  header-actions {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-
-    @media screen and (max-width: 749px) {
-      justify-self: flex-end;
-      gap: 0;
-    }
-  }
-
-  .header__column--right header-actions {
-    margin-inline-start: calc(var(--gap-md) * -1);
   }
 
   .header-actions__action {
@@ -377,18 +381,30 @@
     var els = document.querySelectorAll('[data-insta-target]');
     els.forEach(function(el) {
       var target = parseInt(el.getAttribute('data-insta-target'), 10);
-      var duration = 2000;
-      var start = null;
+      var countUp = 2000;
+      var holdTime = 4000;
+      var isMobile = window.matchMedia('(max-width: 749px)').matches;
 
-      function step(ts) {
-        if (!start) start = ts;
-        var progress = Math.min((ts - start) / duration, 1);
-        var ease = 1 - Math.pow(1 - progress, 3);
-        var current = Math.round(ease * target);
-        el.textContent = formatCount(current);
-        if (progress < 1) requestAnimationFrame(step);
+      function runCycle() {
+        var start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          var progress = Math.min((ts - start) / countUp, 1);
+          var ease = 1 - Math.pow(1 - progress, 3);
+          var current = Math.round(ease * target);
+          el.textContent = formatCount(current);
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else if (isMobile) {
+            setTimeout(function() {
+              el.textContent = '0';
+              setTimeout(runCycle, 300);
+            }, holdTime);
+          }
+        }
+        requestAnimationFrame(step);
       }
-      requestAnimationFrame(step);
+      runCycle();
     });
   }
 
