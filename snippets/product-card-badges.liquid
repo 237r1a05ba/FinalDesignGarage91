@@ -29,6 +29,20 @@
       {%- endif -%}
     </div>
   {%- endif -%}
+
+  {%- if product.available -%}
+    {%- assign total_inventory = 0 -%}
+    {%- for variant in product.variants -%}
+      {%- if variant.available -%}
+        {%- assign total_inventory = total_inventory | plus: variant.inventory_quantity -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if total_inventory > 0 and total_inventory <= 5 -%}
+      <div class="product-badges__badge product-badges__badge--rectangle product-badges__badge--low-stock">
+        🔥 Only {{ total_inventory }} left
+      </div>
+    {%- endif -%}
+  {%- endif -%}
 </div>
 
 {% stylesheet %}
@@ -74,4 +88,14 @@
     padding-block: var(--badge-rectangle-padding-block);
     padding-inline: var(--badge-rectangle-padding-inline);
   }
+  .product-badges__badge--low-stock {
+    background: #ff4500;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+    margin-top: 4px;
+    white-space: nowrap;
+  }
+
 {% endstylesheet %}
