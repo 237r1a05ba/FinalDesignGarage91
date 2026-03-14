@@ -20,7 +20,8 @@
     target="_blank"
     rel="noopener noreferrer"
   >
-    <span class="header-insta-badge__glow"></span>
+    <span class="header-insta-badge__pulse"></span>
+    <span class="header-insta-badge__border-glow"></span>
     <span class="header-insta-badge__icon">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
@@ -211,43 +212,75 @@
     text-align: center;
   }
 
-  /* ── Instagram Badge ── */
+  /* ── Instagram Badge – Motion Design ── */
+  @property --insta-border-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
   .header-insta-badge {
     position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    padding: 5px 10px 5px 7px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, rgba(131, 58, 180, 0.15), rgba(225, 48, 108, 0.15), rgba(252, 175, 69, 0.1));
-    border: 1px solid rgba(225, 48, 108, 0.3);
+    gap: 6px;
+    padding: 6px 12px 6px 8px;
+    border-radius: 22px;
+    background: rgba(20, 5, 10, 0.85);
+    border: 1px solid transparent;
     text-decoration: none !important;
     color: #fff !important;
     cursor: pointer;
     overflow: hidden;
-    transition: border-color 0.3s ease, transform 0.25s ease;
     flex-shrink: 0;
+    isolation: isolate;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .header-insta-badge:hover {
-    border-color: rgba(225, 48, 108, 0.6);
-    transform: scale(1.04);
+    transform: scale(1.06);
   }
 
-  .header-insta-badge__glow {
+  /* Rotating conic-gradient border */
+  .header-insta-badge__border-glow {
     position: absolute;
-    inset: 0;
+    inset: -1px;
     border-radius: inherit;
-    background: radial-gradient(circle at 30% 50%, rgba(225, 48, 108, 0.2), transparent 70%);
-    opacity: 0;
-    transition: opacity 0.35s ease;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--insta-border-angle, 0deg),
+      #833ab4, #fd1d1d, #fcaf45, #833ab4
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: instaBorderSpin 3s linear infinite;
     pointer-events: none;
+    z-index: 0;
   }
 
-  .header-insta-badge:hover .header-insta-badge__glow {
-    opacity: 1;
+  @keyframes instaBorderSpin {
+    to { --insta-border-angle: 360deg; }
   }
 
+  /* Breathing outer pulse */
+  .header-insta-badge__pulse {
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    border: 2px solid rgba(225, 48, 108, 0.3);
+    animation: instaBadgePulse 2.5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  @keyframes instaBadgePulse {
+    0%, 100% { opacity: 0; transform: scale(1); }
+    50%      { opacity: 1; transform: scale(1.1); }
+  }
+
+  /* Icon with floating micro-motion */
   .header-insta-badge__icon {
     display: flex;
     align-items: center;
@@ -258,13 +291,27 @@
     flex-shrink: 0;
     position: relative;
     z-index: 1;
+    animation: instaIconBob 3s ease-in-out infinite;
+  }
+
+  @keyframes instaIconBob {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25%      { transform: translateY(-1.2px) rotate(-3deg); }
+    75%      { transform: translateY(0.6px) rotate(1.5deg); }
   }
 
   .header-insta-badge__icon svg {
     width: 100%;
     height: 100%;
+    filter: drop-shadow(0 0 4px rgba(225, 48, 108, 0.5));
+    transition: filter 0.3s ease;
   }
 
+  .header-insta-badge:hover .header-insta-badge__icon svg {
+    filter: drop-shadow(0 0 8px rgba(225, 48, 108, 0.7));
+  }
+
+  /* Gradient text with traveling shimmer */
   .header-insta-badge__text {
     font-size: 11px;
     font-weight: 800;
@@ -272,10 +319,21 @@
     line-height: 1;
     position: relative;
     z-index: 1;
-    background: linear-gradient(135deg, #e1306c, #fcaf45);
+    background: linear-gradient(
+      90deg,
+      #e1306c 0%, #fd1d1d 25%, #fcaf45 50%, #fd1d1d 75%, #e1306c 100%
+    );
+    background-size: 300% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: instaGradientFlow 4s ease-in-out infinite;
+  }
+
+  @keyframes instaGradientFlow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   .header-insta-badge__text sup {
@@ -283,6 +341,16 @@
     font-weight: 700;
     vertical-align: super;
     margin-left: 1px;
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .header-insta-badge__border-glow,
+    .header-insta-badge__pulse,
+    .header-insta-badge__icon,
+    .header-insta-badge__text {
+      animation: none;
+    }
   }
 
   @media screen and (max-width: 749px) {

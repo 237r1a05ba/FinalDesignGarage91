@@ -654,6 +654,8 @@
     target="_blank"
     rel="noopener noreferrer"
   >
+    <span class="header-insta-mobile__pulse"></span>
+    <span class="header-insta-mobile__border-glow"></span>
     <span class="header-insta-mobile__icon">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
@@ -666,60 +668,123 @@
 </header-drawer>
 
 {% stylesheet %}
-  /* ── Mobile Instagram badge (between hamburger & logo) ── */
+  /* ── Mobile Instagram badge – motion design ── */
   header-drawer {
     display: flex;
     align-items: center;
   }
 
   .header-insta-mobile {
+    position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 3px 8px 3px 5px;
-    border-radius: 16px;
-    background: linear-gradient(135deg, rgba(131, 58, 180, 0.12), rgba(225, 48, 108, 0.12), rgba(252, 175, 69, 0.08));
-    border: 1px solid rgba(225, 48, 108, 0.25);
+    gap: 5px;
+    padding: 4px 9px 4px 6px;
+    border-radius: 18px;
+    background: rgba(20, 5, 10, 0.85);
+    border: 1px solid transparent;
     text-decoration: none !important;
     color: #fff !important;
     cursor: pointer;
-    margin-inline-start: 4px;
+    margin-inline-start: 6px;
     flex-shrink: 0;
-    transition: border-color 0.3s ease;
+    overflow: hidden;
+    isolation: isolate;
   }
 
-  .header-insta-mobile:hover {
-    border-color: rgba(225, 48, 108, 0.5);
+  /* Rotating gradient border */
+  .header-insta-mobile__border-glow {
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--insta-angle, 0deg),
+      #833ab4, #fd1d1d, #fcaf45, #833ab4
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: instaRotateBorder 3s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes instaRotateBorder {
+    to { --insta-angle: 360deg; }
+  }
+
+  @property --insta-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  /* Soft breathing pulse ring behind the badge */
+  .header-insta-mobile__pulse {
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    border: 2px solid rgba(225, 48, 108, 0.35);
+    animation: instaPulse 2.5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  @keyframes instaPulse {
+    0%, 100% { opacity: 0; transform: scale(1); }
+    50%      { opacity: 1; transform: scale(1.08); }
   }
 
   .header-insta-mobile__icon {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 14px;
-    height: 14px;
-    color: #e1306c;
+    width: 15px;
+    height: 15px;
     flex-shrink: 0;
+    z-index: 1;
+    color: #e1306c;
+    animation: instaIconFloat 3s ease-in-out infinite;
+  }
+
+  @keyframes instaIconFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25%      { transform: translateY(-1px) rotate(-2deg); }
+    75%      { transform: translateY(0.5px) rotate(1deg); }
   }
 
   .header-insta-mobile__icon svg {
     width: 100%;
     height: 100%;
+    filter: drop-shadow(0 0 3px rgba(225, 48, 108, 0.4));
   }
 
   .header-insta-mobile__count {
-    font-size: 9.5px;
+    position: relative;
+    z-index: 1;
+    font-size: 10px;
     font-weight: 800;
     letter-spacing: 0.02em;
     line-height: 1;
-    background: linear-gradient(135deg, #e1306c, #fcaf45);
+    background: linear-gradient(135deg, #e1306c, #fd1d1d, #fcaf45);
+    background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: instaTextShimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes instaTextShimmer {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   .header-insta-mobile__count sup {
-    font-size: 6px;
+    font-size: 6.5px;
     font-weight: 700;
   }
 
