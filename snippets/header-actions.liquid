@@ -7,11 +7,6 @@
 <header-actions
   {{- block.shopify_attributes -}}
 >
-  {% if shop.customer_accounts_enabled %}
-    {% render 'account-popover' %}
-    {% render 'account-drawer' %}
-  {% endif %}
-
   {%- assign insta_url = settings.social_instagram_link | default: 'https://www.instagram.com' -%}
   <a
     href="{{ insta_url }}"
@@ -29,6 +24,11 @@
     </span>
     <span class="header-insta__count" data-insta-target="60000">0</span>
   </a>
+
+  {% if shop.customer_accounts_enabled %}
+    {% render 'account-popover' %}
+    {% render 'account-drawer' %}
+  {% endif %}
 
   {% if settings.cart_type == 'drawer' and template.name != 'cart' %}
     {% render 'cart-drawer' %}
@@ -214,7 +214,7 @@
   header-actions {
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: 4px;
 
     @media screen and (max-width: 749px) {
       justify-self: flex-end;
@@ -233,7 +233,7 @@
     justify-content: center;
     gap: 3px;
     height: var(--button-size);
-    padding: 0 4px;
+    padding: 0 6px;
     background: none;
     border: none;
     text-decoration: none !important;
@@ -251,8 +251,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: var(--icon-size-md, 20px);
-    height: var(--icon-size-md, 20px);
+    width: 20px;
+    height: 20px;
     color: #e1306c;
     flex-shrink: 0;
     transition: filter 0.3s ease;
@@ -291,6 +291,10 @@
   }
 
   @media screen and (max-width: 749px) {
+    .header-insta {
+      gap: 4px;
+    }
+
     .header-insta__icon {
       width: 22px;
       height: 22px;
@@ -300,6 +304,13 @@
       font-size: 12px;
       font-weight: 900;
     }
+  }
+
+  /* ── Ensure all header action items align vertically ── */
+  .header-actions__action,
+  .account-popover,
+  .header-insta {
+    vertical-align: middle;
   }
 
   .header-actions__action {
