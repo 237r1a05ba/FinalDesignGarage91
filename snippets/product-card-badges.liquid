@@ -25,15 +25,15 @@
     {%- for tag in product.tags -%}
       {%- assign tag_downcase = tag | downcase -%}
       {%- if tag_downcase == 'new' and settings.badge_new_enabled -%}
-        <div class="product-badges__badge product-badges__badge--rectangle product-badges__badge--new" style="background-color: {{ settings.badge_new_color }}; color: #fff; border-radius: {{ settings.custom_badge_corner_radius }}px;">
+        <div class="product-badges__badge product-badges__badge--rectangle product-badges__badge--new" style="background-color: {{ settings.badge_new_color }}; color: #fff; border-radius: {{ settings.custom_badge_corner_radius }}px; font-size: {{ settings.custom_badge_font_size }}px; font-weight: {{ settings.custom_badge_font_weight }}; text-transform: {{ settings.custom_badge_text_transform }};">
           New
         </div>
       {%- elsif tag_downcase == 'free shipping' and settings.badge_free_shipping_enabled -%}
-        <div class="product-badges__badge product-badges__badge--rectangle product-badges__badge--free-shipping" style="background-color: {{ settings.badge_free_shipping_color }}; color: #fff; border-radius: {{ settings.custom_badge_corner_radius }}px;">
+        <div class="product-badges__badge product-badges__badge--rectangle product-badges__badge--free-shipping" style="background-color: {{ settings.badge_free_shipping_color }}; color: #fff; border-radius: {{ settings.custom_badge_corner_radius }}px; font-size: {{ settings.custom_badge_font_size }}px; font-weight: {{ settings.custom_badge_font_weight }}; text-transform: {{ settings.custom_badge_text_transform }};">
           Free Shipping
         </div>
       {%- elsif tag_downcase == 'percentage off' and product.compare_at_price > product.price and settings.badge_percentage_off_enabled -%}
-        <div class="product-badges__badge product-badges__badge--rectangle product-badges__badge--percentage" style="background-color: {{ settings.badge_percentage_off_color }}; color: #fff; border-radius: {{ settings.custom_badge_corner_radius }}px;">
+        <div class="product-badges__badge product-badges__badge--rectangle product-badges__badge--percentage" style="background-color: {{ settings.badge_percentage_off_color }}; color: #fff; border-radius: {{ settings.custom_badge_corner_radius }}px; font-size: {{ settings.custom_badge_font_size }}px; font-weight: {{ settings.custom_badge_font_weight }}; text-transform: {{ settings.custom_badge_text_transform }};">
           {%- assign savings = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
           {{ savings }}% OFF
         </div>
