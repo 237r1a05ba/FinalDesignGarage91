@@ -1,5 +1,19 @@
 
 
+{%- if product.available == false -%}
+    <div class="product-stock-tag product-stock-tag--soldout">Sold Out</div>
+  {%- else -%}
+    {%- assign total_inventory = 0 -%}
+    {%- for variant in product.variants -%}
+      {%- if variant.available -%}
+        {%- assign total_inventory = total_inventory | plus: variant.inventory_quantity -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if total_inventory > 0 and total_inventory <= 5 -%}
+      <div class="product-stock-tag product-stock-tag--low">🐆 Only {{ total_inventory }} left</div>
+    {%- endif -%}
+  {%- endif -%}
+
 {% if closest.product == blank %}
   {% assign text = 'placeholders.product_title' | t %}
   {% assign product_title = '<p>' | append: text | append: '</p>' %}
@@ -15,6 +29,33 @@
     {% render 'text', fallback_text: product_title, block: block %}
   </a>
 {% endif %}
+
+{% stylesheet %}
+  .product-stock-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+  }
+
+  .product-stock-tag--low {
+    background: #1a0a00;
+    color: #ff6a00;
+    border: 1px solid rgba(255, 106, 0, 0.35);
+  }
+
+  .product-stock-tag--soldout {
+    background: #111;
+    color: #888;
+    border: 1px solid #2a2a2a;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
