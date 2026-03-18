@@ -1,7 +1,7 @@
 {% style %}
   .testimonial-section {
     padding: 80px 20px;
-    background-color: #050505;
+    background-color: #fff;
     text-align: center;
     overflow: hidden;
     max-width: 100vw;
@@ -10,19 +10,18 @@
   .testimonial-pill {
     display: inline-flex;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: #111;
     color: #fff;
     padding: 6px 16px 6px 6px;
     border-radius: 40px;
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   }
 
   .testimonial-pill-icon {
-    background-color: #FF2A2A;
+    background-color: #2E5CFF;
     border-radius: 50%;
     width: 24px;
     height: 24px;
@@ -38,7 +37,7 @@
     line-height: 1.2;
     margin: 0 auto 60px;
     max-width: 800px;
-    color: #ffffff;
+    color: #000;
   }
 
   /* Marquee Styles */
@@ -53,8 +52,8 @@
     flex-direction: column;
     gap: 24px;
     /* Fade out edges using a mask */
-    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
   }
 
   .testimonial-track {
@@ -91,26 +90,25 @@
   /* Card Styles */
   .testimonial-card-{{ section.id }} {
     width: 400px;
-    background-color: #111111;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: #F8F9FA;
     border-radius: 16px;
     padding: 32px;
     text-align: left;
     display: flex;
     flex-direction: column;
     flex: 0 0 auto;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
   }
 
   .testimonial-quote-icon {
     margin-bottom: 24px;
-    color: #FF2A2A;
+    color: #2E5CFF;
   }
 
   .testimonial-text {
     font-size: 16px;
     line-height: 1.6;
-    color: #e0e0e0;
+    color: #111;
     margin-bottom: 40px;
     flex-grow: 1;
     font-weight: 500;
@@ -137,12 +135,11 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background-color: #222;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #E9ECEF;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #888;
+    color: #6C757D;
     font-weight: 600;
     font-size: 18px;
   }
@@ -150,13 +147,13 @@
   .testimonial-author-name {
     font-weight: 700;
     font-size: 16px;
-    color: #ffffff;
+    color: #000;
     margin-bottom: 2px;
   }
 
   .testimonial-author-title {
     font-size: 14px;
-    color: #888888;
+    color: #6C757D;
     font-weight: 500;
   }
 
@@ -171,6 +168,10 @@
     }
     .testimonial-section {
       padding: 60px 20px;
+    }
+    .testimonial-marquee {
+      mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
     }
   }
 {% endstyle %}
