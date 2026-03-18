@@ -1514,6 +1514,22 @@
         "default": 4
       },
       {
+        "type": "select",
+        "id": "custom_badge_layout",
+        "label": "Badge layout",
+        "options": [
+          {
+            "value": "column",
+            "label": "Stacked vertically"
+          },
+          {
+            "value": "row",
+            "label": "Side by side"
+          }
+        ],
+        "default": "column"
+      },
+      {
         "type": "checkbox",
         "id": "badge_new_enabled",
         "label": "Show 'New' badge",

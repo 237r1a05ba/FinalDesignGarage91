@@ -306,7 +306,7 @@
           </div>
         {% endif %}
 
-        <div class='{{ prefix_class }}product-card__badge'>
+        <div class='{{ prefix_class }}product-card__badge {% if settings.custom_badge_layout == 'row' %}{{ prefix_class }}product-card__badge--row{% endif %}'>
           {%- if product.available == false and show_soldout -%}
             <span class='{{ prefix_class }}badge {{ prefix_class }}badge--soldout' aria-hidden='true'>
               {{ translation.products.product.sold_out }}
