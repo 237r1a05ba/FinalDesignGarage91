@@ -1812,6 +1812,73 @@
         "padding_left_mobile": 20,
         "padding_right_mobile": 20
       }
+    },
+    "testimonial_KfQwni": {
+      "type": "testimonial",
+      "blocks": {
+        "testimonial_p3riwR": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>Their team's artistic flair and strategic approach resulted in remarkable campaigns - a reliable creative partner.</p>",
+            "author_name": "John Peter",
+            "author_title": "CEO and Co-founder of ABC Company"
+          }
+        },
+        "testimonial_W4FWkF": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>Their team's artistic flair and strategic approach resulted in remarkable campaigns - a reliable creative partner.</p>",
+            "author_name": "John Peter",
+            "author_title": "CEO and Co-founder of ABC Company"
+          }
+        },
+        "testimonial_EKrmxx": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>Their team's artistic flair and strategic approach resulted in remarkable campaigns - a reliable creative partner.</p>",
+            "author_name": "John Peter",
+            "author_title": "CEO and Co-founder of ABC Company"
+          }
+        },
+        "testimonial_NkbXFW": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>Their team's artistic flair and strategic approach resulted in remarkable campaigns - a reliable creative partner.</p>",
+            "author_name": "John Peter",
+            "author_title": "CEO and Co-founder of ABC Company"
+          }
+        },
+        "testimonial_UTPrtX": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>Their team's artistic flair and strategic approach resulted in remarkable campaigns - a reliable creative partner.</p>",
+            "author_name": "John Peter",
+            "author_title": "CEO and Co-founder of ABC Company"
+          }
+        },
+        "testimonial_j9gWWE": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>Their team's artistic flair and strategic approach resulted in remarkable campaigns - a reliable creative partner.</p>",
+            "author_name": "John Peter",
+            "author_title": "CEO and Co-founder of ABC Company"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_p3riwR",
+        "testimonial_W4FWkF",
+        "testimonial_EKrmxx",
+        "testimonial_NkbXFW",
+        "testimonial_UTPrtX",
+        "testimonial_j9gWWE"
+      ],
+      "name": "Testimonial Marquee",
+      "settings": {
+        "heading": "Words of praise from others about our presence.",
+        "subtext": "Rated 4/5 by over 1 Lakh users",
+        "speed": 40
+      }
     }
   },
   "order": [
@@ -1836,6 +1903,7 @@
     "snow_MFimY4",
     "whatsapp_jeaBta",
     "recent_sale_pop_zgtpBP",
-    "insta_reel_CUANmq"
+    "insta_reel_CUANmq",
+    "testimonial_KfQwni"
   ]
 }
