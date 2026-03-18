@@ -316,17 +316,17 @@
           {%- for tag in product.tags -%}
             {%- assign tag_downcase = tag | downcase -%}
             {%- if tag_downcase == 'new' and settings.badge_new_enabled -%}
-              <span class='{{ prefix_class }}badge {{ prefix_class }}badge--new' aria-hidden='true' style='background-color: {{ settings.badge_new_color }}; color: #fff;'>
+              <span class='{{ prefix_class }}badge {{ prefix_class }}badge--new' aria-hidden='true' style='background-color: {{ settings.badge_new_color }}; color: #fff; border-radius: {{ settings.custom_badge_corner_radius }}px;'>
                 New
               </span>
             {%- endif -%}
             {%- if tag_downcase == 'free shipping' and settings.badge_free_shipping_enabled -%}
-              <span class='{{ prefix_class }}badge {{ prefix_class }}badge--free-shipping' aria-hidden='true' style='background-color: {{ settings.badge_free_shipping_color }}; color: #fff;'>
+              <span class='{{ prefix_class }}badge {{ prefix_class }}badge--free-shipping' aria-hidden='true' style='background-color: {{ settings.badge_free_shipping_color }}; color: #fff; border-radius: {{ settings.custom_badge_corner_radius }}px;'>
                 Free Shipping
               </span>
             {%- endif -%}
             {%- if tag_downcase == 'percentage off' and on_sale and settings.badge_percentage_off_enabled -%}
-              <span class='{{ prefix_class }}badge {{ prefix_class }}badge--percentage-off' aria-hidden='true' style='background-color: {{ settings.badge_percentage_off_color }}; color: #fff;'>
+              <span class='{{ prefix_class }}badge {{ prefix_class }}badge--percentage-off' aria-hidden='true' style='background-color: {{ settings.badge_percentage_off_color }}; color: #fff; border-radius: {{ settings.custom_badge_corner_radius }}px;'>
                 -{{ discount }}%
               </span>
             {%- endif -%}

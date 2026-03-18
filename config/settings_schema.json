@@ -1504,6 +1504,16 @@
         "content": "Custom badges"
       },
       {
+        "type": "range",
+        "id": "custom_badge_corner_radius",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Corner radius",
+        "default": 4
+      },
+      {
         "type": "checkbox",
         "id": "badge_new_enabled",
         "label": "Show 'New' badge",
