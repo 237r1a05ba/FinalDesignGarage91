@@ -306,32 +306,49 @@
           </div>
         {% endif %}
 
-        {%- if product.available == false or on_sale -%}
-          <div class='{{ prefix_class }}product-card__badge'>
-            {%- if product.available == false and show_soldout -%}
-              <span class='{{ prefix_class }}badge {{ prefix_class }}badge--soldout' aria-hidden='true'>
-                {{ translation.products.product.sold_out }}
-              </span>
-            {% endif %}
-            {%- if show_on_sale_badge and product.available -%}
-              <span class='{{ prefix_class }}badge {{ prefix_class }}badge--sale' aria-hidden='true'>
-                {%- if saleBadgeType == 'percentage' -%}
-                  -
-                  {{- discount -}}
-                  %
-                {%- endif -%}
-                {% liquid
-                  if saleBadgeType == 'text'
-                    echo translation.products.product.on_sale
-                  endif
-                  if saleBadgeType == 'amount'
-                    echo translation.products.product.price.save_price_html | replace: '{{ amount }}', amount
-                  endif
-                %}
+        <div class='{{ prefix_class }}product-card__badge'>
+          {%- if product.available == false and show_soldout -%}
+            <span class='{{ prefix_class }}badge {{ prefix_class }}badge--soldout' aria-hidden='true'>
+              {{ translation.products.product.sold_out }}
+            </span>
+          {% endif %}
+          {%- if show_on_sale_badge and product.available -%}
+            <span class='{{ prefix_class }}badge {{ prefix_class }}badge--sale' aria-hidden='true'>
+              {%- if saleBadgeType == 'percentage' -%}
+                -
+                {{- discount -}}
+                %
+              {%- endif -%}
+              {% liquid
+                if saleBadgeType == 'text'
+                  echo translation.products.product.on_sale
+                endif
+                if saleBadgeType == 'amount'
+                  echo translation.products.product.price.save_price_html | replace: '{{ amount }}', amount
+                endif
+              %}
+            </span>
+          {%- endif -%}
+
+          {%- for tag in product.tags -%}
+            {%- assign tag_downcase = tag | downcase -%}
+            {%- if tag_downcase == 'new' -%}
+              <span class='{{ prefix_class }}badge {{ prefix_class }}badge--new' aria-hidden='true'>
+                New
               </span>
             {%- endif -%}
-          </div>
-        {% endif %}
+            {%- if tag_downcase == 'free shipping' -%}
+              <span class='{{ prefix_class }}badge {{ prefix_class }}badge--free-shipping' aria-hidden='true'>
+                Free Shipping
+              </span>
+            {%- endif -%}
+            {%- if tag_downcase == 'percentage off' and on_sale -%}
+              <span class='{{ prefix_class }}badge {{ prefix_class }}badge--percentage-off' aria-hidden='true'>
+                -{{ discount }}%
+              </span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
         {% if cardStyle == '2' or cardStyle == '4' %}
           {% if show_quickview %}
             {{- quickview_button -}}
