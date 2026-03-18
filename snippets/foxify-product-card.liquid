@@ -312,38 +312,21 @@
               {{ translation.products.product.sold_out }}
             </span>
           {% endif %}
-          {%- if show_on_sale_badge and product.available -%}
-            <span class='{{ prefix_class }}badge {{ prefix_class }}badge--sale' aria-hidden='true'>
-              {%- if saleBadgeType == 'percentage' -%}
-                -
-                {{- discount -}}
-                %
-              {%- endif -%}
-              {% liquid
-                if saleBadgeType == 'text'
-                  echo translation.products.product.on_sale
-                endif
-                if saleBadgeType == 'amount'
-                  echo translation.products.product.price.save_price_html | replace: '{{ amount }}', amount
-                endif
-              %}
-            </span>
-          {%- endif -%}
 
           {%- for tag in product.tags -%}
             {%- assign tag_downcase = tag | downcase -%}
-            {%- if tag_downcase == 'new' -%}
-              <span class='{{ prefix_class }}badge {{ prefix_class }}badge--new' aria-hidden='true'>
+            {%- if tag_downcase == 'new' and settings.badge_new_enabled -%}
+              <span class='{{ prefix_class }}badge {{ prefix_class }}badge--new' aria-hidden='true' style='background-color: {{ settings.badge_new_color }}; color: #fff;'>
                 New
               </span>
             {%- endif -%}
-            {%- if tag_downcase == 'free shipping' -%}
-              <span class='{{ prefix_class }}badge {{ prefix_class }}badge--free-shipping' aria-hidden='true'>
+            {%- if tag_downcase == 'free shipping' and settings.badge_free_shipping_enabled -%}
+              <span class='{{ prefix_class }}badge {{ prefix_class }}badge--free-shipping' aria-hidden='true' style='background-color: {{ settings.badge_free_shipping_color }}; color: #fff;'>
                 Free Shipping
               </span>
             {%- endif -%}
-            {%- if tag_downcase == 'percentage off' and on_sale -%}
-              <span class='{{ prefix_class }}badge {{ prefix_class }}badge--percentage-off' aria-hidden='true'>
+            {%- if tag_downcase == 'percentage off' and on_sale and settings.badge_percentage_off_enabled -%}
+              <span class='{{ prefix_class }}badge {{ prefix_class }}badge--percentage-off' aria-hidden='true' style='background-color: {{ settings.badge_percentage_off_color }}; color: #fff;'>
                 -{{ discount }}%
               </span>
             {%- endif -%}

@@ -1498,6 +1498,49 @@
           }
         ],
         "default": "none"
+      },
+      {
+        "type": "header",
+        "content": "Custom badges"
+      },
+      {
+        "type": "checkbox",
+        "id": "badge_new_enabled",
+        "label": "Show 'New' badge",
+        "default": true,
+        "info": "Displays when a product has the tag 'new'"
+      },
+      {
+        "type": "color",
+        "id": "badge_new_color",
+        "label": "'New' badge color",
+        "default": "#007bff"
+      },
+      {
+        "type": "checkbox",
+        "id": "badge_free_shipping_enabled",
+        "label": "Show 'Free Shipping' badge",
+        "default": true,
+        "info": "Displays when a product has the tag 'free shipping'"
+      },
+      {
+        "type": "color",
+        "id": "badge_free_shipping_color",
+        "label": "'Free Shipping' badge color",
+        "default": "#20c997"
+      },
+      {
+        "type": "checkbox",
+        "id": "badge_percentage_off_enabled",
+        "label": "Show 'Percentage Off' badge",
+        "default": true,
+        "info": "Displays when a product has the tag 'percentage off' and is on sale"
+      },
+      {
+        "type": "color",
+        "id": "badge_percentage_off_color",
+        "label": "'Percentage Off' badge color",
+        "default": "#d9534f"
       }
     ]
   },
