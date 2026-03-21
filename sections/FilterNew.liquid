@@ -238,12 +238,13 @@
     <div class="moto-search-bar-wrap">
       <div class="moto-search-glow"></div>
       
-      <form action="/search" method="get" class="moto-search-bar">
-        {% comment %} Using hidden inputs if you want to pass these as tags or parameters {% endcomment %}
+      <form id="moto-search-form" action="/search" method="get" class="moto-search-bar">
         <input type="hidden" name="type" value="product">
+        {% comment %} The 'q' parameter is what Shopify uses for the main search query {% endcomment %}
+        <input type="hidden" name="q" id="moto-final-query" value="">
         
         <div class="moto-dropdown-group">
-          <select name="brand" class="moto-select" id="moto-brand">
+          <select class="moto-select" id="moto-brand" required>
             <option value="" disabled selected>{{ section.settings.label_brand }}</option>
             {% assign brands = section.settings.brands | split: ',' %}
             {% for brand in brands %}
@@ -254,7 +255,7 @@
         </div>
 
         <div class="moto-dropdown-group">
-          <select name="model" class="moto-select" id="moto-model">
+          <select class="moto-select" id="moto-model" required>
             <option value="" disabled selected>{{ section.settings.label_model }}</option>
             {% assign models = section.settings.models | split: ',' %}
             {% for model in models %}
@@ -265,8 +266,8 @@
         </div>
 
         <div class="moto-dropdown-group">
-          <select name="q" class="moto-select" id="moto-category">
-            <option value="" disabled selected>{{ section.settings.label_category }}</option>
+          <select class="moto-select" id="moto-category">
+            <option value="" selected>{{ section.settings.label_category }}</option>
             <option value="all">All Categories</option>
             {% assign categories = section.settings.categories | split: ',' %}
             {% for category in categories %}
@@ -288,22 +289,25 @@
 </section>
 
 <script>
-  // Optional: Add logic here to filter 'model' options based on 'brand'
-  // Or handle the search redirection logic to build a specific Shopify search URL
-  document.querySelector('.moto-search-bar').addEventListener('submit', function(e) {
+  document.getElementById('moto-search-form').addEventListener('submit', function(e) {
     const brand = document.getElementById('moto-brand').value;
     const model = document.getElementById('moto-model').value;
     const category = document.getElementById('moto-category').value;
+    const queryInput = document.getElementById('moto-final-query');
     
-    // Example: building a query string for Shopify search
-    // You might want to search by tags like "brand_Honda" AND "model_CBR"
-    let query = "";
-    if (brand) query += brand + " ";
-    if (model) query += model + " ";
-    if (category && category !== 'all') query += category;
+    if (!brand || !model) {
+      e.preventDefault();
+      return;
+    }
+
+    // Shopify search works best by joining terms. 
+    // This will search for products containing "Honda", "CBR", and the specific category.
+    let searchTerms = [];
+    if (brand) searchTerms.push(brand);
+    if (model) searchTerms.push(model);
+    if (category && category !== 'all' && category !== "") searchTerms.push(category);
     
-    // Update the search input before submitting if needed
-    // This is a simplified version. Usually, you'd redirect to a filtered collection page.
+    queryInput.value = searchTerms.join(' ');
   });
 </script>
 
