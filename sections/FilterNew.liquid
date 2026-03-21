@@ -1,7 +1,7 @@
 {% comment %}
   Elite Moto Parts - Vehicle Search Strip
   Designed for Shopify as a section.
-  Fully manual Block-based selection for Brands, Models, and Categories.
+  Uses Textarea settings for easy data entry (Brand, Model, Category).
 {% endcomment %}
 
 <style>
@@ -243,40 +243,40 @@
         <input type="hidden" name="type" value="product">
         <input type="hidden" name="q" id="moto-final-query" value="">
         
-        {% comment %} Brand Dropdown - Populated by manual blocks {% endcomment %}
         <div class="moto-dropdown-group">
           <select class="moto-select" id="moto-brand" required>
             <option value="" disabled selected>{{ section.settings.label_brand }}</option>
-            {% for block in section.blocks %}
-              {% if block.type == 'brand' %}
-                <option value="{{ block.settings.title | escape }}">{{ block.settings.title }}</option>
+            {% assign brands = section.settings.brands_list | split: ',' %}
+            {% for brand in brands %}
+              {% if brand != blank %}
+                <option value="{{ brand | strip | escape }}">{{ brand | strip }}</option>
               {% endif %}
             {% endfor %}
           </select>
           <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </div>
 
-        {% comment %} Model Dropdown - Populated by manual blocks {% endcomment %}
         <div class="moto-dropdown-group">
           <select class="moto-select" id="moto-model" required>
             <option value="" disabled selected>{{ section.settings.label_model }}</option>
-            {% for block in section.blocks %}
-              {% if block.type == 'model' %}
-                <option value="{{ block.settings.title | escape }}">{{ block.settings.title }}</option>
+            {% assign models = section.settings.models_list | split: ',' %}
+            {% for model in models %}
+              {% if model != blank %}
+                <option value="{{ model | strip | escape }}">{{ model | strip }}</option>
               {% endif %}
             {% endfor %}
           </select>
           <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </div>
 
-        {% comment %} Category Dropdown - Populated by manual blocks {% endcomment %}
         <div class="moto-dropdown-group">
           <select class="moto-select" id="moto-category">
             <option value="" selected>{{ section.settings.label_category }}</option>
             <option value="all">All Categories</option>
-            {% for block in section.blocks %}
-              {% if block.type == 'category' %}
-                <option value="{{ block.settings.title | escape }}">{{ block.settings.title }}</option>
+            {% assign categories = section.settings.categories_list | split: ',' %}
+            {% for category in categories %}
+              {% if category != blank %}
+                <option value="{{ category | strip | escape }}">{{ category | strip }}</option>
               {% endif %}
             {% endfor %}
           </select>
@@ -376,55 +376,37 @@
       "id": "button_text",
       "label": "Button Text",
       "default": "SEARCH"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "brand",
-      "name": "Brand Option",
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Brand Name",
-          "default": "Honda"
-        }
-      ]
     },
     {
-      "type": "model",
-      "name": "Model Option",
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Model Name",
-          "default": "CBR600RR"
-        }
-      ]
+      "type": "header",
+      "content": "Search Options Data"
     },
     {
-      "type": "category",
-      "name": "Category Option",
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Category Name",
-          "default": "Mirrors"
-        }
-      ]
+      "type": "textarea",
+      "id": "brands_list",
+      "label": "Brands List (Comma separated)",
+      "default": "Honda, Yamaha, Kawasaki, Suzuki, Royal Enfield, BMW, Ducati, KTM",
+      "info": "Enter brands separated by commas (e.g. Honda, Yamaha)"
+    },
+    {
+      "type": "textarea",
+      "id": "models_list",
+      "label": "Models List (Comma separated)",
+      "default": "CBR600RR, YZF-R1, Ninja 400, Classic 350, Duke 390, R1250GS, Panigale V4",
+      "info": "Enter models separated by commas"
+    },
+    {
+      "type": "textarea",
+      "id": "categories_list",
+      "label": "Categories List (Comma separated)",
+      "default": "Mirrors, Brake Pads, Exhaust Systems, Indicators / Lighting, Chain & Sprocket, Engine Oil & Filters, Tires / Wheels, Handlebars & Grips",
+      "info": "Enter categories separated by commas"
     }
   ],
   "presets": [
     {
       "name": "Moto Search Strip",
-      "category": "Search",
-      "blocks": [
-        { "type": "brand" },
-        { "type": "model" },
-        { "type": "category" }
-      ]
+      "category": "Search"
     }
   ]
 }
