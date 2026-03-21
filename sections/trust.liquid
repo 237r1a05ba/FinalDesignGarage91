@@ -12,6 +12,9 @@
     --pb-desktop: {{ section.settings.padding_bottom }}px;
     --pt-mobile: {{ section.settings.padding_top_mobile }}px;
     --pb-mobile: {{ section.settings.padding_bottom_mobile }}px;
+
+    /* Marquee Speed */
+    --marquee-speed: {{ section.settings.marquee_speed }}s;
   }
 
   .trust-bar-v2 {
@@ -137,7 +140,7 @@
       display: flex;
       flex-shrink: 0;
       width: max-content;
-      animation: scroll 30s linear infinite;
+      animation: scroll var(--marquee-speed) linear infinite;
     }
 
     @keyframes scroll {
@@ -233,6 +236,20 @@
       "id": "accent_color",
       "label": "Accent Color",
       "default": "#3b82f6"
+    },
+    {
+      "type": "header",
+      "content": "Marquee Settings"
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "s",
+      "label": "Marquee Speed (Lower is faster)",
+      "default": 30
     },
     {
       "type": "header",
