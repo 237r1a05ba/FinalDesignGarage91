@@ -123,6 +123,24 @@
       "name": "Feature Trust Bar",
       "settings": {}
     },
+    "filter_new_E4DRp6": {
+      "type": "FilterNew",
+      "name": "Moto Search Strip",
+      "settings": {
+        "bg_color": "#050505",
+        "accent_color": "#dc2626",
+        "badge_text": "Elite Moto Parts",
+        "title_part1": "SEARCH BY",
+        "title_part2": "VEHICLE",
+        "label_brand": "Select Brand",
+        "label_model": "Select Model",
+        "label_category": "Select Category",
+        "button_text": "SEARCH",
+        "brands_list": "Honda, Yamaha, Kawasaki, Suzuki, Royal Enfield, BMW, Ducati, KTM",
+        "models_list": "CBR600RR, YZF-R1, Ninja 400, Classic 350, Duke 390, R1250GS, Panigale V4",
+        "categories_list": "Mirrors, Brake Pads, Exhaust Systems, Indicators / Lighting, Chain & Sprocket, Engine Oil & Filters, Tires / Wheels, Handlebars & Grips"
+      }
+    },
     "three_sec_eFQfGE": {
       "type": "ThreeSec",
       "blocks": {
@@ -1890,29 +1908,12 @@
         "author_name_color": "#ffffff",
         "author_title_color": "#888888"
       }
-    },
-    "filter_new_E4DRp6": {
-      "type": "FilterNew",
-      "name": "Moto Search Strip",
-      "settings": {
-        "bg_color": "#050505",
-        "accent_color": "#dc2626",
-        "badge_text": "Elite Moto Parts",
-        "title_part1": "SEARCH BY",
-        "title_part2": "VEHICLE",
-        "label_brand": "Select Brand",
-        "label_model": "Select Model",
-        "label_category": "Select Category",
-        "button_text": "SEARCH",
-        "brands_list": "Honda, Yamaha, Kawasaki, Suzuki, Royal Enfield, BMW, Ducati, KTM",
-        "models_list": "CBR600RR, YZF-R1, Ninja 400, Classic 350, Duke 390, R1250GS, Panigale V4",
-        "categories_list": "Mirrors, Brake Pads, Exhaust Systems, Indicators / Lighting, Chain & Sprocket, Engine Oil & Filters, Tires / Wheels, Handlebars & Grips"
-      }
     }
   },
   "order": [
     "herotex_xbc7M9",
     "trust_txzpAM",
+    "filter_new_E4DRp6",
     "three_sec_eFQfGE",
     "product_list_LrnP4T",
     "newheading_EFfJgw",
@@ -1933,7 +1934,6 @@
     "whatsapp_jeaBta",
     "recent_sale_pop_zgtpBP",
     "insta_reel_CUANmq",
-    "testimonial_KfQwni",
-    "filter_new_E4DRp6"
+    "testimonial_KfQwni"
   ]
 }
