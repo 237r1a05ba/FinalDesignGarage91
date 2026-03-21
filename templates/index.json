@@ -84,16 +84,13 @@
       "settings": {
         "bg_color": "#050505",
         "accent_color": "#dc2626",
-        "badge_text": "Elite Moto Parts",
+        "badge_text": "Garage91 Automotive",
         "title_part1": "SEARCH BY",
         "title_part2": "VEHICLE",
         "label_brand": "Select Brand",
         "label_model": "Select Model",
         "label_category": "Select Category",
-        "button_text": "SEARCH",
-        "brands": "Honda, Yamaha, Kawasaki, Suzuki, Royal Enfield, BMW, Ducati, KTM",
-        "models": "CBR600RR, YZF-R1, Ninja 400, Classic 350, Duke 390, R1250GS, Panigale V4",
-        "categories": "Mirrors, Brake Pads, Exhaust Systems, Indicators / Lighting, Chain & Sprocket, Engine Oil & Filters, Tires / Wheels, Handlebars & Grips"
+        "button_text": "SEARCH"
       }
     },
     "trust_txzpAM": {

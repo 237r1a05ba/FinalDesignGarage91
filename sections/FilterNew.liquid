@@ -1,7 +1,7 @@
 {% comment %}
   Elite Moto Parts - Vehicle Search Strip
   Designed for Shopify as a section.
-  Updated with Block-based schema for easier data management.
+  Updated to dynamically pull Brands (Vendors) and Categories (Product Types) from Shopify data.
 {% endcomment %}
 
 <style>
@@ -243,18 +243,18 @@
         <input type="hidden" name="type" value="product">
         <input type="hidden" name="q" id="moto-final-query" value="">
         
+        {% comment %} Brand Dropdown - Pulls from Shopify Vendors {% endcomment %}
         <div class="moto-dropdown-group">
           <select class="moto-select" id="moto-brand" required>
             <option value="" disabled selected>{{ section.settings.label_brand }}</option>
-            {% for block in section.blocks %}
-              {% if block.type == 'brand' %}
-                <option value="{{ block.settings.title | escape }}">{{ block.settings.title }}</option>
-              {% endif %}
+            {% for vendor in shop.vendors %}
+              <option value="{{ vendor | escape }}">{{ vendor }}</option>
             {% endfor %}
           </select>
           <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </div>
 
+        {% comment %} Model Dropdown - Managed via Blocks {% endcomment %}
         <div class="moto-dropdown-group">
           <select class="moto-select" id="moto-model" required>
             <option value="" disabled selected>{{ section.settings.label_model }}</option>
@@ -267,13 +267,14 @@
           <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </div>
 
+        {% comment %} Category Dropdown - Pulls from Shopify Product Types {% endcomment %}
         <div class="moto-dropdown-group">
           <select class="moto-select" id="moto-category">
             <option value="" selected>{{ section.settings.label_category }}</option>
             <option value="all">All Categories</option>
-            {% for block in section.blocks %}
-              {% if block.type == 'category' %}
-                <option value="{{ block.settings.title | escape }}">{{ block.settings.title }}</option>
+            {% for type in shop.types %}
+              {% if type != blank %}
+                <option value="{{ type | escape }}">{{ type }}</option>
               {% endif %}
             {% endfor %}
           </select>
@@ -377,18 +378,6 @@
   ],
   "blocks": [
     {
-      "type": "brand",
-      "name": "Brand Option",
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Brand Name",
-          "default": "Honda"
-        }
-      ]
-    },
-    {
       "type": "model",
       "name": "Model Option",
       "settings": [
@@ -399,18 +388,6 @@
           "default": "CBR600RR"
         }
       ]
-    },
-    {
-      "type": "category",
-      "name": "Category Option",
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Category Name",
-          "default": "Mirrors"
-        }
-      ]
     }
   ],
   "presets": [
@@ -418,9 +395,7 @@
       "name": "Moto Search Strip",
       "category": "Search",
       "blocks": [
-        { "type": "brand" },
-        { "type": "model" },
-        { "type": "category" }
+        { "type": "model" }
       ]
     }
   ]
