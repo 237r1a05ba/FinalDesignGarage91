@@ -1,6 +1,7 @@
 {% comment %}
   Elite Moto Parts - Vehicle Search Strip
   Designed for Shopify as a section.
+  Updated with Block-based schema for easier data management.
 {% endcomment %}
 
 <style>
@@ -240,15 +241,15 @@
       
       <form id="moto-search-form" action="/search" method="get" class="moto-search-bar">
         <input type="hidden" name="type" value="product">
-        {% comment %} The 'q' parameter is what Shopify uses for the main search query {% endcomment %}
         <input type="hidden" name="q" id="moto-final-query" value="">
         
         <div class="moto-dropdown-group">
           <select class="moto-select" id="moto-brand" required>
             <option value="" disabled selected>{{ section.settings.label_brand }}</option>
-            {% assign brands = section.settings.brands | split: ',' %}
-            {% for brand in brands %}
-              <option value="{{ brand | strip }}">{{ brand | strip }}</option>
+            {% for block in section.blocks %}
+              {% if block.type == 'brand' %}
+                <option value="{{ block.settings.title | escape }}">{{ block.settings.title }}</option>
+              {% endif %}
             {% endfor %}
           </select>
           <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -257,9 +258,10 @@
         <div class="moto-dropdown-group">
           <select class="moto-select" id="moto-model" required>
             <option value="" disabled selected>{{ section.settings.label_model }}</option>
-            {% assign models = section.settings.models | split: ',' %}
-            {% for model in models %}
-              <option value="{{ model | strip }}">{{ model | strip }}</option>
+            {% for block in section.blocks %}
+              {% if block.type == 'model' %}
+                <option value="{{ block.settings.title | escape }}">{{ block.settings.title }}</option>
+              {% endif %}
             {% endfor %}
           </select>
           <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -269,9 +271,10 @@
           <select class="moto-select" id="moto-category">
             <option value="" selected>{{ section.settings.label_category }}</option>
             <option value="all">All Categories</option>
-            {% assign categories = section.settings.categories | split: ',' %}
-            {% for category in categories %}
-              <option value="{{ category | strip }}">{{ category | strip }}</option>
+            {% for block in section.blocks %}
+              {% if block.type == 'category' %}
+                <option value="{{ block.settings.title | escape }}">{{ block.settings.title }}</option>
+              {% endif %}
             {% endfor %}
           </select>
           <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -300,8 +303,6 @@
       return;
     }
 
-    // Shopify search works best by joining terms. 
-    // This will search for products containing "Honda", "CBR", and the specific category.
     let searchTerms = [];
     if (brand) searchTerms.push(brand);
     if (model) searchTerms.push(model);
@@ -372,34 +373,55 @@
       "id": "button_text",
       "label": "Button Text",
       "default": "SEARCH"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand Option",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Brand Name",
+          "default": "Honda"
+        }
+      ]
     },
     {
-      "type": "header",
-      "content": "Options Data (Comma Separated)"
+      "type": "model",
+      "name": "Model Option",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Model Name",
+          "default": "CBR600RR"
+        }
+      ]
     },
     {
-      "type": "textarea",
-      "id": "brands",
-      "label": "Brands List",
-      "default": "Honda, Yamaha, Kawasaki, Suzuki, Royal Enfield, BMW, Ducati, KTM"
-    },
-    {
-      "type": "textarea",
-      "id": "models",
-      "label": "Models List",
-      "default": "CBR600RR, YZF-R1, Ninja 400, Classic 350, Duke 390, R1250GS, Panigale V4"
-    },
-    {
-      "type": "textarea",
-      "id": "categories",
-      "label": "Categories List",
-      "default": "Mirrors, Brake Pads, Exhaust Systems, Indicators / Lighting, Chain & Sprocket, Engine Oil & Filters, Tires / Wheels, Handlebars & Grips"
+      "type": "category",
+      "name": "Category Option",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Name",
+          "default": "Mirrors"
+        }
+      ]
     }
   ],
   "presets": [
     {
       "name": "Moto Search Strip",
-      "category": "Search"
+      "category": "Search",
+      "blocks": [
+        { "type": "brand" },
+        { "type": "model" },
+        { "type": "category" }
+      ]
     }
   ]
 }
