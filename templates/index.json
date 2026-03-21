@@ -1877,12 +1877,42 @@
       "settings": {
         "heading": "Words of praise from others about our presence.",
         "subtext": "Rated 4/5 by over 1 Lakh users",
-        "speed": 40
+        "speed": 40,
+        "bg_color": "#050505",
+        "heading_color": "#ffffff",
+        "accent_color": "#ff2a2a",
+        "pill_bg_color": "#ffffff0d",
+        "pill_border_color": "#ffffff1a",
+        "pill_text_color": "#ffffff",
+        "card_bg_color": "#111111",
+        "card_border_color": "#ffffff14",
+        "card_text_color": "#e0e0e0",
+        "author_name_color": "#ffffff",
+        "author_title_color": "#888888"
+      }
+    },
+    "filter_new_XVxgAH": {
+      "type": "FilterNew",
+      "name": "Moto Search Strip",
+      "settings": {
+        "bg_color": "#050505",
+        "accent_color": "#dc2626",
+        "badge_text": "Elite Moto Parts",
+        "title_part1": "SEARCH BY",
+        "title_part2": "VEHICLE",
+        "label_brand": "Select Brand",
+        "label_model": "Select Model",
+        "label_category": "Select Category",
+        "button_text": "SEARCH",
+        "brands": "Honda, Yamaha, Kawasaki, Suzuki, Royal Enfield, BMW, Ducati, KTM",
+        "models": "CBR600RR, YZF-R1, Ninja 400, Classic 350, Duke 390, R1250GS, Panigale V4",
+        "categories": "Mirrors, Brake Pads, Exhaust Systems, Indicators / Lighting, Chain & Sprocket, Engine Oil & Filters, Tires / Wheels, Handlebars & Grips"
       }
     }
   },
   "order": [
     "herotex_xbc7M9",
+    "filter_new_XVxgAH",
     "trust_txzpAM",
     "three_sec_eFQfGE",
     "product_list_LrnP4T",
