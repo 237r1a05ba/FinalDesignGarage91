@@ -90,7 +90,10 @@
         "label_brand": "Select Brand",
         "label_model": "Select Model",
         "label_category": "Select Category",
-        "button_text": "SEARCH"
+        "button_text": "SEARCH",
+        "brands_list": "Honda, Yamaha, Kawasaki, Suzuki, Royal Enfield, BMW, Ducati, KTM",
+        "models_list": "CBR600RR, YZF-R1, Ninja 400, Classic 350, Duke 390, R1250GS, Panigale V4",
+        "categories_list": "Mirrors, Brake Pads, Exhaust Systems, Indicators / Lighting, Chain & Sprocket, Engine Oil & Filters, Tires / Wheels, Handlebars & Grips"
       }
     },
     "trust_txzpAM": {
@@ -135,7 +138,6 @@
         "feature_rmeyeH",
         "feature_Aj9D8K"
       ],
-      "disabled": true,
       "name": "Feature Trust Bar",
       "settings": {}
     },
