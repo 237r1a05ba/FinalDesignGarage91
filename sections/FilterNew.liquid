@@ -1,7 +1,7 @@
 {% comment %}
   Elite Moto Parts - Vehicle Search Strip
   Designed for Shopify as a section.
-  Updated to use manual Block-based selection for Brands, Models, and Categories.
+  Fully manual Block-based selection for Brands, Models, and Categories.
 {% endcomment %}
 
 <style>
@@ -243,7 +243,7 @@
         <input type="hidden" name="type" value="product">
         <input type="hidden" name="q" id="moto-final-query" value="">
         
-        {% comment %} Brand Dropdown - Manual Selection via Blocks {% endcomment %}
+        {% comment %} Brand Dropdown - Populated by manual blocks {% endcomment %}
         <div class="moto-dropdown-group">
           <select class="moto-select" id="moto-brand" required>
             <option value="" disabled selected>{{ section.settings.label_brand }}</option>
@@ -256,7 +256,7 @@
           <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </div>
 
-        {% comment %} Model Dropdown - Manual Selection via Blocks {% endcomment %}
+        {% comment %} Model Dropdown - Populated by manual blocks {% endcomment %}
         <div class="moto-dropdown-group">
           <select class="moto-select" id="moto-model" required>
             <option value="" disabled selected>{{ section.settings.label_model }}</option>
@@ -269,7 +269,7 @@
           <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </div>
 
-        {% comment %} Category Dropdown - Manual Selection via Blocks {% endcomment %}
+        {% comment %} Category Dropdown - Populated by manual blocks {% endcomment %}
         <div class="moto-dropdown-group">
           <select class="moto-select" id="moto-category">
             <option value="" selected>{{ section.settings.label_category }}</option>
