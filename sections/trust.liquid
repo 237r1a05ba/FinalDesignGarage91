@@ -1,318 +1,223 @@
 {%- style -%}
-  /* ─── Wrapper ─────────────────────────────────────────── */
-  .feature-bar-section {
-    background: #0a0a0a;
-    border-top: 1px solid #1e1e1e;
-    border-bottom: 1px solid #1e1e1e;
+  :root {
+    --trust-bg: {{ section.settings.bg_color | default: '#050505' }};
+    --trust-accent: {{ section.settings.accent_color | default: '#3b82f6' }};
+    --trust-accent-rgb: 59, 130, 246;
+    --trust-text-main: #ffffff;
+    --trust-text-dim: #9ca3af;
+    --trust-border: rgba(255, 255, 255, 0.08);
+  }
+
+  .trust-bar-v2 {
+    background: var(--trust-bg);
+    border-top: 1px solid var(--trust-border);
+    border-bottom: 1px solid var(--trust-border);
+    padding: 0;
     overflow: hidden;
-    color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    position: relative;
+    font-family: Inter, -apple-system, system-ui, sans-serif;
   }
 
-  /* Subtle top gradient accent line */
-  .feature-bar-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, #3b82f6 30%, #a855f7 70%, transparent 100%);
-    opacity: 0.6;
-  }
-
-  /* ─── Desktop Layout ───────────────────────────────────── */
-  .feature-bar__desktop {
-    max-width: 1280px;
+  /* --- Desktop Grid --- */
+  .trust-bar__container {
+    max-width: 1400px;
     margin: 0 auto;
     display: flex;
-    align-items: stretch;
+    justify-content: space-between;
   }
 
-  .feature-bar__item {
+  .trust-item {
     flex: 1;
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 20px 28px;
+    gap: 16px;
+    padding: 24px 32px;
     position: relative;
-    transition: background 0.4s ease;
-    cursor: default;
-    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    border-right: 1px solid var(--trust-border);
   }
 
-  /* Shimmer sweep on hover */
-  .feature-bar__item::before {
+  .trust-item:last-child { border-right: none; }
+
+  /* Hover Effects */
+  .trust-item::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.04) 50%, transparent 60%);
-    transform: translateX(-100%);
-    transition: none;
+    background: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.06), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
   }
 
-  .feature-bar__item:hover::before {
-    animation: trustShimmer 0.8s ease forwards;
+  .trust-item:hover {
+    background: rgba(255, 255, 255, 0.02);
   }
 
-  @keyframes trustShimmer {
-    to { transform: translateX(250%); }
+  .trust-item:hover::before {
+    opacity: 1;
   }
 
-  .feature-bar__item:hover {
-    background: rgba(255, 255, 255, 0.025);
-  }
-
-  /* Bottom gradient accent */
-  .feature-bar__item::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #3b82f6, #a855f7);
-    transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .feature-bar__item:hover::after {
-    width: 100%;
-  }
-
-  /* ─── Icon ─────────────────────────────────────────────── */
-  .feature-bar__icon-wrap {
-    flex-shrink: 0;
-    width: 46px;
-    height: 46px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+  .trust-item__icon-box {
+    width: 42px;
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--trust-border);
+    color: var(--trust-text-dim);
     transition: all 0.4s ease;
+    flex-shrink: 0;
   }
 
-  .feature-bar__item:hover .feature-bar__icon-wrap {
-    background: rgba(59, 130, 246, 0.12);
-    border-color: rgba(59, 130, 246, 0.3);
-    box-shadow: 0 0 18px rgba(59, 130, 246, 0.2);
-    transform: scale(1.06);
+  .trust-item:hover .trust-item__icon-box {
+    border-color: var(--trust-accent);
+    color: var(--trust-accent);
+    box-shadow: 0 0 20px rgba(var(--trust-accent-rgb), 0.2);
+    transform: translateY(-2px);
   }
 
-  .feature-bar__icon {
-    width: 22px;
-    height: 22px;
-    color: #a0aec0;
-    transition: color 0.4s ease, transform 0.4s ease;
+  .trust-item__icon-box svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 1.5px;
   }
 
-  .feature-bar__item:hover .feature-bar__icon {
-    color: #60a5fa;
-    transform: scale(1.1);
-  }
-
-  .feature-bar__icon svg {
-    width: 100%;
-    height: 100%;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.6;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  /* ─── Text ─────────────────────────────────────────────── */
-  .feature-bar__content {
+  .trust-item__text {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    min-width: 0;
   }
 
-  .feature-bar__title {
-    font-size: 0.95rem;
-    font-weight: 900;
+  .trust-item__title {
+    color: var(--trust-text-main);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
-    font-style: italic;
-    letter-spacing: -0.01em;
-    line-height: 1.15;
-    white-space: nowrap;
-    color: #f5f5f5;
-    transition: color 0.3s ease;
   }
 
-  .feature-bar__item:hover .feature-bar__title {
-    color: #ffffff;
-  }
-
-  .feature-bar__subtitle {
-    font-size: 8.5px;
-    font-weight: 500;
+  .trust-item__subtitle {
+    color: var(--trust-text-dim);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: #525252;
-    white-space: nowrap;
-    transition: color 0.3s ease;
   }
 
-  .feature-bar__item:hover .feature-bar__subtitle {
-    color: #737373;
-  }
-
-  /* ─── Mobile marquee ──────────────────────────────────── */
-  .feature-bar__mobile {
-    display: none;
-  }
-
-  @media (max-width: 768px) {
-    .feature-bar__desktop {
+  /* --- Marquee Logic (Mobile) --- */
+  @media (max-width: 1024px) {
+    .trust-bar__container {
       display: none;
     }
 
-    .feature-bar__mobile {
-      display: block;
-      overflow: hidden;
-      mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
-    }
-
-    .feature-bar__mobile-track {
+    .trust-bar__marquee {
       display: flex;
+      overflow: hidden;
+      user-select: none;
+      padding: 12px 0;
+      mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    }
+
+    .trust-bar__marquee-track {
+      display: flex;
+      flex-shrink: 0;
       width: max-content;
-      animation: mobileMarquee 16s linear infinite;
+      animation: scroll 30s linear infinite;
     }
 
-    @keyframes mobileMarquee {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
     }
 
-    .feature-bar__mobile .feature-bar__item {
-      flex: 0 0 auto;
-      width: 210px;
-      padding: 18px 16px;
-      gap: 12px;
-      justify-content: flex-start;
+    .trust-item--marquee {
+      width: 260px;
+      border: none;
+      padding: 12px 20px;
     }
 
-    .feature-bar__mobile .feature-bar__item::after {
-      display: none;
+    .trust-item__icon-box {
+      width: 36px;
+      height: 36px;
     }
-
-    .feature-bar__mobile .feature-bar__icon-wrap {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-    }
-
-    .feature-bar__mobile .feature-bar__icon {
-      width: 18px;
-      height: 18px;
-    }
-
-    .feature-bar__mobile .feature-bar__title {
-      font-size: 0.82rem;
-    }
-
-    .feature-bar__mobile .feature-bar__subtitle {
-      font-size: 7.5px;
-    }
-
-    /* Instagram item accent */
-    .feature-bar__item--instagram .feature-bar__icon-wrap {
-      background: rgba(225, 48, 108, 0.1);
-      border-color: rgba(225, 48, 108, 0.25);
-    }
-
-    .feature-bar__item--instagram .feature-bar__icon {
-      color: #e1306c;
-    }
+    
+    .trust-item__title { font-size: 13px; }
   }
 {%- endstyle -%}
 
-{%- capture feature_items_html -%}
+{%- capture feature_items -%}
   {%- for block in section.blocks -%}
-    <div class="feature-bar__item" {{ block.shopify_attributes }}>
-      <div class="feature-bar__icon-wrap">
-        <div class="feature-bar__icon">
-          {%- case block.settings.icon -%}
-            {%- when 'riders' -%}
-              <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            {%- when 'secure' -%}
-              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-            {%- when 'premium' -%}
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-            {%- when 'returns' -%}
-              <svg viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h12.5A5.5 5.5 0 0 1 22 14.5v0A5.5 5.5 0 0 1 16.5 20H11"/></svg>
-          {%- endcase -%}
-        </div>
+    <div class="trust-item {{ class }}" {{ block.shopify_attributes }}>
+      <div class="trust-item__icon-box">
+        {%- case block.settings.icon -%}
+          {%- when 'riders' -%}
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" /></svg>
+          {%- when 'secure' -%}
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.744c0 5.598 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg>
+          {%- when 'premium' -%}
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+          {%- when 'returns' -%}
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" /></svg>
+          {%- when 'instagram' -%}
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3h10.5A3.75 3.75 0 0 1 21 6.75v10.5A3.75 3.75 0 0 1 17.25 21H6.75A3.75 3.75 0 0 1 3 17.25V6.75A3.75 3.75 0 0 1 6.75 3Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M17.625 6.375h.008v.008h-.008v-.008Z" /></svg>
+        {%- endcase -%}
       </div>
-      <div class="feature-bar__content">
-        <span class="feature-bar__title">{{ block.settings.title }}</span>
-        <span class="feature-bar__subtitle">{{ block.settings.subtitle }}</span>
+      <div class="trust-item__text">
+        <span class="trust-item__title">{{ block.settings.title }}</span>
+        <span class="trust-item__subtitle">{{ block.settings.subtitle }}</span>
       </div>
     </div>
   {%- endfor -%}
 {%- endcapture -%}
 
-<section class="feature-bar-section">
-
-  {{- '<!-- Desktop -->' -}}
-  <div class="feature-bar__desktop">
-    {{ feature_items_html }}
+<section class="trust-bar-v2" id="TrustBar-{{ section.id }}">
+  <!-- Desktop View -->
+  <div class="trust-bar__container">
+    {{ feature_items }}
   </div>
 
-  {{- '<!-- Mobile marquee -->' -}}
-  <div class="feature-bar__mobile">
-    <div class="feature-bar__mobile-track">
-      {%- capture mobile_items -%}
-        {%- for block in section.blocks -%}
-          <div class="feature-bar__item" {{ block.shopify_attributes }}>
-            <div class="feature-bar__icon-wrap">
-              <div class="feature-bar__icon">
-                {%- case block.settings.icon -%}
-                  {%- when 'riders' -%}
-                    <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                  {%- when 'secure' -%}
-                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-                  {%- when 'premium' -%}
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-                  {%- when 'returns' -%}
-                    <svg viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h12.5A5.5 5.5 0 0 1 22 14.5v0A5.5 5.5 0 0 1 16.5 20H11"/></svg>
-                {%- endcase -%}
-              </div>
-            </div>
-            <div class="feature-bar__content">
-              <span class="feature-bar__title">{{ block.settings.title }}</span>
-              <span class="feature-bar__subtitle">{{ block.settings.subtitle }}</span>
-            </div>
-          </div>
-        {%- endfor -%}
-        <div class="feature-bar__item feature-bar__item--instagram">
-          <div class="feature-bar__icon-wrap">
-            <div class="feature-bar__icon">
-              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-            </div>
-          </div>
-          <div class="feature-bar__content">
-            <span class="feature-bar__title">60K Followers</span>
-            <span class="feature-bar__subtitle">Follow on Instagram</span>
-          </div>
-        </div>
-      {%- endcapture -%}
-      {{ mobile_items }}
-      {{ mobile_items }}
+  <!-- Mobile Marquee -->
+  <div class="trust-bar__marquee">
+    <div class="trust-bar__marquee-track">
+      {%- assign class = 'trust-item--marquee' -%}
+      {{ feature_items }}
+      {{ feature_items }}
     </div>
   </div>
-
 </section>
+
+<script>
+  // Cursor follow effect for desktop items
+  document.querySelectorAll('.trust-item').forEach(item => {
+    item.addEventListener('mousemove', e => {
+      const rect = item.getBoundingClientRect();
+      item.style.setProperty('--x', (e.clientX - rect.left) + 'px');
+      item.style.setProperty('--y', (e.clientY - rect.top) + 'px');
+    });
+  });
+</script>
 
 {% schema %}
 {
-  "name": "Feature Trust Bar",
-  "max_blocks": 4,
+  "name": "Trust Bar v2",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#050505"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#3b82f6"
+    }
+  ],
   "blocks": [
     {
       "type": "feature",
@@ -323,10 +228,11 @@
           "id": "icon",
           "label": "Icon",
           "options": [
-            { "value": "riders", "label": "Users/Riders" },
-            { "value": "secure", "label": "Shield/Secure" },
-            { "value": "premium", "label": "Award/Premium" },
-            { "value": "returns", "label": "Return Arrow" }
+            { "value": "riders", "label": "Community" },
+            { "value": "secure", "label": "Secure" },
+            { "value": "premium", "label": "Premium" },
+            { "value": "returns", "label": "Returns" },
+            { "value": "instagram", "label": "Instagram" }
           ],
           "default": "riders"
         },
@@ -347,12 +253,11 @@
   ],
   "presets": [
     {
-      "name": "Feature Trust Bar",
+      "name": "Trust Bar v2",
       "blocks": [
-        { "type": "feature", "settings": { "icon": "riders", "title": "2M Riders", "subtitle": "Journey With Us" } },
-        { "type": "feature", "settings": { "icon": "secure", "title": "100% Secure", "subtitle": "Secure Payment" } },
-        { "type": "feature", "settings": { "icon": "premium", "title": "Premium", "subtitle": "Quality Products" } },
-        { "type": "feature", "settings": { "icon": "returns", "title": "Easy Returns", "subtitle": "Return Policy" } }
+        { "type": "feature", "settings": { "icon": "riders", "title": "2M Riders", "subtitle": "Join the movement" } },
+        { "type": "feature", "settings": { "icon": "secure", "title": "Secure Pay", "subtitle": "Encrypted Checkout" } },
+        { "type": "feature", "settings": { "icon": "instagram", "title": "60K Fans", "subtitle": "Follow @Brand" } }
       ]
     }
   ]
