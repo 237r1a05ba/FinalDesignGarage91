@@ -1,359 +1,580 @@
-{%- style -%}
-  /* ─── Wrapper ─────────────────────────────────────────── */
-  .feature-bar-section {
-    background: #0a0a0a;
-    border-top: 1px solid #1e1e1e;
-    border-bottom: 1px solid #1e1e1e;
-    overflow: hidden;
-    color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    position: relative;
+{% comment %}
+  Elite Moto Parts - Vehicle Search Strip + Trust Bar
+  Designed for Shopify as a section.
+  Uses Textarea settings for easy data entry and a redesigned Trust Bar.
+{% endcomment %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&display=swap');
+
+  #shopify-section-{{ section.id }} {
+    --primary-red: {{ section.settings.accent_color }};
+    --bg-dark: {{ section.settings.bg_color }};
+    --card-bg: #0a0a0a;
+    --text-white: #ffffff;
+    --text-dim: rgba(255, 255, 255, 0.4);
+    --border-color: rgba(255, 255, 255, 0.1);
   }
 
-  /* Subtle top gradient accent line */
-  .feature-bar-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, #3b82f6 30%, #a855f7 70%, transparent 100%);
-    opacity: 0.6;
-  }
-
-  /* ─── Desktop Layout ───────────────────────────────────── */
-  .feature-bar__desktop {
-    max-width: 1280px;
-    margin: 0 auto;
+  .moto-search-wrapper {
+    background-color: var(--bg-dark);
+    padding: 60px 20px;
+    font-family: 'Inter', sans-serif;
     display: flex;
-    align-items: stretch;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
   }
 
-  .feature-bar__item {
-    flex: 1;
+  .moto-search-container {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* Header Styles */
+  .moto-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 8px;
+  }
+
+  @media (min-width: 768px) {
+    .moto-header {
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+    }
+  }
+
+  .moto-badge {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 20px 28px;
+    gap: 8px;
+    color: var(--primary-red);
+  }
+
+  .moto-badge svg {
+    width: 16px;
+    height: 16px;
+    fill: var(--primary-red);
+  }
+
+  .moto-badge span {
+    font-size: 9px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    white-space: nowrap;
+  }
+
+  .moto-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    line-height: 1;
+    color: var(--text-white);
+    letter-spacing: 0.1em;
+    margin: 0;
+  }
+
+  .moto-title span {
+    color: var(--primary-red);
+  }
+
+  /* Search Bar Styles */
+  .moto-search-bar-wrap {
     position: relative;
-    transition: background 0.4s ease;
-    cursor: default;
-    overflow: hidden;
   }
 
-  /* Shimmer sweep on hover */
-  .feature-bar__item::before {
-    content: '';
+  .moto-search-glow {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.04) 50%, transparent 60%);
-    transform: translateX(-100%);
-    transition: none;
+    inset: -4px;
+    background: linear-gradient(to right, rgba(153, 27, 27, 0.2), var(--primary-red), rgba(153, 27, 27, 0.2));
+    border-radius: 20px;
+    filter: blur(15px);
+    opacity: 0.1;
+    transition: opacity 1s;
   }
 
-  .feature-bar__item:hover::before {
-    animation: trustShimmer 0.8s ease forwards;
+  .moto-search-bar-wrap:hover .moto-search-glow {
+    opacity: 0.3;
   }
 
-  @keyframes trustShimmer {
-    to { transform: translateX(250%); }
+  .moto-search-bar {
+    position: relative;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   }
 
-  .feature-bar__item:hover {
-    background: rgba(255, 255, 255, 0.025);
+  @media (min-width: 1024px) {
+    .moto-search-bar {
+      flex-direction: row;
+      padding: 12px;
+    }
   }
 
-  /* Bottom gradient accent */
-  .feature-bar__item::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #3b82f6, #a855f7);
-    transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  .moto-dropdown-group {
+    flex: 1;
+    position: relative;
   }
 
-  .feature-bar__item:hover::after {
+  .moto-select {
     width: 100%;
+    height: 56px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 0 16px;
+    color: var(--text-white);
+    font-size: 13px;
+    font-weight: 500;
+    appearance: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    outline: none;
   }
 
-  /* ─── Icon ─────────────────────────────────────────────── */
-  .feature-bar__icon-wrap {
-    flex-shrink: 0;
-    width: 46px;
-    height: 46px;
+  .moto-select:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .moto-select:focus {
+    border-color: var(--primary-red);
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+  }
+
+  .moto-select option {
+    background-color: #1a1a1a;
+    color: white;
+  }
+
+  .moto-chevron {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: #666;
+    pointer-events: none;
+    transition: color 0.3s;
+  }
+
+  .moto-dropdown-group:hover .moto-chevron {
+    color: var(--primary-red);
+  }
+
+  /* Button Styles */
+  .moto-search-btn {
+    flex: 0.6;
+    height: 56px;
+    background-color: var(--primary-red);
+    color: white;
+    border: none;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.4s ease;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    box-shadow: 0 10px 15px -3px rgba(220, 38, 38, 0.3);
   }
 
-  .feature-bar__item:hover .feature-bar__icon-wrap {
-    background: rgba(59, 130, 246, 0.12);
-    border-color: rgba(59, 130, 246, 0.3);
-    box-shadow: 0 0 18px rgba(59, 130, 246, 0.2);
-    transform: scale(1.06);
+  .moto-search-btn:hover {
+    background-color: #b91c1c;
+    transform: translateY(-1px);
   }
 
-  .feature-bar__icon {
-    width: 22px;
-    height: 22px;
-    color: #a0aec0;
-    transition: color 0.4s ease, transform 0.4s ease;
+  .moto-search-btn:active {
+    transform: scale(0.98);
   }
 
-  .feature-bar__item:hover .feature-bar__icon {
-    color: #60a5fa;
-    transform: scale(1.1);
+  .moto-btn-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transform: translateX(-100%) skewX(-12deg);
+    transition: transform 0.7s;
   }
 
-  .feature-bar__icon svg {
+  .moto-search-btn:hover .moto-btn-shimmer {
+    transform: translateX(100%) skewX(-12deg);
+  }
+
+  .moto-search-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Redesigned Trust Bar Styles */
+  .moto-trust-bar {
+    max-width: 1200px;
     width: 100%;
-    height: 100%;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.6;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
   }
 
-  /* ─── Text ─────────────────────────────────────────────── */
-  .feature-bar__content {
+  @media (min-width: 1024px) {
+    .moto-trust-bar {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+  }
+
+  .moto-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .moto-trust-icon {
+    width: 48px;
+    height: 48px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s;
+  }
+
+  .moto-trust-item:hover .moto-trust-icon {
+    border-color: var(--primary-red);
+    background-color: rgba(220, 38, 38, 0.05);
+    transform: translateY(-2px);
+  }
+
+  .moto-trust-icon svg {
+    width: 20px;
+    height: 20px;
+    color: var(--text-white);
+    opacity: 0.8;
+  }
+
+  .moto-trust-info {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    min-width: 0;
   }
 
-  .feature-bar__title {
-    font-size: 0.95rem;
-    font-weight: 900;
-    text-transform: uppercase;
+  .moto-trust-title {
+    font-family: 'Bebas Neue', sans-serif;
     font-style: italic;
-    letter-spacing: -0.01em;
-    line-height: 1.15;
-    white-space: nowrap;
-    color: #f5f5f5;
-    transition: color 0.3s ease;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--text-white);
+    letter-spacing: 0.05em;
   }
 
-  .feature-bar__item:hover .feature-bar__title {
-    color: #ffffff;
-  }
-
-  .feature-bar__subtitle {
-    font-size: 8.5px;
-    font-weight: 500;
+  .moto-trust-subtitle {
+    font-size: 9px;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: #525252;
-    white-space: nowrap;
-    transition: color 0.3s ease;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    margin-top: 2px;
   }
+</style>
 
-  .feature-bar__item:hover .feature-bar__subtitle {
-    color: #737373;
-  }
-
-  /* ─── Mobile marquee ──────────────────────────────────── */
-  .feature-bar__mobile {
-    display: none;
-  }
-
-  @media (max-width: 768px) {
-    .feature-bar__desktop {
-      display: none;
-    }
-
-    .feature-bar__mobile {
-      display: block;
-      overflow: hidden;
-      mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
-    }
-
-    .feature-bar__mobile-track {
-      display: flex;
-      width: max-content;
-      animation: mobileMarquee 16s linear infinite;
-    }
-
-    @keyframes mobileMarquee {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .feature-bar__mobile .feature-bar__item {
-      flex: 0 0 auto;
-      width: 210px;
-      padding: 18px 16px;
-      gap: 12px;
-      justify-content: flex-start;
-    }
-
-    .feature-bar__mobile .feature-bar__item::after {
-      display: none;
-    }
-
-    .feature-bar__mobile .feature-bar__icon-wrap {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-    }
-
-    .feature-bar__mobile .feature-bar__icon {
-      width: 18px;
-      height: 18px;
-    }
-
-    .feature-bar__mobile .feature-bar__title {
-      font-size: 0.82rem;
-    }
-
-    .feature-bar__mobile .feature-bar__subtitle {
-      font-size: 7.5px;
-    }
-
-    /* Instagram item accent */
-    .feature-bar__item--instagram .feature-bar__icon-wrap {
-      background: rgba(225, 48, 108, 0.1);
-      border-color: rgba(225, 48, 108, 0.25);
-    }
-
-    .feature-bar__item--instagram .feature-bar__icon {
-      color: #e1306c;
-    }
-  }
-{%- endstyle -%}
-
-{%- capture feature_items_html -%}
-  {%- for block in section.blocks -%}
-    <div class="feature-bar__item" {{ block.shopify_attributes }}>
-      <div class="feature-bar__icon-wrap">
-        <div class="feature-bar__icon">
-          {%- case block.settings.icon -%}
-            {%- when 'riders' -%}
-              <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            {%- when 'secure' -%}
-              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-            {%- when 'premium' -%}
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-            {%- when 'returns' -%}
-              <svg viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h12.5A5.5 5.5 0 0 1 22 14.5v0A5.5 5.5 0 0 1 16.5 20H11"/></svg>
-          {%- endcase -%}
-        </div>
+<section class="moto-search-wrapper">
+  <div class="moto-search-container">
+    
+    <div class="moto-header">
+      <div class="moto-badge">
+        <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14H11V21L20 10H13Z"/></svg>
+        <span>{{ section.settings.badge_text }}</span>
       </div>
-      <div class="feature-bar__content">
-        <span class="feature-bar__title">{{ block.settings.title }}</span>
-        <span class="feature-bar__subtitle">{{ block.settings.subtitle }}</span>
-      </div>
+      <h2 class="moto-title">
+        {{ section.settings.title_part1 }} <span>{{ section.settings.title_part2 }}</span>
+      </h2>
     </div>
-  {%- endfor -%}
-{%- endcapture -%}
 
-<section class="feature-bar-section">
-
-  {{- '<!-- Desktop -->' -}}
-  <div class="feature-bar__desktop">
-    {{ feature_items_html }}
-  </div>
-
-  {{- '<!-- Mobile marquee -->' -}}
-  <div class="feature-bar__mobile">
-    <div class="feature-bar__mobile-track">
-      {%- capture mobile_items -%}
-        {%- for block in section.blocks -%}
-          <div class="feature-bar__item" {{ block.shopify_attributes }}>
-            <div class="feature-bar__icon-wrap">
-              <div class="feature-bar__icon">
-                {%- case block.settings.icon -%}
-                  {%- when 'riders' -%}
-                    <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                  {%- when 'secure' -%}
-                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-                  {%- when 'premium' -%}
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-                  {%- when 'returns' -%}
-                    <svg viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h12.5A5.5 5.5 0 0 1 22 14.5v0A5.5 5.5 0 0 1 16.5 20H11"/></svg>
-                {%- endcase -%}
-              </div>
-            </div>
-            <div class="feature-bar__content">
-              <span class="feature-bar__title">{{ block.settings.title }}</span>
-              <span class="feature-bar__subtitle">{{ block.settings.subtitle }}</span>
-            </div>
-          </div>
-        {%- endfor -%}
-        <div class="feature-bar__item feature-bar__item--instagram">
-          <div class="feature-bar__icon-wrap">
-            <div class="feature-bar__icon">
-              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-            </div>
-          </div>
-          <div class="feature-bar__content">
-            <span class="feature-bar__title">60K Followers</span>
-            <span class="feature-bar__subtitle">Follow on Instagram</span>
-          </div>
+    <div class="moto-search-bar-wrap">
+      <div class="moto-search-glow"></div>
+      
+      <form id="moto-search-form" action="/search" method="get" class="moto-search-bar">
+        <input type="hidden" name="type" value="product">
+        <input type="hidden" name="q" id="moto-final-query" value="">
+        
+        <div class="moto-dropdown-group">
+          <select class="moto-select" id="moto-brand" required>
+            <option value="" disabled selected>{{ section.settings.label_brand }}</option>
+            {% assign brands = section.settings.brands_list | split: ',' %}
+            {% for brand in brands %}
+              {% if brand != blank %}
+                <option value="{{ brand | strip | escape }}">{{ brand | strip }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+          <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </div>
-      {%- endcapture -%}
-      {{ mobile_items }}
-      {{ mobile_items }}
+
+        <div class="moto-dropdown-group">
+          <select class="moto-select" id="moto-model" required>
+            <option value="" disabled selected>{{ section.settings.label_model }}</option>
+            {% assign models = section.settings.models_list | split: ',' %}
+            {% for model in models %}
+              {% if model != blank %}
+                <option value="{{ model | strip | escape }}">{{ model | strip }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+          <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+
+        <div class="moto-dropdown-group">
+          <select class="moto-select" id="moto-category">
+            <option value="" selected>{{ section.settings.label_category }}</option>
+            <option value="all">All Categories</option>
+            {% assign categories = section.settings.categories_list | split: ',' %}
+            {% for category in categories %}
+              {% if category != blank %}
+                <option value="{{ category | strip | escape }}">{{ category | strip }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+          <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+
+        <button type="submit" class="moto-search-btn">
+          <div class="moto-btn-shimmer"></div>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          {{ section.settings.button_text }}
+        </button>
+      </form>
     </div>
   </div>
 
+  {% comment %} Redesigned Trust Bar {% endcomment %}
+  <div class="moto-trust-bar">
+    <div class="moto-trust-item">
+      <div class="moto-trust-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+      </div>
+      <div class="moto-trust-info">
+        <span class="moto-trust-title">{{ section.settings.trust_1_title }}</span>
+        <span class="moto-trust-subtitle">{{ section.settings.trust_1_sub }}</span>
+      </div>
+    </div>
+    
+    <div class="moto-trust-item">
+      <div class="moto-trust-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+      </div>
+      <div class="moto-trust-info">
+        <span class="moto-trust-title">{{ section.settings.trust_2_title }}</span>
+        <span class="moto-trust-subtitle">{{ section.settings.trust_2_sub }}</span>
+      </div>
+    </div>
+
+    <div class="moto-trust-item">
+      <div class="moto-trust-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+      </div>
+      <div class="moto-trust-info">
+        <span class="moto-trust-title">{{ section.settings.trust_3_title }}</span>
+        <span class="moto-trust-subtitle">{{ section.settings.trust_3_sub }}</span>
+      </div>
+    </div>
+
+    <div class="moto-trust-item">
+      <div class="moto-trust-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+      </div>
+      <div class="moto-trust-info">
+        <span class="moto-trust-title">{{ section.settings.trust_4_title }}</span>
+        <span class="moto-trust-subtitle">{{ section.settings.trust_4_sub }}</span>
+      </div>
+    </div>
+  </div>
 </section>
+
+<script>
+  document.getElementById('moto-search-form').addEventListener('submit', function(e) {
+    const brand = document.getElementById('moto-brand').value;
+    const model = document.getElementById('moto-model').value;
+    const category = document.getElementById('moto-category').value;
+    const queryInput = document.getElementById('moto-final-query');
+    
+    if (!brand || !model) {
+      e.preventDefault();
+      return;
+    }
+
+    let searchTerms = [];
+    if (brand) searchTerms.push(brand);
+    if (model) searchTerms.push(model);
+    if (category && category !== 'all' && category !== "") searchTerms.push(category);
+    
+    queryInput.value = searchTerms.join(' ');
+  });
+</script>
 
 {% schema %}
 {
-  "name": "Feature Trust Bar",
-  "max_blocks": 4,
-  "blocks": [
+  "name": "Moto Search Strip",
+  "settings": [
     {
-      "type": "feature",
-      "name": "Feature",
-      "settings": [
-        {
-          "type": "select",
-          "id": "icon",
-          "label": "Icon",
-          "options": [
-            { "value": "riders", "label": "Users/Riders" },
-            { "value": "secure", "label": "Shield/Secure" },
-            { "value": "premium", "label": "Award/Premium" },
-            { "value": "returns", "label": "Return Arrow" }
-          ],
-          "default": "riders"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Feature Title"
-        },
-        {
-          "type": "text",
-          "id": "subtitle",
-          "label": "Subtitle",
-          "default": "Supporting text"
-        }
-      ]
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#050505"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color (Red)",
+      "default": "#dc2626"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "Elite Moto Parts"
+    },
+    {
+      "type": "text",
+      "id": "title_part1",
+      "label": "Title Part 1",
+      "default": "SEARCH BY"
+    },
+    {
+      "type": "text",
+      "id": "title_part2",
+      "label": "Title Part 2 (Red)",
+      "default": "VEHICLE"
+    },
+    {
+      "type": "header",
+      "content": "Dropdown Labels"
+    },
+    {
+      "type": "text",
+      "id": "label_brand",
+      "label": "Brand Label",
+      "default": "Select Brand"
+    },
+    {
+      "type": "text",
+      "id": "label_model",
+      "label": "Model Label",
+      "default": "Select Model"
+    },
+    {
+      "type": "text",
+      "id": "label_category",
+      "label": "Category Label",
+      "default": "Select Category"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "SEARCH"
+    },
+    {
+      "type": "header",
+      "content": "Search Options Data"
+    },
+    {
+      "type": "textarea",
+      "id": "brands_list",
+      "label": "Brands List (Comma separated)",
+      "default": "Honda, Yamaha, Kawasaki, Suzuki, Royal Enfield, BMW, Ducati, KTM",
+      "info": "Enter brands separated by commas (e.g. Honda, Yamaha)"
+    },
+    {
+      "type": "textarea",
+      "id": "models_list",
+      "label": "Models List (Comma separated)",
+      "default": "CBR600RR, YZF-R1, Ninja 400, Classic 350, Duke 390, R1250GS, Panigale V4",
+      "info": "Enter models separated by commas"
+    },
+    {
+      "type": "textarea",
+      "id": "categories_list",
+      "label": "Categories List (Comma separated)",
+      "default": "Mirrors, Brake Pads, Exhaust Systems, Indicators / Lighting, Chain & Sprocket, Engine Oil & Filters, Tires / Wheels, Handlebars & Grips",
+      "info": "Enter categories separated by commas"
+    },
+    {
+      "type": "header",
+      "content": "Trust Bar Settings"
+    },
+    {
+      "type": "text",
+      "id": "trust_1_title",
+      "label": "Trust 1 Title",
+      "default": "2M RIDERS"
+    },
+    {
+      "type": "text",
+      "id": "trust_1_sub",
+      "label": "Trust 1 Subtitle",
+      "default": "JOURNEY WITH US"
+    },
+    {
+      "type": "text",
+      "id": "trust_2_title",
+      "label": "Trust 2 Title",
+      "default": "100% SECURE"
+    },
+    {
+      "type": "text",
+      "id": "trust_2_sub",
+      "label": "Trust 2 Subtitle",
+      "default": "SECURE PAYMENT"
+    },
+    {
+      "type": "text",
+      "id": "trust_3_title",
+      "label": "Trust 3 Title",
+      "default": "PREMIUM"
+    },
+    {
+      "type": "text",
+      "id": "trust_3_sub",
+      "label": "Trust 3 Subtitle",
+      "default": "QUALITY PRODUCTS"
+    },
+    {
+      "type": "text",
+      "id": "trust_4_title",
+      "label": "Trust 4 Title",
+      "default": "EASY RETURNS"
+    },
+    {
+      "type": "text",
+      "id": "trust_4_sub",
+      "label": "Trust 4 Subtitle",
+      "default": "RETURN POLICY"
     }
   ],
   "presets": [
     {
-      "name": "Feature Trust Bar",
-      "blocks": [
-        { "type": "feature", "settings": { "icon": "riders", "title": "2M Riders", "subtitle": "Journey With Us" } },
-        { "type": "feature", "settings": { "icon": "secure", "title": "100% Secure", "subtitle": "Secure Payment" } },
-        { "type": "feature", "settings": { "icon": "premium", "title": "Premium", "subtitle": "Quality Products" } },
-        { "type": "feature", "settings": { "icon": "returns", "title": "Easy Returns", "subtitle": "Return Policy" } }
-      ]
+      "name": "Moto Search Strip",
+      "category": "Search"
     }
   ]
 }
