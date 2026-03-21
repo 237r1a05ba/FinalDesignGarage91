@@ -1,7 +1,7 @@
 {% comment %}
   Elite Moto Parts - Vehicle Search Strip + Trust Bar
   Designed for Shopify as a section.
-  Uses Textarea settings for easy data entry and a redesigned Trust Bar.
+  Uses Textarea settings for easy data entry AND Blocks to resolve Shopify schema errors.
 {% endcomment %}
 
 <style>
@@ -326,6 +326,11 @@
                 <option value="{{ brand | strip | escape }}">{{ brand | strip }}</option>
               {% endif %}
             {% endfor %}
+            {% for block in section.blocks %}
+              {% if block.type == 'brand' %}
+                <option value="{{ block.settings.title | escape }}">{{ block.settings.title }}</option>
+              {% endif %}
+            {% endfor %}
           </select>
           <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </div>
@@ -337,6 +342,11 @@
             {% for model in models %}
               {% if model != blank %}
                 <option value="{{ model | strip | escape }}">{{ model | strip }}</option>
+              {% endif %}
+            {% endfor %}
+            {% for block in section.blocks %}
+              {% if block.type == 'model' %}
+                <option value="{{ block.settings.title | escape }}">{{ block.settings.title }}</option>
               {% endif %}
             {% endfor %}
           </select>
@@ -351,6 +361,11 @@
             {% for category in categories %}
               {% if category != blank %}
                 <option value="{{ category | strip | escape }}">{{ category | strip }}</option>
+              {% endif %}
+            {% endfor %}
+            {% for block in section.blocks %}
+              {% if block.type == 'category' %}
+                <option value="{{ block.settings.title | escape }}">{{ block.settings.title }}</option>
               {% endif %}
             {% endfor %}
           </select>
@@ -569,6 +584,41 @@
       "id": "trust_4_sub",
       "label": "Trust 4 Subtitle",
       "default": "RETURN POLICY"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand Option",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Brand Name"
+        }
+      ]
+    },
+    {
+      "type": "model",
+      "name": "Model Option",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Model Name"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "name": "Category Option",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Name"
+        }
+      ]
     }
   ],
   "presets": [
