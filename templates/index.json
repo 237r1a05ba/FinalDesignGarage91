@@ -57,7 +57,7 @@
         "autoplay_speed": 3,
         "show_arrows": false,
         "show_dots": true,
-        "desktop_aspect_ratio": "auto",
+        "desktop_aspect_ratio": "21:9",
         "mobile_aspect_ratio": "auto",
         "overlay_opacity": 0,
         "overlay_heading_font": "sans_serif_n4",
