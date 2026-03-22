@@ -260,6 +260,7 @@
     flex-shrink: 0;
     transition: filter 0.3s ease;
     filter: drop-shadow(0 0 2px rgba(225, 48, 108, 0.3));
+    animation: instaIconFade 5s ease-in-out infinite;
   }
 
   .header-insta:hover .header-insta__icon {
@@ -318,6 +319,32 @@
     animation: instaFollowFade 5s ease-in-out infinite;
   }
 
+  @keyframes instaIconFade {
+    0%, 38% {
+      opacity: 1;
+      width: 20px;
+      min-width: 20px;
+      margin-inline-end: 0;
+      overflow: visible;
+    }
+
+    48%, 58% {
+      opacity: 0;
+      width: 0;
+      min-width: 0;
+      margin-inline-end: -3px;
+      overflow: hidden;
+    }
+
+    68%, 100% {
+      opacity: 1;
+      width: 20px;
+      min-width: 20px;
+      margin-inline-end: 0;
+      overflow: visible;
+    }
+  }
+
   @keyframes instaCountFade {
     0%, 35% { opacity: 1; }
     45%, 55% { opacity: 0; }
@@ -325,17 +352,19 @@
   }
 
   @keyframes instaFollowFade {
-    0%, 40% { opacity: 0; }
-    50%, 60% { opacity: 1; }
-    70%, 100% { opacity: 0; }
+    0%, 45% { opacity: 0; }
+    52%, 62% { opacity: 1; }
+    72%, 100% { opacity: 0; }
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .header-insta__icon,
     .header-insta__count,
     .header-insta__follow {
       animation: none;
     }
 
+    .header-insta__icon,
     .header-insta__count { opacity: 1; }
     .header-insta__follow { opacity: 0; }
   }
