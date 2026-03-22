@@ -11,7 +11,7 @@
   <a
     href="{{ insta_url }}"
     class="header-insta mobile:hidden"
-    aria-label="Follow us on Instagram – 60K+ followers"
+    aria-label="{{ 'accessibility.follow_on_instagram' | t }}"
     target="_blank"
     rel="noopener noreferrer"
   >
@@ -22,7 +22,9 @@
         <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
       </svg>
     </span>
-    <span class="header-insta__count" data-insta-target="60000">0</span>
+    <span class="header-insta__label">
+      <span class="header-insta__roll-text">Follow</span>
+    </span>
   </a>
 
   {% if shop.customer_accounts_enabled %}
@@ -278,16 +280,45 @@
     height: 100%;
   }
 
-  .header-insta__count {
+  .header-insta__label {
+    display: inline-flex;
+    align-items: center;
+    overflow: hidden;
+    height: 1.15em;
     font-size: 11px;
     font-weight: 800;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.04em;
     line-height: 1;
-    font-variant-numeric: tabular-nums;
+    text-transform: uppercase;
     background: linear-gradient(135deg, #e1306c, #fcaf45);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  .header-insta__roll-text {
+    display: inline-block;
+    animation: headerInstaRollUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes headerInstaRollUp {
+    from {
+      transform: translateY(110%);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .header-insta__roll-text {
+      animation: none;
+      transform: none;
+      opacity: 1;
+    }
   }
 
   @media screen and (max-width: 749px) {
@@ -300,7 +331,7 @@
       height: 22px;
     }
 
-    .header-insta__count {
+    .header-insta__label {
       font-size: 12px;
       font-weight: 900;
     }
@@ -380,49 +411,3 @@
     animation: cartBubbleSlideIn var(--animation-speed) var(--animation-easing);
   }
 {% endstylesheet %}
-
-<script>
-(function(){
-  function formatCount(n) {
-    if (n >= 1000) return (n / 1000).toFixed(n % 1000 === 0 ? 0 : 1) + 'K+';
-    return n.toString();
-  }
-
-  function animateCounters() {
-    var els = document.querySelectorAll('[data-insta-target]');
-    els.forEach(function(el) {
-      var target = parseInt(el.getAttribute('data-insta-target'), 10);
-      var countUp = 2000;
-      var holdTime = 4000;
-      var isMobile = window.matchMedia('(max-width: 749px)').matches;
-
-      function runCycle() {
-        var start = null;
-        function step(ts) {
-          if (!start) start = ts;
-          var progress = Math.min((ts - start) / countUp, 1);
-          var ease = 1 - Math.pow(1 - progress, 3);
-          var current = Math.round(ease * target);
-          el.textContent = formatCount(current);
-          if (progress < 1) {
-            requestAnimationFrame(step);
-          } else if (isMobile) {
-            setTimeout(function() {
-              el.textContent = '0';
-              setTimeout(runCycle, 300);
-            }, holdTime);
-          }
-        }
-        requestAnimationFrame(step);
-      }
-      runCycle();
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', animateCounters);
-  } else {
-    animateCounters();
-  }
-})();
-</script>
