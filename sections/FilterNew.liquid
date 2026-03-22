@@ -1,6 +1,7 @@
 {% comment %}
-  Filter steps as accordions — each step is a theme block with its own option list (comma-separated).
-  Selections combine in block order for the final search query.
+  Elite Moto Parts - Vehicle Search Strip
+  Designed for Shopify as a section.
+  Uses Textarea settings for easy data entry (Brand, Model, Category).
 {% endcomment %}
 
 <style>
@@ -15,7 +16,7 @@
     --border-color: rgba(255, 255, 255, 0.1);
   }
 
-  #shopify-section-{{ section.id }} .moto-search-wrapper {
+  .moto-search-wrapper {
     background-color: var(--bg-dark);
     padding: 60px 20px;
     font-family: 'Inter', sans-serif;
@@ -25,7 +26,7 @@
     min-height: 200px;
   }
 
-  #shopify-section-{{ section.id }} .moto-search-container {
+  .moto-search-container {
     max-width: 1200px;
     width: 100%;
     display: flex;
@@ -33,7 +34,8 @@
     gap: 16px;
   }
 
-  #shopify-section-{{ section.id }} .moto-header {
+  /* Header Styles */
+  .moto-header {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -41,27 +43,27 @@
   }
 
   @media (min-width: 768px) {
-    #shopify-section-{{ section.id }} .moto-header {
+    .moto-header {
       flex-direction: row;
       align-items: center;
       gap: 16px;
     }
   }
 
-  #shopify-section-{{ section.id }} .moto-badge {
+  .moto-badge {
     display: flex;
     align-items: center;
     gap: 8px;
     color: var(--primary-red);
   }
 
-  #shopify-section-{{ section.id }} .moto-badge svg {
+  .moto-badge svg {
     width: 16px;
     height: 16px;
     fill: var(--primary-red);
   }
 
-  #shopify-section-{{ section.id }} .moto-badge span {
+  .moto-badge span {
     font-size: 9px;
     font-weight: 900;
     text-transform: uppercase;
@@ -69,7 +71,7 @@
     white-space: nowrap;
   }
 
-  #shopify-section-{{ section.id }} .moto-title {
+  .moto-title {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 32px;
     line-height: 1;
@@ -78,15 +80,16 @@
     margin: 0;
   }
 
-  #shopify-section-{{ section.id }} .moto-title span {
+  .moto-title span {
     color: var(--primary-red);
   }
 
-  #shopify-section-{{ section.id }} .moto-search-bar-wrap {
+  /* Search Bar Styles */
+  .moto-search-bar-wrap {
     position: relative;
   }
 
-  #shopify-section-{{ section.id }} .moto-search-glow {
+  .moto-search-glow {
     position: absolute;
     inset: -4px;
     background: linear-gradient(to right, rgba(153, 27, 27, 0.2), var(--primary-red), rgba(153, 27, 27, 0.2));
@@ -96,11 +99,11 @@
     transition: opacity 1s;
   }
 
-  #shopify-section-{{ section.id }} .moto-search-bar-wrap:hover .moto-search-glow {
+  .moto-search-bar-wrap:hover .moto-search-glow {
     opacity: 0.3;
   }
 
-  #shopify-section-{{ section.id }} .moto-search-bar {
+  .moto-search-bar {
     position: relative;
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
@@ -108,121 +111,29 @@
     padding: 12px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   }
 
   @media (min-width: 1024px) {
-    #shopify-section-{{ section.id }} .moto-search-bar {
+    .moto-search-bar {
       flex-direction: row;
-      flex-wrap: wrap;
-      align-items: stretch;
-    }
-
-    #shopify-section-{{ section.id }} .moto-accordion-stack {
-      flex: 1;
-      min-width: 280px;
-    }
-
-    #shopify-section-{{ section.id }} .moto-search-btn {
-      align-self: flex-end;
+      padding: 12px;
     }
   }
 
-  #shopify-section-{{ section.id }} .moto-accordion-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  .moto-dropdown-group {
     flex: 1;
+    position: relative;
   }
 
-  #shopify-section-{{ section.id }} .moto-accordion-item {
+  .moto-select {
+    width: 100%;
+    height: 56px;
+    background-color: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    background-color: rgba(255, 255, 255, 0.03);
-    overflow: hidden;
-  }
-
-  #shopify-section-{{ section.id }} .moto-accordion-item[open] {
-    border-color: rgba(255, 255, 255, 0.18);
-  }
-
-  #shopify-section-{{ section.id }} .moto-accordion-summary {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 14px 16px;
-    cursor: pointer;
-    color: var(--text-white);
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-
-  #shopify-section-{{ section.id }} .moto-accordion-summary::-webkit-details-marker {
-    display: none;
-  }
-
-  #shopify-section-{{ section.id }} .moto-accordion-summary:hover {
-    background-color: rgba(255, 255, 255, 0.04);
-  }
-
-  #shopify-section-{{ section.id }} .moto-accordion-meta {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-  }
-
-  #shopify-section-{{ section.id }} .moto-accordion-choice {
-    color: var(--text-dim);
-    font-weight: 500;
-    text-transform: none;
-    letter-spacing: 0;
-    font-size: 12px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 160px;
-  }
-
-  #shopify-section-{{ section.id }} .moto-accordion-item[data-has-value='true'] .moto-accordion-choice {
-    color: var(--primary-red);
-  }
-
-  #shopify-section-{{ section.id }} .moto-accordion-chevron {
-    width: 18px;
-    height: 18px;
-    color: #666;
-    flex-shrink: 0;
-    transition: transform 0.25s ease, color 0.2s;
-  }
-
-  #shopify-section-{{ section.id }} .moto-accordion-item[open] .moto-accordion-chevron {
-    transform: rotate(180deg);
-    color: var(--primary-red);
-  }
-
-  #shopify-section-{{ section.id }} .moto-accordion-body {
-    padding: 0 16px 14px;
-    border-top: 1px solid var(--border-color);
-  }
-
-  #shopify-section-{{ section.id }} .moto-dropdown-group {
-    position: relative;
-    margin-top: 12px;
-  }
-
-  #shopify-section-{{ section.id }} .moto-select {
-    width: 100%;
-    height: 48px;
-    background-color: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 0 40px 0 14px;
+    padding: 0 16px;
     color: var(--text-white);
     font-size: 13px;
     font-weight: 500;
@@ -232,24 +143,24 @@
     outline: none;
   }
 
-  #shopify-section-{{ section.id }} .moto-select:hover {
+  .moto-select:hover {
     background-color: rgba(255, 255, 255, 0.06);
     border-color: rgba(255, 255, 255, 0.2);
   }
 
-  #shopify-section-{{ section.id }} .moto-select:focus {
+  .moto-select:focus {
     border-color: var(--primary-red);
     box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
   }
 
-  #shopify-section-{{ section.id }} .moto-select option {
+  .moto-select option {
     background-color: #1a1a1a;
     color: white;
   }
 
-  #shopify-section-{{ section.id }} .moto-chevron {
+  .moto-chevron {
     position: absolute;
-    right: 14px;
+    right: 16px;
     top: 50%;
     transform: translateY(-50%);
     width: 16px;
@@ -259,14 +170,14 @@
     transition: color 0.3s;
   }
 
-  #shopify-section-{{ section.id }} .moto-dropdown-group:hover .moto-chevron {
+  .moto-dropdown-group:hover .moto-chevron {
     color: var(--primary-red);
   }
 
-  #shopify-section-{{ section.id }} .moto-search-btn {
-    flex: 0 0 auto;
+  /* Button Styles */
+  .moto-search-btn {
+    flex: 0.6;
     height: 56px;
-    min-width: 160px;
     background-color: var(--primary-red);
     color: white;
     border: none;
@@ -285,16 +196,16 @@
     box-shadow: 0 10px 15px -3px rgba(220, 38, 38, 0.3);
   }
 
-  #shopify-section-{{ section.id }} .moto-search-btn:hover {
+  .moto-search-btn:hover {
     background-color: #b91c1c;
     transform: translateY(-1px);
   }
 
-  #shopify-section-{{ section.id }} .moto-search-btn:active {
+  .moto-search-btn:active {
     transform: scale(0.98);
   }
 
-  #shopify-section-{{ section.id }} .moto-btn-shimmer {
+  .moto-btn-shimmer {
     position: absolute;
     inset: 0;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
@@ -302,27 +213,19 @@
     transition: transform 0.7s;
   }
 
-  #shopify-section-{{ section.id }} .moto-search-btn:hover .moto-btn-shimmer {
+  .moto-search-btn:hover .moto-btn-shimmer {
     transform: translateX(100%) skewX(-12deg);
   }
 
-  #shopify-section-{{ section.id }} .moto-search-btn svg {
+  .moto-search-btn svg {
     width: 18px;
     height: 18px;
   }
-
-  #shopify-section-{{ section.id }} .moto-filter-empty {
-    color: var(--text-dim);
-    font-size: 13px;
-    padding: 16px;
-    text-align: center;
-    border: 1px dashed var(--border-color);
-    border-radius: 12px;
-  }
 </style>
 
-<div class="moto-search-wrapper">
+<section class="moto-search-wrapper">
   <div class="moto-search-container">
+    
     <div class="moto-header">
       <div class="moto-badge">
         <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14H11V21L20 10H13Z"/></svg>
@@ -335,268 +238,175 @@
 
     <div class="moto-search-bar-wrap">
       <div class="moto-search-glow"></div>
-
-      <form
-        id="moto-search-form-{{ section.id }}"
-        class="moto-search-bar"
-        action="{{ routes.search_url }}"
-        method="get"
-      >
+      
+      <form id="moto-search-form" action="/search" method="get" class="moto-search-bar">
         <input type="hidden" name="type" value="product">
-        <input type="hidden" name="q" id="moto-final-query-{{ section.id }}" value="">
-
-        <div class="moto-accordion-stack" data-filter-root>
-          {% if section.blocks.size == 0 %}
-            <p class="moto-filter-empty">
-              Add <strong>Filter step</strong> blocks in the theme editor and enter each step’s options (comma-separated).
-            </p>
-          {% endif %}
-
-          {% for block in section.blocks %}
-            {% if block.type == 'filter_step' %}
-              <details
-                class="moto-accordion-item"
-                data-filter-step
-                data-step-index="{{ forloop.index0 }}"
-                {{ block.shopify_attributes }}
-              >
-                <summary class="moto-accordion-summary">
-                  <span class="moto-accordion-meta">
-                    <span>{{ block.settings.heading | escape }}</span>
-                    <span class="moto-accordion-choice" data-choice-label>{{ block.settings.placeholder | escape }}</span>
-                  </span>
-                  <svg class="moto-accordion-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                  </svg>
-                </summary>
-                <div class="moto-accordion-body">
-                  <div class="moto-dropdown-group">
-                    <select
-                      class="moto-select moto-filter-select"
-                      id="moto-select-{{ block.id }}"
-                      name="moto_step_{{ forloop.index }}"
-                      data-required="{{ block.settings.required }}"
-                      data-placeholder="{{ block.settings.placeholder | escape }}"
-                    >
-                      {% if block.settings.required %}
-                        <option value="" disabled selected>{{ block.settings.placeholder | escape }}</option>
-                      {% else %}
-                        <option value="" selected>{{ block.settings.placeholder | escape }}</option>
-                      {% endif %}
-                      {% assign raw_options = block.settings.options | split: ',' %}
-                      {% assign option_lines = block.settings.options | newline_to_br | split: '<br />' %}
-                      {% if option_lines.size > 1 %}
-                        {% assign raw_options = option_lines %}
-                      {% endif %}
-                      {% capture opt_joined %}{% for o in raw_options %}{% assign t = o | strip %}{% if t != '' %}{{ t }}|{% endif %}{% endfor %}{% endcapture %}
-                      {% assign opt_arr = opt_joined | split: '|' %}
-                      {% assign sorted_opts = opt_arr | sort %}
-                      {% for opt in sorted_opts %}
-                        {% if opt != blank %}
-                          <option value="{{ opt | escape }}">{{ opt }}</option>
-                        {% endif %}
-                      {% endfor %}
-                    </select>
-                    <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                  </div>
-                </div>
-              </details>
-            {% endif %}
-          {% endfor %}
+        <input type="hidden" name="q" id="moto-final-query" value="">
+        
+        <div class="moto-dropdown-group">
+          <select class="moto-select" id="moto-brand" required>
+            <option value="" disabled selected>{{ section.settings.label_brand }}</option>
+            {% assign brands = section.settings.brands_list | split: ',' %}
+            {% for brand in brands %}
+              {% if brand != blank %}
+                <option value="{{ brand | strip | escape }}">{{ brand | strip }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+          <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </div>
 
-        <button type="submit" class="moto-search-btn" {% if section.blocks.size == 0 %}disabled{% endif %}>
+        <div class="moto-dropdown-group">
+          <select class="moto-select" id="moto-model" required>
+            <option value="" disabled selected>{{ section.settings.label_model }}</option>
+            {% assign models = section.settings.models_list | split: ',' %}
+            {% for model in models %}
+              {% if model != blank %}
+                <option value="{{ model | strip | escape }}">{{ model | strip }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+          <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+
+        <div class="moto-dropdown-group">
+          <select class="moto-select" id="moto-category">
+            <option value="" selected>{{ section.settings.label_category }}</option>
+            <option value="all">All Categories</option>
+            {% assign categories = section.settings.categories_list | split: ',' %}
+            {% for category in categories %}
+              {% if category != blank %}
+                <option value="{{ category | strip | escape }}">{{ category | strip }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+          <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+
+        <button type="submit" class="moto-search-btn">
           <div class="moto-btn-shimmer"></div>
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
           {{ section.settings.button_text }}
         </button>
       </form>
     </div>
+
   </div>
-</div>
+</section>
 
 <script>
-  (function () {
-    var root = document.getElementById('shopify-section-{{ section.id }}');
-    if (!root) return;
-
-    var form = root.querySelector('#moto-search-form-{{ section.id }}');
-    var queryInput = root.querySelector('#moto-final-query-{{ section.id }}');
-    if (!form || !queryInput) return;
-
-    var sortAlphabetical = {{ section.settings.sort_terms_alphabetically | json }};
-
-    function updateChoiceLabel(select) {
-      var item = select.closest('[data-filter-step]');
-      if (!item) return;
-      var el = item.querySelector('[data-choice-label]');
-      var ph = select.getAttribute('data-placeholder') || '';
-      var v = select.value;
-      if (el) el.textContent = v ? select.options[select.selectedIndex].textContent : ph;
-      item.setAttribute('data-has-value', v ? 'true' : 'false');
+  document.getElementById('moto-search-form').addEventListener('submit', function(e) {
+    const brand = document.getElementById('moto-brand').value;
+    const model = document.getElementById('moto-model').value;
+    const category = document.getElementById('moto-category').value;
+    const queryInput = document.getElementById('moto-final-query');
+    
+    if (!brand || !model) {
+      e.preventDefault();
+      return;
     }
 
-    function clearFromIndex(index) {
-      var steps = root.querySelectorAll('[data-filter-step]');
-      for (var i = index + 1; i < steps.length; i++) {
-        var sel = steps[i].querySelector('.moto-filter-select');
-        if (!sel) continue;
-        sel.selectedIndex = 0;
-        updateChoiceLabel(sel);
-      }
-    }
-
-    root.querySelectorAll('.moto-filter-select').forEach(function (sel) {
-      updateChoiceLabel(sel);
-      sel.addEventListener('change', function () {
-        var item = sel.closest('[data-filter-step]');
-        var idx = item ? parseInt(item.getAttribute('data-step-index'), 10) : 0;
-        if (!isNaN(idx)) clearFromIndex(idx);
-        updateChoiceLabel(sel);
-      });
-    });
-
-    form.addEventListener('submit', function (e) {
-      var selects = root.querySelectorAll('.moto-filter-select');
-      var terms = [];
-      for (var i = 0; i < selects.length; i++) {
-        var s = selects[i];
-        var req = s.getAttribute('data-required') === 'true';
-        var val = (s.value || '').trim();
-        if (req && !val) {
-          e.preventDefault();
-          var det = s.closest('details');
-          if (det) det.open = true;
-          s.focus();
-          return;
-        }
-        if (val) terms.push(val);
-      }
-      if (sortAlphabetical) terms.sort(function (a, b) { return a.localeCompare(b, undefined, { sensitivity: 'base' }); });
-      queryInput.value = terms.join(' ');
-    });
-  })();
+    let searchTerms = [];
+    if (brand) searchTerms.push(brand);
+    if (model) searchTerms.push(model);
+    if (category && category !== 'all' && category !== "") searchTerms.push(category);
+    
+    queryInput.value = searchTerms.join(' ');
+  });
 </script>
 
 {% schema %}
 {
-  "name": "Moto filter accordion",
-  "tag": "section",
-  "class": "section-moto-filter",
+  "name": "Moto Search Strip",
   "settings": [
     {
       "type": "color",
       "id": "bg_color",
-      "label": "Background color",
+      "label": "Background Color",
       "default": "#050505"
     },
     {
       "type": "color",
       "id": "accent_color",
-      "label": "Accent color",
+      "label": "Accent Color (Red)",
       "default": "#dc2626"
     },
     {
       "type": "text",
       "id": "badge_text",
-      "label": "Badge text",
+      "label": "Badge Text",
       "default": "Elite Moto Parts"
     },
     {
       "type": "text",
       "id": "title_part1",
-      "label": "Title part 1",
+      "label": "Title Part 1",
       "default": "SEARCH BY"
     },
     {
       "type": "text",
       "id": "title_part2",
-      "label": "Title part 2 (accent)",
+      "label": "Title Part 2 (Red)",
       "default": "VEHICLE"
+    },
+    {
+      "type": "header",
+      "content": "Dropdown Labels"
+    },
+    {
+      "type": "text",
+      "id": "label_brand",
+      "label": "Brand Label",
+      "default": "Select Brand"
+    },
+    {
+      "type": "text",
+      "id": "label_model",
+      "label": "Model Label",
+      "default": "Select Model"
+    },
+    {
+      "type": "text",
+      "id": "label_category",
+      "label": "Category Label",
+      "default": "Select Category"
     },
     {
       "type": "text",
       "id": "button_text",
-      "label": "Button text",
+      "label": "Button Text",
       "default": "SEARCH"
     },
     {
-      "type": "checkbox",
-      "id": "sort_terms_alphabetically",
-      "label": "Sort search terms A–Z before search",
-      "default": false,
-      "info": "Off = order matches your accordion blocks (recommended). On = alphabetize the combined query."
-    }
-  ],
-  "blocks": [
+      "type": "header",
+      "content": "Search Options Data"
+    },
     {
-      "type": "filter_step",
-      "name": "Filter step",
-      "settings": [
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "Accordion title",
-          "default": "Brand"
-        },
-        {
-          "type": "text",
-          "id": "placeholder",
-          "label": "Placeholder (empty option)",
-          "default": "Select brand"
-        },
-        {
-          "type": "textarea",
-          "id": "options",
-          "label": "Options",
-          "default": "Honda, Yamaha, Kawasaki, Suzuki",
-          "info": "Comma-separated, or one option per line. Options are shown A–Z in the dropdown."
-        },
-        {
-          "type": "checkbox",
-          "id": "required",
-          "label": "Required before search",
-          "default": true
-        }
-      ]
+      "type": "textarea",
+      "id": "brands_list",
+      "label": "Brands List (Comma separated)",
+      "default": "Honda, Yamaha, Kawasaki, Suzuki, Royal Enfield, BMW, Ducati, KTM",
+      "info": "Enter brands separated by commas (e.g. Honda, Yamaha)"
+    },
+    {
+      "type": "textarea",
+      "id": "models_list",
+      "label": "Models List (Comma separated)",
+      "default": "CBR600RR, YZF-R1, Ninja 400, Classic 350, Duke 390, R1250GS, Panigale V4",
+      "info": "Enter models separated by commas"
+    },
+    {
+      "type": "textarea",
+      "id": "categories_list",
+      "label": "Categories List (Comma separated)",
+      "default": "Mirrors, Brake Pads, Exhaust Systems, Indicators / Lighting, Chain & Sprocket, Engine Oil & Filters, Tires / Wheels, Handlebars & Grips",
+      "info": "Enter categories separated by commas"
     }
   ],
-  "max_blocks": 8,
   "presets": [
     {
-      "name": "Moto filter accordion",
-      "category": "Search",
-      "blocks": [
-        {
-          "type": "filter_step",
-          "settings": {
-            "heading": "Brand",
-            "placeholder": "Select brand",
-            "options": "Honda, Yamaha, Kawasaki, Suzuki, Royal Enfield, BMW, Ducati, KTM",
-            "required": true
-          }
-        },
-        {
-          "type": "filter_step",
-          "settings": {
-            "heading": "Model",
-            "placeholder": "Select model",
-            "options": "CBR600RR, YZF-R1, Ninja 400, Classic 350, Duke 390, R1250GS, Panigale V4",
-            "required": true
-          }
-        },
-        {
-          "type": "filter_step",
-          "settings": {
-            "heading": "Category",
-            "placeholder": "All categories",
-            "options": "Mirrors, Brake Pads, Exhaust Systems, Indicators / Lighting, Chain & Sprocket, Engine Oil & Filters, Tires / Wheels, Handlebars & Grips",
-            "required": false
-          }
-        }
-      ]
+      "name": "Moto Search Strip",
+      "category": "Search"
     }
   ]
 }
