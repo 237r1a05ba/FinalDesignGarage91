@@ -286,15 +286,16 @@
     position: relative;
     display: inline-flex;
     align-items: center;
-    overflow: hidden;
+    overflow: visible;
     height: 1.15em;
-    min-width: 3.8em;
+    min-width: 5em;
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 0.04em;
     line-height: 1;
     text-transform: uppercase;
     font-variant-numeric: tabular-nums;
+    white-space: nowrap;
   }
 
   .header-insta__count,
@@ -305,6 +306,7 @@
     height: 100%;
     display: flex;
     align-items: center;
+    white-space: nowrap;
     background: linear-gradient(135deg, #e1306c, #fcaf45);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -382,6 +384,7 @@
     .header-insta__label {
       font-size: 12px;
       font-weight: 900;
+      min-width: 5.5em;
     }
   }
 
