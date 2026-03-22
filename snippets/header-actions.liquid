@@ -23,7 +23,8 @@
       </svg>
     </span>
     <span class="header-insta__label">
-      <span class="header-insta__roll-text">Follow</span>
+      <span class="header-insta__count">61K+</span>
+      <span class="header-insta__follow">Follow</span>
     </span>
   </a>
 
@@ -281,44 +282,62 @@
   }
 
   .header-insta__label {
+    position: relative;
     display: inline-flex;
     align-items: center;
     overflow: hidden;
     height: 1.15em;
+    min-width: 3.8em;
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 0.04em;
     line-height: 1;
     text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .header-insta__count,
+  .header-insta__follow {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
     background: linear-gradient(135deg, #e1306c, #fcaf45);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .header-insta__roll-text {
-    display: inline-block;
-    animation: headerInstaRollUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  .header-insta__count {
+    animation: instaCountFade 5s ease-in-out infinite;
   }
 
-  @keyframes headerInstaRollUp {
-    from {
-      transform: translateY(110%);
-      opacity: 0;
-    }
+  .header-insta__follow {
+    animation: instaFollowFade 5s ease-in-out infinite;
+  }
 
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
+  @keyframes instaCountFade {
+    0%, 35% { opacity: 1; }
+    45%, 55% { opacity: 0; }
+    65%, 100% { opacity: 1; }
+  }
+
+  @keyframes instaFollowFade {
+    0%, 40% { opacity: 0; }
+    50%, 60% { opacity: 1; }
+    70%, 100% { opacity: 0; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .header-insta__roll-text {
+    .header-insta__count,
+    .header-insta__follow {
       animation: none;
-      transform: none;
-      opacity: 1;
     }
+
+    .header-insta__count { opacity: 1; }
+    .header-insta__follow { opacity: 0; }
   }
 
   @media screen and (max-width: 749px) {
