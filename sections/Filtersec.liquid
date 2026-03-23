@@ -1,7 +1,7 @@
 {% comment %}
   Elite Moto Parts - Vehicle Search Strip + Trust Bar Redesign
   Designed for Shopify as a section.
-  Redesigned Trust Bar based on image_5e153a.png
+  Redesigned for full responsiveness without marquee scroll.
 {% endcomment %}
 
 <style>
@@ -24,7 +24,13 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 60px;
+    gap: 40px;
+  }
+
+  @media (min-width: 768px) {
+    .moto-search-wrapper {
+      gap: 60px;
+    }
   }
 
   .moto-search-container {
@@ -75,11 +81,17 @@
 
   .moto-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
-    line-height: 1;
+    font-size: 28px;
+    line-height: 1.1;
     color: var(--text-white);
     letter-spacing: 0.1em;
     margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .moto-title {
+      font-size: 32px;
+    }
   }
 
   .moto-title span {
@@ -167,26 +179,39 @@
     transition: all 0.3s;
   }
 
-  /* ─── TRUST BAR REDESIGN (image_5e153a.png Style) ─── */
+  .moto-search-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* ─── TRUST BAR (image_5e153a.png Style) ─── */
   .moto-trust-section {
     width: 100%;
     background: #000;
     border-top: 1px solid #111;
-    padding: 30px 0;
-    overflow: hidden;
+    padding: 40px 0;
   }
 
   .moto-trust-grid {
     max-width: 1280px;
     margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 40px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
   }
 
-  @media (max-width: 991px) {
+  @media (min-width: 580px) {
     .moto-trust-grid {
-      display: none; /* Hide grid for marquee on mobile */
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .moto-trust-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 0 40px;
     }
   }
 
@@ -194,7 +219,13 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    flex: 1;
+    justify-content: flex-start;
+  }
+
+  @media (min-width: 1024px) {
+    .moto-trust-item {
+      justify-content: center;
+    }
   }
 
   .moto-trust-icon-box {
@@ -232,7 +263,7 @@
 
   .moto-trust-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     font-style: italic;
     color: #fff;
@@ -241,40 +272,18 @@
     text-transform: uppercase;
   }
 
+  @media (min-width: 768px) {
+    .moto-trust-title {
+      font-size: 22px;
+    }
+  }
+
   .moto-trust-subtitle {
     font-size: 9px;
     font-weight: 600;
     color: #555;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-  }
-
-  /* Mobile Marquee Logic */
-  .moto-trust-marquee {
-    display: none;
-    width: 100%;
-  }
-
-  @media (max-width: 991px) {
-    .moto-trust-marquee {
-      display: block;
-    }
-  }
-
-  .moto-marquee-track {
-    display: flex;
-    width: max-content;
-    animation: motoMarquee 20s linear infinite;
-  }
-
-  @keyframes motoMarquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
-  .moto-marquee-track .moto-trust-item {
-    width: 240px;
-    padding: 0 20px;
   }
 </style>
 
@@ -296,29 +305,29 @@
         <input type="hidden" name="q" id="moto-final-query" value="">
         
         <div class="moto-dropdown-group">
-          <select class="moto-select" id="moto-brand" required>
+          <select class="moto-select" id="moto-brand" required aria-label="{{ section.settings.label_brand }}">
             <option value="" disabled selected>{{ section.settings.label_brand }}</option>
             {% assign brands = section.settings.brands_list | split: ',' %}
             {% for brand in brands %}
                 <option value="{{ brand | strip | escape }}">{{ brand | strip }}</option>
             {% endfor %}
           </select>
-          <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </div>
 
         <div class="moto-dropdown-group">
-          <select class="moto-select" id="moto-model" required>
+          <select class="moto-select" id="moto-model" required aria-label="{{ section.settings.label_model }}">
             <option value="" disabled selected>{{ section.settings.label_model }}</option>
             {% assign models = section.settings.models_list | split: ',' %}
             {% for model in models %}
                 <option value="{{ model | strip | escape }}">{{ model | strip }}</option>
             {% endfor %}
           </select>
-          <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </div>
 
         <div class="moto-dropdown-group">
-          <select class="moto-select" id="moto-category">
+          <select class="moto-select" id="moto-category" aria-label="{{ section.settings.label_category }}">
             <option value="" selected>{{ section.settings.label_category }}</option>
             <option value="all">All Categories</option>
             {% assign categories = section.settings.categories_list | split: ',' %}
@@ -326,11 +335,11 @@
                 <option value="{{ category | strip | escape }}">{{ category | strip }}</option>
             {% endfor %}
           </select>
-          <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          <svg class="moto-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </div>
 
         <button type="submit" class="moto-search-btn">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
           {{ section.settings.button_text }}
         </button>
       </form>
@@ -338,18 +347,21 @@
   </div>
 </section>
 
-<!-- REDESIGNED TRUST SECTION -->
+<!-- RESPONSIVE TRUST SECTION (No Marquee) -->
 <div class="moto-trust-section">
-  <!-- Desktop Grid -->
   <div class="moto-trust-grid">
     {%- for block in section.blocks -%}
-      <div class="moto-trust-item">
+      <div class="moto-trust-item" {{ block.shopify_attributes }}>
         <div class="moto-trust-icon-box">
           {%- case block.settings.icon -%}
-            {%- when 'riders' -%}<svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path fill="none" stroke="currentColor" stroke-width="2" d="M22 21v-2a4 4 0 0 0-3-3.87"/><path fill="none" stroke="currentColor" stroke-width="2" d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            {%- when 'secure' -%}<svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path fill="none" stroke="currentColor" stroke-width="2" d="m9 12 2 2 4-4"/></svg>
-            {%- when 'premium' -%}<svg viewBox="0 0 24 24"><circle fill="none" stroke="currentColor" stroke-width="2" cx="12" cy="8" r="7"/><path fill="none" stroke="currentColor" stroke-width="2" d="M8.21 13.89 7 23l5-3 5 3-1.21-9.12"/></svg>
-            {%- when 'returns' -%}<svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M9 14 4 9l5-5"/><path fill="none" stroke="currentColor" stroke-width="2" d="M4 9h12.5A5.5 5.5 0 0 1 22 14.5v0A5.5 5.5 0 0 1 16.5 20H11"/></svg>
+            {%- when 'riders' -%}
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path fill="none" stroke="currentColor" stroke-width="2" d="M22 21v-2a4 4 0 0 0-3-3.87"/><path fill="none" stroke="currentColor" stroke-width="2" d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            {%- when 'secure' -%}
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path fill="none" stroke="currentColor" stroke-width="2" d="m9 12 2 2 4-4"/></svg>
+            {%- when 'premium' -%}
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle fill="none" stroke="currentColor" stroke-width="2" cx="12" cy="8" r="7"/><path fill="none" stroke="currentColor" stroke-width="2" d="M8.21 13.89 7 23l5-3 5 3-1.21-9.12"/></svg>
+            {%- when 'returns' -%}
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M9 14 4 9l5-5"/><path fill="none" stroke="currentColor" stroke-width="2" d="M4 9h12.5A5.5 5.5 0 0 1 22 14.5v0A5.5 5.5 0 0 1 16.5 20H11"/></svg>
           {%- endcase -%}
         </div>
         <div class="moto-trust-content">
@@ -358,31 +370,6 @@
         </div>
       </div>
     {%- endfor -%}
-  </div>
-
-  <!-- Mobile Marquee -->
-  <div class="moto-trust-marquee">
-    <div class="moto-marquee-track">
-      {%- capture items -%}
-        {%- for block in section.blocks -%}
-          <div class="moto-trust-item">
-            <div class="moto-trust-icon-box">
-              {%- case block.settings.icon -%}
-                {%- when 'riders' -%}<svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path fill="none" stroke="currentColor" stroke-width="2" d="M22 21v-2a4 4 0 0 0-3-3.87"/><path fill="none" stroke="currentColor" stroke-width="2" d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                {%- when 'secure' -%}<svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path fill="none" stroke="currentColor" stroke-width="2" d="m9 12 2 2 4-4"/></svg>
-                {%- when 'premium' -%}<svg viewBox="0 0 24 24"><circle fill="none" stroke="currentColor" stroke-width="2" cx="12" cy="8" r="7"/><path fill="none" stroke="currentColor" stroke-width="2" d="M8.21 13.89 7 23l5-3 5 3-1.21-9.12"/></svg>
-                {%- when 'returns' -%}<svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M9 14 4 9l5-5"/><path fill="none" stroke="currentColor" stroke-width="2" d="M4 9h12.5A5.5 5.5 0 0 1 22 14.5v0A5.5 5.5 0 0 1 16.5 20H11"/></svg>
-              {%- endcase -%}
-            </div>
-            <div class="moto-trust-content">
-              <span class="moto-trust-title">{{ block.settings.title }}</span>
-              <span class="moto-trust-subtitle">{{ block.settings.subtitle }}</span>
-            </div>
-          </div>
-        {%- endfor -%}
-      {%- endcapture -%}
-      {{ items }}{{ items }}
-    </div>
   </div>
 </div>
 
