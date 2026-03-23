@@ -1569,6 +1569,7 @@
       "type": "VideoLayer",
       "name": "Custom Video Section",
       "settings": {
+        "video_file": "shopify://files/videos/0828.mp4",
         "video_autoplay": true,
         "video_loop": true,
         "video_muted": true,
@@ -1901,46 +1902,7 @@
     },
     "filtersec_yGQPVG": {
       "type": "Filtersec",
-      "blocks": {
-        "feature_y7X9ff": {
-          "type": "feature",
-          "settings": {
-            "icon": "riders",
-            "title": "2M RIDERS",
-            "subtitle": "JOURNEY WITH US"
-          }
-        },
-        "feature_jVNxQy": {
-          "type": "feature",
-          "settings": {
-            "icon": "secure",
-            "title": "100% SECURE",
-            "subtitle": "SECURE PAYMENT"
-          }
-        },
-        "feature_R7zh4n": {
-          "type": "feature",
-          "settings": {
-            "icon": "premium",
-            "title": "PREMIUM",
-            "subtitle": "QUALITY PRODUCTS"
-          }
-        },
-        "feature_F6MdJ8": {
-          "type": "feature",
-          "settings": {
-            "icon": "returns",
-            "title": "EASY RETURNS",
-            "subtitle": "RETURN POLICY"
-          }
-        }
-      },
-      "block_order": [
-        "feature_y7X9ff",
-        "feature_jVNxQy",
-        "feature_R7zh4n",
-        "feature_F6MdJ8"
-      ],
+      "disabled": true,
       "name": "Moto Search Strip",
       "settings": {
         "bg_color": "#050505",
