@@ -298,30 +298,33 @@
 
   /* ── Riders Club in Mobile Drawer ── */
   .rc-drawer-btn-wrap {
-    padding: 16px 20px;
+    padding: 12px var(--menu-drawer-padding, 20px);
   }
   .rc-drawer-btn {
     display: inline-flex !important;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    gap: 7px;
     background: #ff7a1a !important;
     color: #fff !important;
     font-weight: 700 !important;
-    font-size: 0.78rem !important;
-    letter-spacing: 0.6px;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.8px;
     text-transform: uppercase;
-    padding: 10px 20px !important;
+    padding: 8px 18px !important;
     border-radius: 0;
     text-decoration: none !important;
     white-space: nowrap;
     transition: opacity 0.22s;
-    width: fit-content;
+    width: auto;
+    max-width: max-content;
+    line-height: 1;
   }
   .rc-drawer-btn:hover {
     opacity: 0.85;
   }
   .rc-drawer-btn__icon {
-    font-size: 1rem;
+    font-size: 0.9rem;
     line-height: 1;
   }
 
