@@ -67,6 +67,38 @@
             "padding-inline-end": 0
           },
           "blocks": {
+            "ai_gen_block_2246e44_W836wF": {
+              "type": "ai_gen_block_2246e44",
+              "settings": {
+                "min_count": 10,
+                "max_count": 50,
+                "update_interval": 5000,
+                "counter_text": "People are viewing this Product",
+                "show_icon": true,
+                "icon_size": 18,
+                "icon_color": "#ff0000",
+                "text_font": "body",
+                "text_size": 14,
+                "text_weight": "400",
+                "text_transform": "none",
+                "text_style": "normal",
+                "text_color": "#ffffff",
+                "number_font": "body",
+                "number_weight": "600",
+                "number_color": "#ff0000",
+                "background_color": "#f5f5f5",
+                "background_opacity": 100,
+                "padding_vertical": 8,
+                "padding_horizontal": 12,
+                "spacing": 8,
+                "border_radius": 8,
+                "border_width": 1,
+                "border_color": "#e6e6e6",
+                "border_opacity": 100,
+                "desktop_width_percent": 100
+              },
+              "blocks": {}
+            },
             "heading_m7KmQQ": {
               "type": "text",
               "name": "Product title",
@@ -114,7 +146,7 @@
                 "width": "100%",
                 "alignment": "left",
                 "font": "var(--font-subheading--family)",
-                "font_size": "1.5rem",
+                "font_size": "1.25rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -123,38 +155,6 @@
                 "padding-block-end": 17,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "ai_gen_block_2246e44_W836wF": {
-              "type": "ai_gen_block_2246e44",
-              "settings": {
-                "min_count": 10,
-                "max_count": 50,
-                "update_interval": 5000,
-                "counter_text": "People are viewing this Product",
-                "show_icon": true,
-                "icon_size": 18,
-                "icon_color": "#ff0000",
-                "text_font": "body",
-                "text_size": 14,
-                "text_weight": "400",
-                "text_transform": "none",
-                "text_style": "normal",
-                "text_color": "#ffffff",
-                "number_font": "body",
-                "number_weight": "600",
-                "number_color": "#ff0000",
-                "background_color": "#f5f5f5",
-                "background_opacity": 100,
-                "padding_vertical": 8,
-                "padding_horizontal": 12,
-                "spacing": 8,
-                "border_radius": 8,
-                "border_width": 1,
-                "border_color": "#e6e6e6",
-                "border_opacity": 100,
-                "desktop_width_percent": 100
               },
               "blocks": {}
             },
@@ -810,10 +810,10 @@
             }
           },
           "block_order": [
+            "ai_gen_block_2246e44_W836wF",
             "heading_m7KmQQ",
             "reviews",
             "price_a7krng",
-            "ai_gen_block_2246e44_W836wF",
             "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi",
             "product_description_LfDYCg",
