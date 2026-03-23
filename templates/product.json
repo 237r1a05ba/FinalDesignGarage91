@@ -70,9 +70,9 @@
             "ai_gen_block_2246e44_W836wF": {
               "type": "ai_gen_block_2246e44",
               "settings": {
-                "min_count": 10,
-                "max_count": 50,
-                "update_interval": 5000,
+                "min_count": 21,
+                "max_count": 90,
+                "update_interval": 6000,
                 "counter_text": "People are viewing this Product",
                 "show_icon": true,
                 "icon_size": 18,
