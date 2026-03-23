@@ -1,7 +1,7 @@
 {% comment %}
-  Elite Moto Parts - Vehicle Search Strip + Trust Bar Redesign
+  Elite Moto Parts - Vehicle Search Strip
   Designed for Shopify as a section.
-  Redesigned for full responsiveness without marquee scroll.
+  Redesigned for full responsiveness.
 {% endcomment %}
 
 <style>
@@ -183,108 +183,6 @@
     width: 18px;
     height: 18px;
   }
-
-  /* ─── TRUST BAR (image_5e153a.png Style) ─── */
-  .moto-trust-section {
-    width: 100%;
-    background: #000;
-    border-top: 1px solid #111;
-    padding: 40px 0;
-  }
-
-  .moto-trust-grid {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 30px;
-  }
-
-  @media (min-width: 580px) {
-    .moto-trust-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .moto-trust-grid {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      padding: 0 40px;
-    }
-  }
-
-  .moto-trust-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    justify-content: flex-start;
-  }
-
-  @media (min-width: 1024px) {
-    .moto-trust-item {
-      justify-content: center;
-    }
-  }
-
-  .moto-trust-icon-box {
-    width: 52px;
-    height: 52px;
-    background: #0a0a0a;
-    border: 1px solid #1a1a1a;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-
-  .moto-trust-item:hover .moto-trust-icon-box {
-    border-color: var(--primary-red);
-    background: #110a0a;
-    transform: translateY(-4px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-  }
-
-  .moto-trust-icon-box svg {
-    width: 22px;
-    height: 22px;
-    color: #fff;
-    opacity: 0.7;
-  }
-
-  .moto-trust-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .moto-trust-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    font-style: italic;
-    color: #fff;
-    line-height: 1;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-
-  @media (min-width: 768px) {
-    .moto-trust-title {
-      font-size: 22px;
-    }
-  }
-
-  .moto-trust-subtitle {
-    font-size: 9px;
-    font-weight: 600;
-    color: #555;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
 </style>
 
 <section class="moto-search-wrapper">
@@ -347,32 +245,6 @@
   </div>
 </section>
 
-<!-- RESPONSIVE TRUST SECTION (No Marquee) -->
-<div class="moto-trust-section">
-  <div class="moto-trust-grid">
-    {%- for block in section.blocks -%}
-      <div class="moto-trust-item" {{ block.shopify_attributes }}>
-        <div class="moto-trust-icon-box">
-          {%- case block.settings.icon -%}
-            {%- when 'riders' -%}
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path fill="none" stroke="currentColor" stroke-width="2" d="M22 21v-2a4 4 0 0 0-3-3.87"/><path fill="none" stroke="currentColor" stroke-width="2" d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            {%- when 'secure' -%}
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path fill="none" stroke="currentColor" stroke-width="2" d="m9 12 2 2 4-4"/></svg>
-            {%- when 'premium' -%}
-              <svg viewBox="0 0 24 24" aria-hidden="true"><circle fill="none" stroke="currentColor" stroke-width="2" cx="12" cy="8" r="7"/><path fill="none" stroke="currentColor" stroke-width="2" d="M8.21 13.89 7 23l5-3 5 3-1.21-9.12"/></svg>
-            {%- when 'returns' -%}
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M9 14 4 9l5-5"/><path fill="none" stroke="currentColor" stroke-width="2" d="M4 9h12.5A5.5 5.5 0 0 1 22 14.5v0A5.5 5.5 0 0 1 16.5 20H11"/></svg>
-          {%- endcase -%}
-        </div>
-        <div class="moto-trust-content">
-          <span class="moto-trust-title">{{ block.settings.title }}</span>
-          <span class="moto-trust-subtitle">{{ block.settings.subtitle }}</span>
-        </div>
-      </div>
-    {%- endfor -%}
-  </div>
-</div>
-
 <script>
   document.getElementById('moto-search-form').addEventListener('submit', function(e) {
     const brand = document.getElementById('moto-brand').value;
@@ -394,7 +266,6 @@
 {% schema %}
 {
   "name": "Moto Search Strip",
-  "max_blocks": 4,
   "settings": [
     { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#050505" },
     { "type": "color", "id": "accent_color", "label": "Accent Color", "default": "#dc2626" },
@@ -411,37 +282,9 @@
     { "type": "textarea", "id": "models_list", "label": "Models (Comma separated)", "default": "CBR600RR, R1" },
     { "type": "textarea", "id": "categories_list", "label": "Categories (Comma separated)", "default": "Mirrors, Pads" }
   ],
-  "blocks": [
-    {
-      "type": "feature",
-      "name": "Trust Item",
-      "settings": [
-        {
-          "type": "select",
-          "id": "icon",
-          "label": "Icon",
-          "options": [
-            { "value": "riders", "label": "Riders" },
-            { "value": "secure", "label": "Secure" },
-            { "value": "premium", "label": "Premium" },
-            { "value": "returns", "label": "Returns" }
-          ],
-          "default": "riders"
-        },
-        { "type": "text", "id": "title", "label": "Title", "default": "2M RIDERS" },
-        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "JOURNEY WITH US" }
-      ]
-    }
-  ],
   "presets": [
     {
-      "name": "Moto Search Strip",
-      "blocks": [
-        { "type": "feature", "settings": { "icon": "riders", "title": "2M RIDERS", "subtitle": "JOURNEY WITH US" } },
-        { "type": "feature", "settings": { "icon": "secure", "title": "100% SECURE", "subtitle": "SECURE PAYMENT" } },
-        { "type": "feature", "settings": { "icon": "premium", "title": "PREMIUM", "subtitle": "QUALITY PRODUCTS" } },
-        { "type": "feature", "settings": { "icon": "returns", "title": "EASY RETURNS", "subtitle": "RETURN POLICY" } }
-      ]
+      "name": "Moto Search Strip"
     }
   ]
 }
