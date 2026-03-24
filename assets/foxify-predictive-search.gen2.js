@@ -62,7 +62,29 @@ if (!customElements.get('x-predictive-search')) {
         this.modal.classList.add(MODAL_OPEN_CLASS);
         this.modal.setAttribute('aria-hidden', 'false');
         if (this.section) this.section.classList.add(this.states.SEARCH_INDEX);
-        if (this.xElement) this.xElement.classList.add(this.states.IS_OPEN);
+
+        const hasAnimationClass = (el) =>
+          Array.from(el.classList).some((cls) => cls.startsWith('x-animation'));
+
+        let animatedElement = this.xElement;
+        animatedElement.classList.add(this.states.IS_OPEN);
+        if (animatedElement) {
+          if (!hasAnimationClass(animatedElement)) {
+            let current = animatedElement.parentElement?.closest('.x-element');
+            while (current && current !== this.section) {
+              if (hasAnimationClass(current)) {
+                animatedElement = current;
+                break;
+              }
+              current = current.parentElement?.closest('.x-element');
+            }
+          }
+
+          if (hasAnimationClass(animatedElement)) {
+            animatedElement.style.animationName = 'none';
+          }
+        }
+
         document.body.style.overflow = 'hidden';
         this.input.focus();
       }
