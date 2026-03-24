@@ -1886,6 +1886,7 @@
         "testimonial_UTPrtX",
         "testimonial_j9gWWE"
       ],
+      "disabled": true,
       "name": "Testimonial Marquee",
       "settings": {
         "heading": "Words of praise from others about our presence.",
