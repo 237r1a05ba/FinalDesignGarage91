@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "maintenance",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

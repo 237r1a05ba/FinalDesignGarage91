@@ -1,0 +1,306 @@
+{% layout none %}
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ shop.name }} - {{ section.settings.heading_main | default: 'Pit Stop' }} {{ section.settings.heading_accent | default: 'In Progress' }}</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: {{ section.settings.bg_color | default: '#0a0a0a' }};
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .01) 25%, rgba(255, 255, 255, .01) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .01) 75%, rgba(255, 255, 255, .01) 76%, transparent 77%, transparent);
+            background-size: 50px 8px;
+        }
+        .racing-font {
+            font-family: 'Anton', sans-serif;
+            letter-spacing: 0.03em;
+        }
+        .mono-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .progress-glow {
+            box-shadow: 0 0 15px {{ section.settings.accent_color | default: '#d11a2a' }}66;
+        }
+        .scanlines::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                rgba(18, 16, 16, 0) 50%, 
+                rgba(0, 0, 0, 0.2) 50%
+            ), linear-gradient(
+                90deg, 
+                rgba(255, 0, 0, 0.03), 
+                rgba(0, 255, 0, 0.01), 
+                rgba(0, 0, 255, 0.03)
+            );
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .shimmer {
+            background: linear-gradient(90deg, {{ section.settings.accent_color | default: '#d11a2a' }} 0%, rgba(255, 255, 255, 0.3) 50%, {{ section.settings.accent_color | default: '#d11a2a' }} 100%);
+            background-size: 200% auto;
+            animation: shine 4s linear infinite;
+        }
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+        .accent-text { color: {{ section.settings.accent_color | default: '#d11a2a' }}; }
+        .accent-bg { background-color: {{ section.settings.accent_color | default: '#d11a2a' }}; }
+        .accent-border { border-color: {{ section.settings.accent_color | default: '#d11a2a' }}; }
+        
+        /* Fix: Tailwind can't use dynamic Liquid values in class names, so use CSS for focus border */
+        .email-input:focus {
+            border-color: {{ section.settings.accent_color | default: '#d11a2a' }};
+            outline: none;
+        }
+    </style>
+    
+    {{ content_for_header }}
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-6 md:p-12 overflow-x-hidden">
+
+    <!-- Header Section -->
+    <header class="text-center mb-12 max-w-2xl">
+        <h1 class="racing-font text-6xl md:text-8xl mb-4 leading-none uppercase select-none">
+            {{ section.settings.heading_main | default: 'PIT STOP' }} <span class="accent-text">{{ section.settings.heading_accent | default: 'IN PROGRESS' }}</span>
+        </h1>
+        <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-md mx-auto font-medium opacity-80">
+            {{ section.settings.subtext | default: "We're fine-tuning the machine. The platform is currently undergoing scheduled maintenance to bring you even more performance." }}
+        </p>
+    </header>
+
+    <!-- Main Visual Container -->
+    <div class="relative w-full max-w-3xl group">
+        <div class="relative aspect-[4/3] rounded-sm overflow-hidden border border-white/10 shadow-2xl bg-black scanlines">
+            <!-- Hero Image Logic -->
+            {%- if section.settings.hero_image != blank -%}
+                <div class="absolute inset-0 grayscale contrast-125 brightness-[0.7] bg-cover bg-center transition-transform duration-700 group-hover:scale-105" 
+                     style="background-image: url('{{ section.settings.hero_image | image_url: width: 1200 }}');">
+                </div>
+            {%- else -%}
+                <div class="absolute inset-0 grayscale contrast-125 brightness-[0.7] bg-cover bg-center transition-transform duration-700 group-hover:scale-105" 
+                     style="background-image: url('https://images.unsplash.com/photo-1615172282427-9a57ef2d142e?auto=format&fit=crop&q=80&w=1200');">
+                </div>
+            {%- endif -%}
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-40" style="z-index: 1;"></div>
+
+            <!-- Re-Calibrating Badge -->
+            <div class="absolute bottom-8 right-8 z-10">
+                <div class="bg-zinc-900/95 border border-white/20 p-4 backdrop-blur-md relative overflow-hidden shadow-xl">
+                    <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: repeating-linear-gradient(45deg, #fff, #fff 10px, transparent 10px, transparent 20px);"></div>
+                    <div class="relative flex flex-col items-end">
+                        <span class="text-[10px] accent-text mono-font tracking-[0.2em] font-bold uppercase mb-1">{{ section.settings.badge_small_text | default: 'ENGINE BLOCK' }}</span>
+                        <span class="racing-font text-3xl tracking-tighter uppercase leading-none italic">{{ section.settings.badge_main_text | default: 'RE-CALIBRATING' }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="mt-8">
+            <div class="flex justify-between items-end mb-3 mono-font">
+                <div class="text-[10px] md:text-xs tracking-wider">
+                    <span class="accent-text font-bold uppercase">{{ section.settings.status_label_1 | default: 'SYSTEM CALIBRATION' }}</span>
+                    <span class="text-gray-700 mx-3 select-none">|</span>
+                    <span class="text-white/50 uppercase">{{ section.settings.status_label_2 | default: 'TORQUE CHECK' }}</span>
+                </div>
+                <div class="text-[10px] md:text-xs font-bold tracking-[0.15em] text-white/90">
+                    {{ section.settings.progress_percent | default: 85 }}% COMPLETE
+                </div>
+            </div>
+            <div class="h-1.5 w-full bg-zinc-900/50 border border-white/5 relative overflow-hidden rounded-full">
+                <div class="absolute top-0 left-0 h-full progress-glow shimmer transition-all duration-1000 ease-out accent-bg" style="width: {{ section.settings.progress_percent | default: 85 }}%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Form -->
+    <section class="w-full max-w-md mt-16 text-center">
+        <div class="bg-zinc-900/40 border border-white/5 p-8 md:p-10 rounded-sm backdrop-blur-sm">
+            <h3 class="racing-font text-xl uppercase tracking-widest mb-6 text-gray-200">
+                {{ section.settings.form_heading | default: "GET NOTIFIED WHEN WE'RE BACK ON THE ASPHALT" }}
+            </h3>
+            
+            {% form 'customer' %}
+              {% if form.posted_successfully? %}
+                <p class="accent-text mono-font text-xs uppercase tracking-wider animate-pulse">
+                  {{ section.settings.success_message | default: 'Data Stream Established. Stand by for signal.' }}
+                </p>
+              {% else %}
+                <div class="space-y-4">
+                    <input type="hidden" name="contact[tags]" value="prospect, password page">
+                    <div class="relative">
+                        <input 
+                            type="email" 
+                            name="contact[email]"
+                            placeholder="EMAIL_ADDRESS" 
+                            required
+                            class="email-input w-full bg-black border accent-border p-4 mono-font text-sm transition-all placeholder-gray-800 text-white rounded-none"
+                        >
+                    </div>
+                    <button 
+                        type="submit"
+                        class="w-full accent-bg hover:opacity-90 text-white racing-font py-4 text-xl transition-all active:scale-[0.98] uppercase shadow-lg shadow-red-900/20"
+                    >
+                        {{ section.settings.button_text | default: 'NOTIFY ME' }}
+                    </button>
+                </div>
+                {% if form.errors %}
+                  <p class="text-xs text-red-500 mt-2 mono-font uppercase">{{ form.errors | default_errors }}</p>
+                {% endif %}
+              {% endif %}
+            {% endform %}
+        </div>
+    </section>
+
+    <!-- Navigation/Footer Icons -->
+    <footer class="mt-20 text-center">
+        <p class="mono-font text-[10px] text-gray-700 uppercase tracking-[0.3em] mb-8">STAY CONNECTED IN THE MEANTIME</p>
+        <div class="flex space-x-12 justify-center items-center">
+            {%- if settings.social_instagram_link != blank -%}
+            <a href="{{ settings.social_instagram_link }}" class="group flex flex-col items-center gap-2 opacity-40 hover:opacity-100 transition-all">
+                <svg class="w-6 h-6 group-hover:text-red-600 transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                <span class="text-[8px] mono-font tracking-widest uppercase">Instagram</span>
+            </a>
+            {%- endif -%}
+            
+            {%- if settings.social_twitter_link != blank -%}
+            <a href="{{ settings.social_twitter_link }}" class="group flex flex-col items-center gap-2 opacity-40 hover:opacity-100 transition-all">
+                <svg class="w-6 h-6 group-hover:text-red-600 transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                <span class="text-[8px] mono-font tracking-widest uppercase">Twitter</span>
+            </a>
+            {%- endif -%}
+            
+            {%- if settings.social_facebook_link != blank -%}
+            <a href="{{ settings.social_facebook_link }}" class="group flex flex-col items-center gap-2 opacity-40 hover:opacity-100 transition-all">
+                <svg class="w-6 h-6 group-hover:text-red-600 transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                <span class="text-[8px] mono-font tracking-widest uppercase">Facebook</span>
+            </a>
+            {%- endif -%}
+        </div>
+    </footer>
+
+</body>
+</html>
+
+{% schema %}
+{
+  "name": "Maintenance Page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Typography & Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color (Red)",
+      "default": "#d11a2a"
+    },
+    {
+      "type": "text",
+      "id": "heading_main",
+      "label": "Heading Main Text",
+      "default": "PIT STOP"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading Accent Text",
+      "default": "IN PROGRESS"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Description",
+      "default": "We're fine-tuning the machine. The platform is currently undergoing scheduled maintenance to bring you even more performance."
+    },
+    {
+      "type": "header",
+      "content": "Visuals"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Engine Hero Image"
+    },
+    {
+      "type": "range",
+      "id": "progress_percent",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Progress Percentage",
+      "default": 85
+    },
+    {
+      "type": "header",
+      "content": "Badges & Status"
+    },
+    {
+      "type": "text",
+      "id": "badge_small_text",
+      "label": "Badge Category",
+      "default": "ENGINE BLOCK"
+    },
+    {
+      "type": "text",
+      "id": "badge_main_text",
+      "label": "Badge Main Text",
+      "default": "RE-CALIBRATING"
+    },
+    {
+      "type": "text",
+      "id": "status_label_1",
+      "label": "Status Label 1",
+      "default": "SYSTEM CALIBRATION"
+    },
+    {
+      "type": "text",
+      "id": "status_label_2",
+      "label": "Status Label 2",
+      "default": "TORQUE CHECK"
+    },
+    {
+      "type": "header",
+      "content": "Notification Form"
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form Heading",
+      "default": "GET NOTIFIED WHEN WE'RE BACK ON THE ASPHALT"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Label",
+      "default": "NOTIFY ME"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success Message",
+      "default": "Data Stream Established. Stand by for signal."
+    }
+  ]
+}
+{% endschema %}
