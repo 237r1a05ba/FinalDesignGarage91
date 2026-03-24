@@ -38,6 +38,14 @@
         from { opacity: 0; }
         to { opacity: 1; }
     }
+    @keyframes glitch {
+      0% { transform: translate(0) }
+      20% { transform: translate(-2px, 2px) }
+      40% { transform: translate(-2px, -2px) }
+      60% { transform: translate(2px, 2px) }
+      80% { transform: translate(2px, -2px) }
+      100% { transform: translate(0) }
+    }
 
     /* Hero Effects */
     .hero-gradient {
@@ -98,6 +106,14 @@
         background: var(--racing-red);
     }
 
+    /* Maintenance Mode Styles */
+    .maintenance-glitch {
+      animation: glitch 0.3s infinite;
+      color: var(--racing-red);
+      font-weight: 800;
+      letter-spacing: 0.5em;
+    }
+
     /* Scrollbar */
     .rc-section::-webkit-scrollbar { width: 4px; }
     .rc-section::-webkit-scrollbar-track { background: #0A0A0A; }
@@ -130,111 +146,132 @@
 </style>
 
 <div class="rc-section">
-    <!-- ────────────────────── HERO ────────────────────── -->
-    <section class="relative h-screen flex items-center justify-center overflow-hidden" style="position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-        <div class="absolute inset-0 z-0 scale-105" style="position: absolute; inset: 0; z-index: 0; transform: scale(1.05);">
-            {%- if section.settings.hero_image != blank -%}
-                <img alt="Garage91" class="w-full h-full object-cover opacity-60 brightness-75" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: brightness(0.75);" src="{{ section.settings.hero_image | image_url: width: 1800 }}"/>
-            {%- else -%}
-                 <img alt="Riders" class="w-full h-full object-cover opacity-60 brightness-75" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: brightness(0.75);" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBivnscVWALJxpuqoAwsnWECwEM9ysFNqmPU2KWD5mBj2sqqLpw7L9Lx-jhNC4wceFHWR75GagzXW0OEKzFW3E70rwmzbjrh5QBG3Uik31O5nOrIrVnvxt15XGEGKgNXL7Fjh9eDDLW-USvrp5d2WhifnigCh09dnYTh14mi5Nn_-Y-rAfXwnb5AwSr309bP1jfW4nRg6P5TG_fJcZ1_6uWyRhlnDXAnSQhUGrS9zUWjuFrAFjmcvxQ88lMYsLX441NH5ISkbTVS5M"/>
-            {%- endif -%}
-            <div class="absolute inset-0 hero-gradient" style="position: absolute; inset: 0;"></div>
-        </div>
-
-        <div class="relative z-10 text-center max-w-4xl px-6" style="position: relative; z-index: 10; text-align: center; max-width: 56rem; padding-left: 1.5rem; padding-right: 1.5rem;">
-            <span class="inline-block font-mono text-xs uppercase mb-6 opacity-0" style="display: inline-block; color: var(--racing-red); font-size: 0.75rem; letter-spacing: 0.5em; margin-bottom: 1.5rem; animation: fadeIn 1s ease-out forwards;">
-                Est. 1991 / Global Community
-            </span>
-            <h1 class="font-display leading-[0.85] tracking-tightest uppercase mb-8 opacity-0" style="font-size: clamp(3.5rem, 10vw, 7.5rem); line-height: 0.85; margin-bottom: 2rem; animation: fadeInUp 1s ease-out 0.3s forwards;">
-                The <span style="color: transparent; -webkit-text-stroke: 1px white;">Collective</span> Experience
-            </h1>
-            <p class="text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed mb-12 opacity-0" style="color: rgba(255,255,255,0.4); font-size: 1rem; max-width: 36rem; margin-left: auto; margin-right: auto; line-height: 1.625; margin-bottom: 3rem; animation: fadeIn 1s ease-out 0.6s forwards;">
-                {{ section.settings.hero_subtitle | default: "A curated sanctuary for performance purists. We don't just ride; we engineer moments of mechanical synchronicity." }}
-            </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-6 opacity-0" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; animation: fadeIn 1s ease-out 0.9s forwards;">
-                <a href="#rides" class="btn-collective">
-                    Browse Calendar
-                    <span class="line"></span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-30" style="position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 1rem; opacity: 0.3;">
-            <span class="font-mono tracking-ultra-wide uppercase" style="font-size: 9px; transform: rotate(90deg); margin-bottom: 2rem;">Scroll</span>
-            <div class="w-[1px] h-16 bg-gradient-to-b from-white to-transparent" style="width: 1px; height: 4rem; background: linear-gradient(to bottom, white, transparent);"></div>
-        </div>
-    </section>
-
-    <!-- ────────────────────── PLANNED EXPEDITIONS ────────────────────── -->
-    <section id="rides" class="py-32 bg-onyx px-8" style="padding-top: 8rem; padding-bottom: 8rem; background-color: var(--onyx); padding-left: 2rem; padding-right: 2rem;">
-        <div class="max-w-[1600px] mx-auto" style="max-width: 1600px; margin-left: auto; margin-right: auto;">
-            <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; margin-bottom: 5rem; gap: 2rem;">
-                <div style="width: 100%;">
-                    <h2 class="font-mono uppercase mb-4" style="font-size: 0.75rem; letter-spacing: 0.4em; color: var(--racing-red); margin-bottom: 1rem;">Upcoming Assemblages</h2>
-                    <h3 class="font-display uppercase tracking-tighter" style="font-size: 3rem;">Planned Expeditions</h3>
-                </div>
-                <p style="font-size: 0.75rem; color: rgba(255,255,255,0.3); max-width: 20rem; font-weight: 300; line-height: 1.625;">
-                    Participation is limited to verified Garage91 chassis owners. RSVP mandatory for logistics.
+    {%- assign maintenance_block = section.blocks | where: "type", "maintenance_notice" | first -%}
+    
+    {%- if maintenance_block -%}
+        <!-- ────────────────────── MAINTENANCE STATE ────────────────────── -->
+        <section class="h-screen flex items-center justify-center bg-onyx relative overflow-hidden" style="height: 100vh; display: flex; align-items: center; justify-content: center; position: relative;">
+            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at center, var(--racing-red) 0%, transparent 70%);"></div>
+            <div class="text-center z-10 px-6">
+                <p class="font-mono text-xs uppercase tracking-[0.5em] mb-6 maintenance-glitch" style="font-size: 10px;">{{ maintenance_block.settings.badge | default: "System Status: Recalibrating" }}</p>
+                <h1 class="font-display uppercase mb-4" style="font-size: clamp(3rem, 8vw, 6rem); line-height: 1.1;">{{ maintenance_block.settings.title | default: "The Collective <br><span style='color: transparent; -webkit-text-stroke: 1px white;'>Maintenance</span>" }}</h1>
+                <p class="font-light max-w-md mx-auto" style="color: rgba(255,255,255,0.4); line-height: 1.625; font-size: 0.875rem; margin-top: 1.5rem;">
+                    {{ maintenance_block.settings.message | default: "We are currently optimizing the mechanical core for the next expedition. Mechanical synchronicity will resume shortly." }}
                 </p>
+                <div class="mt-12" style="margin-top: 3rem;">
+                  <div style="width: 200px; height: 1px; background: rgba(255,255,255,0.1); margin: 0 auto; position: relative;">
+                    <div style="position: absolute; top: 0; left: 0; height: 100%; background: var(--racing-red); width: 40%; box-shadow: 0 0 10px var(--racing-red);"></div>
+                  </div>
+                </div>
+            </div>
+        </section>
+    {%- else -%}
+        <!-- ────────────────────── HERO ────────────────────── -->
+        <section class="relative h-screen flex items-center justify-center overflow-hidden" style="position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+            <div class="absolute inset-0 z-0 scale-105" style="position: absolute; inset: 0; z-index: 0; transform: scale(1.05);">
+                {%- if section.settings.hero_image != blank -%}
+                    <img alt="Garage91" class="w-full h-full object-cover opacity-60 brightness-75" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: brightness(0.75);" src="{{ section.settings.hero_image | image_url: width: 1800 }}"/>
+                {%- else -%}
+                     <img alt="Riders" class="w-full h-full object-cover opacity-60 brightness-75" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: brightness(0.75);" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBivnscVWALJxpuqoAwsnWECwEM9ysFNqmPU2KWD5mBj2sqqLpw7L9Lx-jhNC4wceFHWR75GagzXW0OEKzFW3E70rwmzbjrh5QBG3Uik31O5nOrIrVnvxt15XGEGKgNXL7Fjh9eDDLW-USvrp5d2WhifnigCh09dnYTh14mi5Nn_-Y-rAfXwnb5AwSr309bP1jfW4nRg6P5TG_fJcZ1_6uWyRhlnDXAnSQhUGrS9zUWjuFrAFjmcvxQ88lMYsLX441NH5ISkbTVS5M"/>
+                {%- endif -%}
+                <div class="absolute inset-0 hero-gradient" style="position: absolute; inset: 0;"></div>
             </div>
 
-            <div class="rc-grid-3 thin-border" style="background-color: rgba(255,255,255,0.05);">
-                {%- for block in section.blocks -%}
-                    {%- if block.type == 'ride' -%}
-                        <div class="bg-onyx p-10 group red-edge-glow cursor-pointer" style="padding: 2.5rem; position: relative;" onclick="rcOpenModal('{{ block.settings.ride_name | escape }}')">
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3rem;">
-                                <span class="font-display" style="font-size: 2.25rem; color: rgba(255,255,255,0.1); transition: color 0.3s;" class="group-hover:text-racing-red">0{{ forloop.index }}</span>
-                                <div style="text-align: right;">
-                                    <p class="font-mono uppercase tracking-widest" style="font-size: 10px; color: rgba(255,255,255,0.4);">{{ block.settings.ride_date }}</p>
-                                    <p style="font-size: 0.75rem; font-weight: 600;">{{ block.settings.ride_time }}</p>
+            <div class="relative z-10 text-center max-w-4xl px-6" style="position: relative; z-index: 10; text-align: center; max-width: 56rem; padding-left: 1.5rem; padding-right: 1.5rem;">
+                <span class="inline-block font-mono text-xs uppercase mb-6 opacity-0" style="display: inline-block; color: var(--racing-red); font-size: 0.75rem; letter-spacing: 0.5em; margin-bottom: 1.5rem; animation: fadeIn 1s ease-out forwards;">
+                    Est. 1991 / Global Community
+                </span>
+                <h1 class="font-display leading-[0.85] tracking-tightest uppercase mb-8 opacity-0" style="font-size: clamp(3.5rem, 10vw, 7.5rem); line-height: 0.85; margin-bottom: 2rem; animation: fadeInUp 1s ease-out 0.3s forwards;">
+                    The <span style="color: transparent; -webkit-text-stroke: 1px white;">Collective</span> Experience
+                </h1>
+                <p class="text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed mb-12 opacity-0" style="color: rgba(255,255,255,0.4); font-size: 1rem; max-width: 36rem; margin-left: auto; margin-right: auto; line-height: 1.625; margin-bottom: 3rem; animation: fadeIn 1s ease-out 0.6s forwards;">
+                    {{ section.settings.hero_subtitle | default: "A curated sanctuary for performance purists. We don't just ride; we engineer moments of mechanical synchronicity." }}
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6 opacity-0" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; animation: fadeIn 1s ease-out 0.9s forwards;">
+                    <a href="#rides" class="btn-collective">
+                        Browse Calendar
+                        <span class="line"></span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-30" style="position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 1rem; opacity: 0.3;">
+                <span class="font-mono tracking-ultra-wide uppercase" style="font-size: 9px; transform: rotate(90deg); margin-bottom: 2rem;">Scroll</span>
+                <div class="w-[1px] h-16 bg-gradient-to-b from-white to-transparent" style="width: 1px; height: 4rem; background: linear-gradient(to bottom, white, transparent);"></div>
+            </div>
+        </section>
+
+        <!-- ────────────────────── PLANNED EXPEDITIONS ────────────────────── -->
+        <section id="rides" class="py-32 bg-onyx px-8" style="padding-top: 8rem; padding-bottom: 8rem; background-color: var(--onyx); padding-left: 2rem; padding-right: 2rem;">
+            <div class="max-w-[1600px] mx-auto" style="max-width: 1600px; margin-left: auto; margin-right: auto;">
+                <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; margin-bottom: 5rem; gap: 2rem;">
+                    <div style="width: 100%;">
+                        <h2 class="font-mono uppercase mb-4" style="font-size: 0.75rem; letter-spacing: 0.4em; color: var(--racing-red); margin-bottom: 1rem;">Upcoming Assemblages</h2>
+                        <h3 class="font-display uppercase tracking-tighter" style="font-size: 3rem;">Planned Expeditions</h3>
+                    </div>
+                    <p style="font-size: 0.75rem; color: rgba(255,255,255,0.3); max-width: 20rem; font-weight: 300; line-height: 1.625;">
+                        Participation is limited to verified Garage91 chassis owners. RSVP mandatory for logistics.
+                    </p>
+                </div>
+
+                <div class="rc-grid-3 thin-border" style="background-color: rgba(255,255,255,0.05);">
+                    {%- for block in section.blocks -%}
+                        {%- if block.type == 'ride' -%}
+                            <div class="bg-onyx p-10 group red-edge-glow cursor-pointer" style="padding: 2.5rem; position: relative;" onclick="rcOpenModal('{{ block.settings.ride_name | escape }}')">
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3rem;">
+                                    <span class="font-display" style="font-size: 2.25rem; color: rgba(255,255,255,0.1); transition: color 0.3s;" class="group-hover:text-racing-red">0{{ forloop.index }}</span>
+                                    <div style="text-align: right;">
+                                        <p class="font-mono uppercase tracking-widest" style="font-size: 10px; color: rgba(255,255,255,0.4);">{{ block.settings.ride_date }}</p>
+                                        <p style="font-size: 0.75rem; font-weight: 600;">{{ block.settings.ride_time }}</p>
+                                    </div>
+                                </div>
+                                <h4 class="font-display uppercase mb-4 tracking-tight" style="font-size: 1.875rem; margin-bottom: 1rem;">{{ block.settings.ride_name }}</h4>
+                                <p style="font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.625; margin-bottom: 2.5rem; height: 3rem; overflow: hidden;">
+                                    {{ block.settings.start_location }} Transit. Precision urban maneuvering.
+                                </p>
+                                <div class="font-mono uppercase tracking-widest" style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2.5rem; opacity: 0.6; font-size: 10px;">
+                                    <span>{{ block.settings.distance }} KM</span>
+                                    <span style="width: 4px; height: 4px; border-radius: 9999px; background-color: var(--racing-red);"></span>
+                                    <span>Level: {{ block.settings.difficulty }}</span>
+                                </div>
+                                <button class="font-mono uppercase tracking-[0.3em]" style="width: 100%; padding-top: 1rem; padding-bottom: 1rem; border: 1px solid rgba(255,255,255,0.1); background: none; color: white; font-size: 10px; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.backgroundColor='white'; this.style.color='black';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='white';">Request Entry</button>
+                            </div>
+                        {%- endif -%}
+                    {%- endfor -%}
+                </div>
+            </div>
+        </section>
+
+        <!-- ────────────────────── THE ARCHIVES ────────────────────── -->
+        <section class="py-32 bg-obsidian overflow-hidden" style="padding-top: 8rem; padding-bottom: 8rem; background-color: var(--obsidian); overflow: hidden;">
+            <div class="max-w-[1600px] mx-auto px-8" style="max-width: 1600px; margin-left: auto; margin-right: auto; padding-left: 2rem; padding-right: 2rem;">
+                <div style="margin-bottom: 5rem; text-align: center;">
+                    <h3 class="font-display uppercase mb-4 tracking-tight" style="font-size: 3rem;">The Archives</h3>
+                    <p class="font-mono uppercase tracking-[0.3em]" style="font-size: 0.75rem; color: rgba(255,255,255,0.3);">Moments of Mechanical Perfection</p>
+                </div>
+
+                <div class="rc-grid-4">
+                    {%- for block in section.blocks -%}
+                        {%- if block.type == 'past_ride' -%}
+                            <div style="position: relative; overflow: hidden; aspect-ratio: 4/5; cursor: crosshair;" onmouseover="this.querySelector('img').style.filter='grayscale(0)'; this.querySelector('img').style.transform='scale(1)';" onmouseout="this.querySelector('img').style.filter='grayscale(1)'; this.querySelector('img').style.transform='scale(1.1)';">
+                                {%- if block.settings.photo != blank -%}
+                                    <img src="{{ block.settings.photo | image_url: width: 600 }}" alt="{{ block.settings.ride_name }}" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transform: scale(1.1); transition: all 1s;"/>
+                                {%- else -%}
+                                    <div style="width: 100%; height: 100%; background: var(--graphite);"></div>
+                                {%- endif -%}
+                                <div style="position: absolute; bottom: 1.5rem; left: 1.5rem; opacity: 1; transition: opacity 0.3s;">
+                                    <p class="font-mono uppercase tracking-widest" style="font-size: 10px; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); padding: 0.25rem 0.75rem; color: white;">
+                                        {{ block.settings.ride_name }} / {{ block.settings.ride_date }}
+                                    </p>
                                 </div>
                             </div>
-                            <h4 class="font-display uppercase mb-4 tracking-tight" style="font-size: 1.875rem; margin-bottom: 1rem;">{{ block.settings.ride_name }}</h4>
-                            <p style="font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.625; margin-bottom: 2.5rem; height: 3rem; overflow: hidden;">
-                                {{ block.settings.start_location }} Transit. Precision urban maneuvering.
-                            </p>
-                            <div class="font-mono uppercase tracking-widest" style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2.5rem; opacity: 0.6; font-size: 10px;">
-                                <span>{{ block.settings.distance }} KM</span>
-                                <span style="width: 4px; height: 4px; border-radius: 9999px; background-color: var(--racing-red);"></span>
-                                <span>Level: {{ block.settings.difficulty }}</span>
-                            </div>
-                            <button class="font-mono uppercase tracking-[0.3em]" style="width: 100%; padding-top: 1rem; padding-bottom: 1rem; border: 1px solid rgba(255,255,255,0.1); background: none; color: white; font-size: 10px; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.backgroundColor='white'; this.style.color='black';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='white';">Request Entry</button>
-                        </div>
-                    {%- endif -%}
-                {%- endfor -%}
+                        {%- endif -%}
+                    {%- endfor -%}
+                </div>
             </div>
-        </div>
-    </section>
-
-    <!-- ────────────────────── THE ARCHIVES ────────────────────── -->
-    <section class="py-32 bg-obsidian overflow-hidden" style="padding-top: 8rem; padding-bottom: 8rem; background-color: var(--obsidian); overflow: hidden;">
-        <div class="max-w-[1600px] mx-auto px-8" style="max-width: 1600px; margin-left: auto; margin-right: auto; padding-left: 2rem; padding-right: 2rem;">
-            <div style="margin-bottom: 5rem; text-align: center;">
-                <h3 class="font-display uppercase mb-4 tracking-tight" style="font-size: 3rem;">The Archives</h3>
-                <p class="font-mono uppercase tracking-[0.3em]" style="font-size: 0.75rem; color: rgba(255,255,255,0.3);">Moments of Mechanical Perfection</p>
-            </div>
-
-            <div class="rc-grid-4">
-                {%- for block in section.blocks -%}
-                    {%- if block.type == 'past_ride' -%}
-                        <div style="position: relative; overflow: hidden; aspect-ratio: 4/5; cursor: crosshair;" onmouseover="this.querySelector('img').style.filter='grayscale(0)'; this.querySelector('img').style.transform='scale(1)';" onmouseout="this.querySelector('img').style.filter='grayscale(1)'; this.querySelector('img').style.transform='scale(1.1)';">
-                            {%- if block.settings.photo != blank -%}
-                                <img src="{{ block.settings.photo | image_url: width: 600 }}" alt="{{ block.settings.ride_name }}" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transform: scale(1.1); transition: all 1s;"/>
-                            {%- else -%}
-                                <div style="width: 100%; height: 100%; background: var(--graphite);"></div>
-                            {%- endif -%}
-                            <div style="position: absolute; bottom: 1.5rem; left: 1.5rem; opacity: 1; transition: opacity 0.3s;">
-                                <p class="font-mono uppercase tracking-widest" style="font-size: 10px; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); padding: 0.25rem 0.75rem; color: white;">
-                                    {{ block.settings.ride_name }} / {{ block.settings.ride_date }}
-                                </p>
-                            </div>
-                        </div>
-                    {%- endif -%}
-                {%- endfor -%}
-            </div>
-        </div>
-    </section>
+        </section>
+    {%- endif -%}
 </div>
 
 <!-- ────────────────────── MODAL ────────────────────── -->
@@ -355,6 +392,31 @@
     }
   ],
   "blocks": [
+    {
+      "type": "maintenance_notice",
+      "name": "Maintenance Mode",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge Text",
+          "default": "System Status: Recalibrating"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Title",
+          "default": "The Collective <br><span style='color: transparent; -webkit-text-stroke: 1px white;'>Maintenance</span>"
+        },
+        {
+          "type": "textarea",
+          "id": "message",
+          "label": "Message",
+          "default": "We are currently optimizing the mechanical core for the next expedition. Mechanical synchronicity will resume shortly."
+        }
+      ]
+    },
     {
       "type": "ride",
       "name": "Upcoming Ride",
