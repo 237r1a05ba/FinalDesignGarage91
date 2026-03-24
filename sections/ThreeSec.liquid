@@ -181,6 +181,26 @@
       "max": 100,
       "step": 2,
       "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Corner Radius",
+      "default": 12,
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "image_padding",
+      "label": "Image Padding (smaller makes image fuller)",
+      "default": 10,
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px"
     }
   ],
   "blocks": [
@@ -322,15 +342,17 @@
 .bike-image {
   display: inline-block;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: {{ section.settings.border_radius }}px;
   position: relative;
   width: 100%;
+  padding: {{ section.settings.image_padding }}px;
+  box-sizing: border-box;
 }
 .bike-image img {
   width: 100%;
   height: auto;
   display: block;
-  margin: 0 auto 10px;
+  margin: 0 auto;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .bike-image img:hover {
