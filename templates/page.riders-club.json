@@ -19,10 +19,22 @@
             "title": "Page Under Maintenance",
             "message": "We are currently optimizing the mechanical core for the next expedition. Mechanical synchronicity will resume shortly."
           }
+        },
+        "ride_Fdtgxd": {
+          "type": "ride",
+          "settings": {
+            "ride_name": "Hyderabad Nightfall",
+            "ride_date": "October 24",
+            "ride_time": "21:00 HRS",
+            "start_location": "Gachibowli",
+            "distance": "45",
+            "difficulty": "Intermediate"
+          }
         }
       },
       "block_order": [
-        "maintenance_notice_X7iwTy"
+        "maintenance_notice_X7iwTy",
+        "ride_Fdtgxd"
       ],
       "settings": {
         "hero_subtitle": "A curated sanctuary for performance purists. We don't just ride; we engineer moments of mechanical synchronicity.",
