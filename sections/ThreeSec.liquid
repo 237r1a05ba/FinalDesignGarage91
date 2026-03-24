@@ -188,7 +188,7 @@
       "label": "Corner Radius",
       "default": 12,
       "min": 0,
-      "max": 200,
+      "max": 100,
       "step": 1,
       "unit": "px"
     },
@@ -198,7 +198,7 @@
       "label": "Image Padding (smaller makes image fuller)",
       "default": 10,
       "min": 0,
-      "max": 200,
+      "max": 50,
       "step": 1,
       "unit": "px"
     }
@@ -353,7 +353,6 @@
   height: auto;
   display: block;
   margin: 0 auto;
-  border-radius: {{ section.settings.border_radius }}px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .bike-image img:hover {
