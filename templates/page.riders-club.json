@@ -1,1 +1,38 @@
-{"sections":{"riders-club-main":{"type":"riders-club","settings":{}}},"order":["riders-club-main"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "riders-club-main": {
+      "type": "riders-club",
+      "blocks": {
+        "maintenance_notice_X7iwTy": {
+          "type": "maintenance_notice",
+          "settings": {
+            "badge": "System Status: Recalibrating",
+            "title": "Page Under Maintenance",
+            "message": "We are currently optimizing the mechanical core for the next expedition. Mechanical synchronicity will resume shortly."
+          }
+        }
+      },
+      "block_order": [
+        "maintenance_notice_X7iwTy"
+      ],
+      "settings": {
+        "hero_subtitle": "A curated sanctuary for performance purists. We don't just ride; we engineer moments of mechanical synchronicity.",
+        "stat_rides": "50",
+        "stat_riders": "500",
+        "stat_cities": "12"
+      }
+    }
+  },
+  "order": [
+    "riders-club-main"
+  ]
+}
