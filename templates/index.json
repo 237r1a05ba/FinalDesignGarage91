@@ -137,7 +137,7 @@
         "item_mzWkgN": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/BREAK_PADS_4.png",
+            "image": "shopify://shop_images/BREAK_PADS_1_2f314088-8780-4bba-a8de-23d5f932401a.png",
             "title": "",
             "link": "shopify://collections/brake-pads",
             "show_discount": true,
@@ -150,7 +150,7 @@
         "item_L3hrpF": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/Air_Filters_25228c84-9fc4-44bb-b7e7-7c916517dcae.png",
+            "image": "shopify://shop_images/BREAK_PADS_2_e5df4f1e-4ffc-4c08-978b-262344622e26.png",
             "title": "",
             "link": "shopify://collections/fog-lights",
             "show_discount": true,
@@ -163,7 +163,7 @@
         "item_LjAxH8": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/Air_Filters_24fe6078-5902-497b-b541-e1a3b909f051.png",
+            "image": "shopify://shop_images/BREAK_PADS_3_04ec5d5e-beb6-4438-9e02-377f36b196bb.png",
             "title": "",
             "link": "shopify://collections/air-filter-1",
             "show_discount": true,
@@ -199,7 +199,9 @@
         "progress_fill": "#ff0000",
         "progress_height": 3,
         "progress_margin_left": 20,
-        "progress_margin_right": 20
+        "progress_margin_right": 20,
+        "border_radius": 13,
+        "image_padding": 0
       }
     },
     "product_list_LrnP4T": {
@@ -1562,7 +1564,9 @@
         "progress_fill": "#ff0000",
         "progress_height": 3,
         "progress_margin_left": 20,
-        "progress_margin_right": 20
+        "progress_margin_right": 20,
+        "border_radius": 12,
+        "image_padding": 10
       }
     },
     "video_layer_zaEk9U": {
