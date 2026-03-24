@@ -154,7 +154,7 @@
             <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at center, var(--racing-red) 0%, transparent 70%);"></div>
             <div class="text-center z-10 px-6">
                 <p class="font-mono text-xs uppercase tracking-[0.5em] mb-6 maintenance-glitch" style="font-size: 10px;">{{ maintenance_block.settings.badge | default: "System Status: Recalibrating" }}</p>
-                <h1 class="font-display uppercase mb-4" style="font-size: clamp(3rem, 8vw, 6rem); line-height: 1.1;">{{ maintenance_block.settings.title | default: "The Collective <br><span style='color: transparent; -webkit-text-stroke: 1px white;'>Maintenance</span>" }}</h1>
+                <h1 class="font-display uppercase mb-4" style="font-size: clamp(3rem, 8vw, 6rem); line-height: 1.1;">{{ maintenance_block.settings.title | default: "Page Under Maintenance" }}</h1>
                 <p class="font-light max-w-md mx-auto" style="color: rgba(255,255,255,0.4); line-height: 1.625; font-size: 0.875rem; margin-top: 1.5rem;">
                     {{ maintenance_block.settings.message | default: "We are currently optimizing the mechanical core for the next expedition. Mechanical synchronicity will resume shortly." }}
                 </p>
@@ -404,10 +404,10 @@
           "default": "System Status: Recalibrating"
         },
         {
-          "type": "inline_richtext",
+          "type": "text",
           "id": "title",
           "label": "Title",
-          "default": "The Collective <br><span style='color: transparent; -webkit-text-stroke: 1px white;'>Maintenance</span>"
+          "default": "Page Under Maintenance"
         },
         {
           "type": "textarea",
