@@ -97,5 +97,9 @@ const cart = document.querySelector('.cart-drawer');
     {% if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add-modal' %}
     {% endif %}
-  {%- render 'foxify-footer' -%} {% sections 'foxify-footer-group' %}   </body>
+  {%- render 'foxify-footer' -%} {% sections 'foxify-footer-group' %}   
+</script>
+<script src="https://checkout-merchant.snapmint.com/js/v1/8243" defer></script>
+<!-- End Shopify-payment JavaScript -->
+</body>
 </html>
