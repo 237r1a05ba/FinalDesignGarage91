@@ -9,32 +9,69 @@
  */
 {
   "current": {
-    "badge_free_shipping_color": "#0004ff",
+    "logo": "shopify://shop_images/garage91_Logo-removebg-preview_0ae78b86-9e8f-4f19-8d8f-23a07240fa8e.png",
+    "favicon": "shopify://shop_images/cropped_circle_image_5.png",
+    "type_body_font": "inter_n4",
+    "type_subheading_font": "inter_n5",
+    "type_heading_font": "bebas_neue_n4",
+    "type_accent_font": "saira_n4",
+    "type_size_paragraph": "12",
+    "type_size_h1": "72",
+    "type_size_h2": "48",
+    "type_case_h2": "none",
+    "type_size_h3": "32",
+    "type_size_h4": "24",
+    "type_size_h5": "18",
+    "type_case_h6": "none",
+    "page_width": "normal",
+    "page_transition_enabled": true,
+    "custom_badge_layout": "row",
     "badge_new_color": "#ff0000",
-    "blocks": {
-      "1219337400145039034": {
-        "disabled": false,
-        "settings": {},
-        "type": "shopify://apps/kwikpass/blocks/kp_login/603e209b-d585-47ff-8592-837a4faa325b"
-      },
-      "16278478101612877664": {
-        "disabled": false,
-        "settings": {},
-        "type": "shopify://apps/pagefly-page-builder/blocks/app-embed/83e179f7-59a0-4589-8c66-c0dddf959200"
-      },
-      "6478312753674380289": {
-        "disabled": false,
-        "settings": {},
-        "type": "shopify://apps/gempages-builder/blocks/embed-gp-script-head/20b379d4-1b20-474c-a6ca-665c331919f3"
-      }
-    },
+    "badge_free_shipping_color": "#0004ff",
+    "button_border_radius_primary": 6,
+    "button_font_weight_primary": "400",
+    "secondary_button_border_width": 0,
+    "button_border_radius_secondary": 0,
+    "pills_border_radius": 0,
+    "cart_type": "drawer",
+    "icon_stroke": "heavy",
+    "popover_border": "none",
+    "currency_code_enabled_product_pages": false,
+    "currency_code_enabled_product_cards": true,
+    "product_corner_radius": 10,
+    "card_corner_radius": 10,
+    "variant_swatch_radius": 10,
+    "variant_button_border_width": 1,
+    "variant_button_radius": 10,
+    "variant_button_width": "equal-width-buttons",
+    "mid": "1ekpimhrg0p67",
+    "envType": "production",
+    "ga4Gokwik": "G-WRGCN86J4N",
+    "goEnable": true,
+    "priClr": "#ffffff",
+    "secClr": "#000000",
+    "goBuynowEnable": true,
     "btnBClr": "#ffffff",
     "btnTextClr": "#000000",
-    "button_border_radius_primary": 6,
-    "button_border_radius_secondary": 0,
-    "button_font_weight_primary": "400",
-    "card_corner_radius": 10,
-    "cart_type": "drawer",
+    "enableLogo": true,
+    "content_for_index": [],
+    "blocks": {
+      "1219337400145039034": {
+        "type": "shopify://apps/kwikpass/blocks/kp_login/603e209b-d585-47ff-8592-837a4faa325b",
+        "disabled": false,
+        "settings": {}
+      },
+      "16278478101612877664": {
+        "type": "shopify://apps/pagefly-page-builder/blocks/app-embed/83e179f7-59a0-4589-8c66-c0dddf959200",
+        "disabled": false,
+        "settings": {}
+      },
+      "6478312753674380289": {
+        "type": "shopify://apps/gempages-builder/blocks/embed-gp-script-head/20b379d4-1b20-474c-a6ca-665c331919f3",
+        "disabled": false,
+        "settings": {}
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
@@ -311,9 +348,9 @@
       },
       "scheme-8": {
         "settings": {
-          "background": "#faf9f1",
+          "background": "#000000",
           "foreground_heading": "#000000",
-          "foreground": "#000000bd",
+          "foreground": "#ffffffbd",
           "primary": "#c3cca6",
           "primary_hover": "#000000",
           "border": "#e6e6e6",
@@ -348,44 +385,7 @@
           "selected_variant_hover_border_color": "#1a1a1a"
         }
       }
-    },
-    "content_for_index": [],
-    "currency_code_enabled_product_cards": true,
-    "currency_code_enabled_product_pages": false,
-    "custom_badge_layout": "row",
-    "enableLogo": true,
-    "envType": "production",
-    "favicon": "shopify://shop_images/cropped_circle_image_5.png",
-    "ga4Gokwik": "G-WRGCN86J4N",
-    "goBuynowEnable": true,
-    "goEnable": true,
-    "icon_stroke": "heavy",
-    "logo": "shopify://shop_images/garage91_Logo-removebg-preview_0ae78b86-9e8f-4f19-8d8f-23a07240fa8e.png",
-    "mid": "1ekpimhrg0p67",
-    "page_transition_enabled": true,
-    "page_width": "normal",
-    "pills_border_radius": 0,
-    "popover_border": "none",
-    "priClr": "#ffffff",
-    "product_corner_radius": 10,
-    "secClr": "#000000",
-    "secondary_button_border_width": 0,
-    "type_accent_font": "saira_n4",
-    "type_body_font": "inter_n4",
-    "type_case_h2": "none",
-    "type_case_h6": "none",
-    "type_heading_font": "bebas_neue_n4",
-    "type_size_h1": "72",
-    "type_size_h2": "48",
-    "type_size_h3": "32",
-    "type_size_h4": "24",
-    "type_size_h5": "18",
-    "type_size_paragraph": "12",
-    "type_subheading_font": "inter_n5",
-    "variant_button_border_width": 1,
-    "variant_button_radius": 10,
-    "variant_button_width": "equal-width-buttons",
-    "variant_swatch_radius": 10
+    }
   },
   "presets": {
     "Tinker": {

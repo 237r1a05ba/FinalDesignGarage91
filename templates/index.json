@@ -9,6 +9,48 @@
  */
 {
   "sections": {
+    "marquee_3FfkGh": {
+      "type": "marquee",
+      "blocks": {
+        "text_mBnjQy": {
+          "type": "text",
+          "settings": {
+            "text": "<p>BUY NOWNOW</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-accent--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "tight",
+            "case": "none",
+            "wrap": "nowrap",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_mBnjQy"
+      ],
+      "disabled": true,
+      "name": "t:names.marquee_section",
+      "settings": {
+        "movement_direction": "normal",
+        "color_scheme": "scheme-8",
+        "padding-block-start": 13,
+        "padding-block-end": 13,
+        "gap_between_elements": 24
+      }
+    },
     "herotex_xbc7M9": {
       "type": "Herotex",
       "blocks": {
@@ -1618,155 +1660,6 @@
         "padding-block-end": 26
       }
     },
-    "video_grid_ecjbRh": {
-      "type": "VideoGrid",
-      "blocks": {
-        "video_box_rm8wgk": {
-          "type": "video_box",
-          "settings": {
-            "video_url": "https://cdn.shopify.com/videos/c/o/v/67de2c1cd40c4a11bc8c78dd16527502.mp4",
-            "product_link": "",
-            "collection_link": "",
-            "autoplay": true,
-            "loop": true,
-            "muted": true,
-            "controls": false,
-            "show_discount": false,
-            "discount_text": "20% OFF",
-            "discount_bg": "#ff0000",
-            "discount_color": "#ffffff",
-            "discount_size": 14,
-            "discount_h_align": "left",
-            "discount_v_align": "top",
-            "show_secondary_tag": false,
-            "secondary_tag_text": "NEW",
-            "secondary_tag_bg": "#000000",
-            "secondary_tag_color": "#ffffff",
-            "secondary_tag_size": 12,
-            "secondary_h_align": "right",
-            "secondary_v_align": "bottom",
-            "padding_top": 0,
-            "padding_bottom": 0,
-            "padding_left": 0,
-            "padding_right": 0
-          }
-        },
-        "video_box_KHcwta": {
-          "type": "video_box",
-          "settings": {
-            "video_url": "https://cdn.shopify.com/videos/c/o/v/581868cc66944175a0669e27fd981580.mp4",
-            "product_link": "",
-            "collection_link": "",
-            "autoplay": true,
-            "loop": true,
-            "muted": true,
-            "controls": false,
-            "show_discount": false,
-            "discount_text": "20% OFF",
-            "discount_bg": "#ff0000",
-            "discount_color": "#ffffff",
-            "discount_size": 14,
-            "discount_h_align": "left",
-            "discount_v_align": "top",
-            "show_secondary_tag": false,
-            "secondary_tag_text": "NEW",
-            "secondary_tag_bg": "#000000",
-            "secondary_tag_color": "#ffffff",
-            "secondary_tag_size": 12,
-            "secondary_h_align": "right",
-            "secondary_v_align": "bottom",
-            "padding_top": 0,
-            "padding_bottom": 0,
-            "padding_left": 0,
-            "padding_right": 0
-          }
-        },
-        "video_box_Qg7KdY": {
-          "type": "video_box",
-          "settings": {
-            "video_url": "https://cdn.shopify.com/videos/c/o/v/bc772914d5774d9ea1c21af9475feb25.mp4",
-            "product_link": "",
-            "collection_link": "",
-            "autoplay": true,
-            "loop": true,
-            "muted": true,
-            "controls": false,
-            "show_discount": false,
-            "discount_text": "20% OFF",
-            "discount_bg": "#ff0000",
-            "discount_color": "#ffffff",
-            "discount_size": 14,
-            "discount_h_align": "left",
-            "discount_v_align": "top",
-            "show_secondary_tag": false,
-            "secondary_tag_text": "NEW",
-            "secondary_tag_bg": "#000000",
-            "secondary_tag_color": "#ffffff",
-            "secondary_tag_size": 12,
-            "secondary_h_align": "right",
-            "secondary_v_align": "bottom",
-            "padding_top": 0,
-            "padding_bottom": 0,
-            "padding_left": 0,
-            "padding_right": 0
-          }
-        }
-      },
-      "block_order": [
-        "video_box_rm8wgk",
-        "video_box_KHcwta",
-        "video_box_Qg7KdY"
-      ],
-      "disabled": true,
-      "name": "Video Grid",
-      "settings": {
-        "background_color": "#000000",
-        "full_width": false,
-        "padding_top": 40,
-        "padding_bottom": 40,
-        "padding_left": 80,
-        "padding_right": 80,
-        "enable_desktop_carousel": false,
-        "desktop_columns": 3,
-        "desktop_peek": 100,
-        "enable_mobile_carousel": true,
-        "mobile_peek": 85,
-        "mobile_padding_left": 15,
-        "mobile_padding_right": 15,
-        "video_ratio": "1-1",
-        "custom_width": 400,
-        "custom_height": 500,
-        "border_radius": 10
-      }
-    },
-    "three_sec_r3FwGq": {
-      "type": "ThreeSec",
-      "disabled": true,
-      "name": "Three Grid Layout",
-      "settings": {
-        "background_color": "#000000",
-        "padding_top": 50,
-        "padding_bottom": 70,
-        "padding_left": 80,
-        "padding_right": 80,
-        "mobile_padding_top": 20,
-        "mobile_padding_bottom": 20,
-        "mobile_padding_left": 15,
-        "mobile_padding_right": 15,
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "text_color": "#333333",
-        "vertical_gap": 20,
-        "show_progress_bar": true,
-        "progress_bg": "#ffffff",
-        "progress_fill": "#ff0000",
-        "progress_height": 3,
-        "progress_margin_left": 20,
-        "progress_margin_right": 20,
-        "border_radius": 12,
-        "image_padding": 10
-      }
-    },
     "video_layer_zaEk9U": {
       "type": "VideoLayer",
       "name": "Custom Video Section",
@@ -2101,28 +1994,10 @@
         "author_name_color": "#ffffff",
         "author_title_color": "#888888"
       }
-    },
-    "filtersec_yGQPVG": {
-      "type": "Filtersec",
-      "disabled": true,
-      "name": "Moto Search Strip",
-      "settings": {
-        "bg_color": "#050505",
-        "accent_color": "#dc2626",
-        "badge_text": "Elite Moto Parts",
-        "title_part1": "SEARCH BY",
-        "title_part2": "VEHICLE",
-        "label_brand": "Select Brand",
-        "label_model": "Select Model",
-        "label_category": "Select Category",
-        "button_text": "SEARCH",
-        "brands_list": "Honda, Yamaha",
-        "models_list": "CBR600RR, R1",
-        "categories_list": "Mirrors, Pads"
-      }
     }
   },
   "order": [
+    "marquee_3FfkGh",
     "herotex_xbc7M9",
     "trust_txzpAM",
     "three_sec_eFQfGE",
@@ -2136,8 +2011,6 @@
     "product_list_w8Ey4X",
     "product_list_WJiacN",
     "product_list_zW97cw",
-    "video_grid_ecjbRh",
-    "three_sec_r3FwGq",
     "video_layer_zaEk9U",
     "section_BQYYfk",
     "pop_zGF8Xx",
@@ -2146,7 +2019,6 @@
     "whatsapp_jeaBta",
     "recent_sale_pop_zgtpBP",
     "insta_reel_CUANmq",
-    "testimonial_KfQwni",
-    "filtersec_yGQPVG"
+    "testimonial_KfQwni"
   ]
 }
